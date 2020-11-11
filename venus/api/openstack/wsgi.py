@@ -29,7 +29,6 @@ from oslo_utils import excutils
 from venus import exception
 from venus import i18n
 from venus.i18n import _, _LE, _LI
-from venus.objects import base as objects_base
 from venus import utils
 from venus.wsgi import common as wsgi
 
@@ -66,7 +65,7 @@ def wrap_check_policy(func):
 
 
 def check_policy(context, action, target_obj=None):
-    target = {
+    """target = {
         'project_id': context.project_id,
         'user_id': context.user_id,
     }
@@ -78,6 +77,9 @@ def check_policy(context, action, target_obj=None):
         target.update(target_obj or {})
     _action = 'venus:%s' % action
     #venus.policy.enforce(context, _action, target)
+    """
+
+    pass
 
 
 class Request(webob.Request):

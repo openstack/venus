@@ -22,7 +22,6 @@ import random
 from oslo_concurrency import processutils
 from oslo_config import cfg
 from oslo_log import log as logging
-import oslo_messaging as messaging
 from oslo_service import loopingcall
 from oslo_service import service
 from oslo_utils import importutils
@@ -33,7 +32,6 @@ import osprofiler.web
 from venus import context
 from venus import exception
 from venus.i18n import _, _LI, _LW
-from venus.objects import base as objects_base
 from venus import version
 from venus.wsgi import common as wsgi_common
 from venus.wsgi import eventlet_server as wsgi
@@ -101,8 +99,6 @@ class Service(service.Service):
                  *args, **kwargs):
         super(Service, self).__init__()
 
-
-
         self.host = host
         self.binary = binary
         self.topic = topic
@@ -129,11 +125,10 @@ class Service(service.Service):
         self.manager.init_host()
         LOG.debug("Creating RPC server for service %s", self.topic)
 
-        target = messaging.Target(topic=self.topic, server=self.host)
+        # target = messaging.Target(topic=self.topic, server=self.host)
         endpoints = [self.manager]
         endpoints.extend(self.manager.additional_endpoints)
-        serializer = objects_base.VenusObjectSerializer()
-
+        # serializer = objects_base.VenusObjectSerializer()
 
         self.manager.init_host_with_rpc()
 

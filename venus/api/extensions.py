@@ -372,14 +372,19 @@ def load_standard_extensions(ext_mgr, logger, path, package, ext_list=None):
 
 def extension_authorizer(api_name, extension_name):
     def authorize(context, target=None, action=None):
-        if target is None:
+        """if target is None:
             target = {'project_id': context.project_id,
                       'user_id': context.user_id}
         if action is None:
             act = '%s_extension:%s' % (api_name, extension_name)
         else:
             act = '%s_extension:%s:%s' % (api_name, extension_name, action)
-        #venus.policy.enforce(context, act, target)
+        # venus.policy.enforce(context, act, target)
+
+        """
+
+        pass
+
     return authorize
 
 

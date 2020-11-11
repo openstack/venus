@@ -1,0 +1,5 @@
+The venus.conf sample file is no longer generated and
+maintained in Trunk.  To generate your own version of
+venus.conf, use the following command:
+
+tox -egenconfig

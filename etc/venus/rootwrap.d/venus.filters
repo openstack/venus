@@ -1,0 +1,4 @@
+# venus-rootwrap command filters for venus nodes
+# This file should be owned by (and only-writeable by) the root user
+
+[Filters]

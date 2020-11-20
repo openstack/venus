@@ -9,6 +9,7 @@ It has identified itself as `Venus`. It was abstracted from the Cinder project.
 
 * Wiki: https://github.com/hahaps/openstack-project-generator
 * Developer docs: https://github.com/hahaps/openstack-project-generator
+* Code repository: https://opendev.org/inspur/venus
 
 Getting Started
 ---------------

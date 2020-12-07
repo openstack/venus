@@ -57,15 +57,16 @@ class SearchCore(object):
         super(SearchCore, self).__init__()
 
     def get_all_index(self, index_prefix):
-        url = self.elasticsearch_url + '/_cat/indices/' + index_prefix + '-*'
+        url = self.elasticsearch_url + '/_cat/indices/' + \
+            index_prefix + '-*?format=json'
         index_names = []
         status, indexes = utils.request_es(url, 'GET')
         if status != 200:
             LOG.error("failed to get all es indexes")
             return ""
-        indexes_array = indexes.split('\n')
+        indexes_array = json.loads(indexes)
         for index in indexes_array:
-            index_name = index.split(' ')[2]
+            index_name = index["index"]
             index_names.append(index_name)
 
         return index_names

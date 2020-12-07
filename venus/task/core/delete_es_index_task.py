@@ -13,6 +13,7 @@
 # under the License.
 
 import datetime
+import json
 import six
 import time
 
@@ -74,14 +75,14 @@ class DeleteESIndexTask(object):
             return
 
         today = time.strftime('%Y-%m-%d')
-        url = self.elasticsearch_url + '/_cat/indices/*log-*'
+        url = self.elasticsearch_url + '/_cat/indices/*log-*?format=json'
         status, indexes = utils.request_es(url, "GET")
         if status != 200:
             LOG.error(_LE("failed to get es indexes"))
             return
-        indexes_array = indexes.split('\n')
+        indexes_array = json.dumps(indexes)
         for index in indexes_array:
-            index_name = index.split(' ')[2]
+            index_name = index["index"]
             index_day = index_name.split('-')[1]
             diff_day = datetime.datetime.strptime(today, "%Y-%m-%d") - \
                 datetime.datetime.strptime(index_day, '%Y.%m.%d')

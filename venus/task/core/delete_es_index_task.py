@@ -13,42 +13,21 @@
 # under the License.
 
 import datetime
-import json
 import six
 import time
 
 from oslo_config import cfg
 from oslo_log import log as logging
 
+
 from venus.common import utils
 from venus.modules.custom_config.backends.sql import CustomConfigSql
+from venus.modules.search.search_lib import ESSearchObj
 from venus.i18n import _LE, _LI
 from venus.task.backends.sql import TaskSql
 
 CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
-
-"""
-config the elasticsearch info
-from /etc/venus/venus.conf
-if not exists ,default
-"""
-elasticsearch_group = cfg.OptGroup(name='elasticsearch',
-                                   title='elasticsearch')
-
-elasticsearch_opts = [
-    cfg.StrOpt('url',
-               default='',
-               help='the es url'),
-    cfg.StrOpt('username',
-               default='',
-               help='the es username'),
-    cfg.StrOpt('password',
-               default='',
-               help='the es password')
-]
-CONF.register_group(elasticsearch_group)
-CONF.register_opts(elasticsearch_opts, elasticsearch_group)
 
 TASK_NAME = "delete_es_index"
 
@@ -60,6 +39,7 @@ class DeleteESIndexTask(object):
         self.elasticsearch_url = CONF.elasticsearch.url
         self.custom_sql = CustomConfigSql()
         self.task_sql = TaskSql()
+        self.search_lib = ESSearchObj()
 
     def delete_index(self, name):
         url = self.elasticsearch_url + '/' + name
@@ -70,24 +50,25 @@ class DeleteESIndexTask(object):
 
     def delete_es_history_index(self):
         len_d = self.custom_sql.get_config("es_index_length")
+        LOG.info("the elasticsearch indexes keep days {}".format(len_d))
         if len_d is None:
             LOG.error(_LE("es_index_length no exist"))
             return
-
         today = time.strftime('%Y-%m-%d')
-        url = self.elasticsearch_url + '/_cat/indices/*log-*?format=json'
-        status, indexes = utils.request_es(url, "GET")
-        if status != 200:
-            LOG.error(_LE("failed to get es indexes"))
-            return
-        indexes_array = json.dumps(indexes)
+        indexes_array = self.search_lib.get_all_index()
         for index in indexes_array:
-            index_name = index["index"]
-            index_day = index_name.split('-')[1]
-            diff_day = datetime.datetime.strptime(today, "%Y-%m-%d") - \
-                datetime.datetime.strptime(index_day, '%Y.%m.%d')
-            if diff_day.days >= int(len_d):
-                self.delete_index(index_name)
+            try:
+                index_name = index["index"]
+                index_day = index_name.split('-')[1]
+                diff_day = datetime.datetime.strptime(today, "%Y-%m-%d") - \
+                    datetime.datetime.strptime(index_day, '%Y.%m.%d')
+                if diff_day.days >= int(len_d):
+                    LOG.info("delete index {}, diff_day {}"
+                             .format(index_name, diff_day))
+                    self.delete_index(index_name)
+            except Exception as e:
+                LOG.error("delete index {} error:{}".format(
+                    index["index"], six.text_type(e)))
 
     def start_task(self):
         try:

@@ -16,7 +16,7 @@
 from datetime import datetime
 from elasticsearch import Elasticsearch
 import re
-import urlparse
+from urllib.parse import urlparse
 
 from oslo_config import cfg
 from oslo_log import log as logging
@@ -50,7 +50,7 @@ CONF.register_opts(elasticsearch_opts, elasticsearch_group)
 class ESSearchObj(object):
 
     def __init__(self):
-        url = urlparse.urlparse(CONF.elasticsearch.url)
+        url = urlparse(CONF.elasticsearch.url)
         self.es = Elasticsearch([url.hostname],
                                 http_auth=(CONF.elasticsearch.username,
                                            CONF.elasticsearch.password),

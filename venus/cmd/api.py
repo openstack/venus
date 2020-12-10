@@ -48,7 +48,7 @@ def main():
 
     gmr.TextGuruMeditation.setup_autorun(version)
 
-    launcher = service.process_launcher()
+    launcher = service.get_launcher()
     server = service.WSGIService('osapi_venus')
     launcher.launch_service(server, workers=server.workers)
     launcher.wait()

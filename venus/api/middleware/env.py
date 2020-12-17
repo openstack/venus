@@ -32,8 +32,7 @@ import functools
 
 LOG = logging.getLogger(__name__)
 
-JSON_ENCODE_CONTENT_TYPES = set(['application/json',
-                                 'application/json-home'])
+JSON_ENCODE_CONTENT_TYPES = {'application/json', 'application/json-home'}
 
 
 def middleware_exceptions(method):

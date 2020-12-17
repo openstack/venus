@@ -237,11 +237,11 @@ class GetLogCommands(object):
             sys.exit(1)
         lines = [line.strip() for line in open(log_file, "r")]
         lines.reverse()
-        print(_("Last %s venus syslog entries:-") % (entries))
+        print(_("Last %s venus syslog entries:-") % entries)
         for line in lines:
             if line.find("venus") > 0:
                 count += 1
-                print(_("%s") % (line))
+                print(_("%s") % line)
             if count == entries:
                 break
 

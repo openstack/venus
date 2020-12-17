@@ -14,7 +14,7 @@ Bugs should be filed on Storyboard:
    https://storyboard.openstack.org/#!/project/openstack/venus
 
 For more specific information about contributing to this repository, see the
-Cyborg contributor guide:
+Venus contributor guide:
 
    https://docs.openstack.org/venus/latest/contributor/contributing.html
 

@@ -64,7 +64,6 @@ class TaskSql(object):
     def check_task(self, t_name):
         session = get_session()
         with session.begin():
-            res = False
             hostname = socket.gethostname()
             now = time.time()
             tasks = session.query(models.RegitsterTask).filter_by(

@@ -2,13 +2,20 @@
 *.retry
 *.tox/
 .idea/*
+.vscode/*
 .venv
 .stestr/
+*.DS_Store
 
 dist
 build/*
 venus.egg-info/
 venus/hacking/__pycache__/
+
+# Editors
+*.sublime-workspace
+*.swp
+*.swo
 
 doc/build/*
 doc/source/_static/*.sample
@@ -17,3 +24,4 @@ releasenotes/build*
 
 AUTHORS
 Authors
+ChangeLog

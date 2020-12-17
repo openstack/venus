@@ -111,6 +111,7 @@ class AtomSerializer(wsgi.XMLDictSerializer):
     NSMAP = {None: xmlutil.XMLNS_ATOM}
 
     def __init__(self, metadata=None, xmlns=None):
+        super(AtomSerializer, self).__init__(metadata, xmlns)
         self.metadata = metadata or {}
         if not xmlns:
             self.xmlns = wsgi.XML_NS_ATOM

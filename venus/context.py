@@ -90,7 +90,7 @@ class RequestContext(context.RequestContext):
                                     if s.get('type') in
                                     ('identity', 'compute', 'object-store')]
         else:
-            # if list is empty or none
+            # if list is none
             self.service_catalog = []
 
         # # We need to have RequestContext attributes defined

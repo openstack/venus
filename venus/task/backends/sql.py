@@ -69,7 +69,7 @@ class TaskSql(object):
             tasks = session.query(models.RegitsterTask).filter_by(
                 task_name=t_name).with_lockmode('update').all()
             if len(tasks) != 1:
-                log.error(_LE("unsuported task type:%s, please check it"),
+                log.error(_LE("unsupported task type:%s, please check it"),
                           t_name)
                 return False
 

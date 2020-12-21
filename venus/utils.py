@@ -41,12 +41,10 @@ from oslo_concurrency import lockutils
 from oslo_concurrency import processutils
 from oslo_config import cfg
 from oslo_log import log as logging
-from oslo_utils import encodeutils
 from oslo_utils import importutils
 from oslo_utils import strutils
 from oslo_utils import timeutils
 import retrying
-import six
 
 from venus import exception
 from venus.i18n import _, _LW
@@ -321,7 +319,7 @@ def is_valid_boolstr(val):
 
 def is_none_string(val):
     """Check if a string represents a None value."""
-    if not isinstance(val, six.string_types):
+    if not isinstance(val, str):
         return False
 
     return val.lower() == 'none'
@@ -389,12 +387,8 @@ def make_dev_path(dev, partition=None, base='/dev'):
 
 def sanitize_hostname(hostname):
     """Return a hostname which conforms to RFC-952 and RFC-1123 specs."""
-    if six.PY3:
-        hostname = hostname.encode('latin-1', 'ignore')
-        hostname = hostname.decode('latin-1')
-    else:
-        if isinstance(hostname, six.text_type):
-            hostname = hostname.encode('latin-1', 'ignore')
+    hostname = hostname.encode('latin-1', 'ignore')
+    hostname = hostname.decode('latin-1')
 
     hostname = re.sub('[ _]', '-', hostname)
     hostname = re.sub('[^\w.-]+', '', hostname)
@@ -458,8 +452,7 @@ def tempdir(**kwargs):
         try:
             shutil.rmtree(tmpdir)
         except OSError as e:
-            LOG.debug('Could not remove tmpdir: %s',
-                      six.text_type(e))
+            LOG.debug('Could not remove tmpdir: %s', str(e))
 
 
 def walk_class_hierarchy(clazz, encountered=None):
@@ -512,7 +505,7 @@ def check_string_length(value, name, min_length=0, max_length=None):
     :param min_length: the min_length of the string
     :param max_length: the max_length of the string
     """
-    if not isinstance(value, six.string_types):
+    if not isinstance(value, str):
         msg = _("%s is not a string or unicode") % name
         raise exception.InvalidInput(message=msg)
 
@@ -576,7 +569,7 @@ def retry(exceptions, interval=1, retries=3, backoff_rate=2,
 
     def _decorator(f):
 
-        @six.wraps(f)
+        @functools.wraps(f)
         def _wrapper(*args, **kwargs):
             r = retrying.Retrying(retry_on_exception=_retry_on_exception,
                                   wait_func=_backoff_sleep,
@@ -597,13 +590,10 @@ def convert_str(text):
       encode Unicode using encodeutils.safe_encode()
     * convert to Unicode on Python 3: decode bytes from UTF-8
     """
-    if six.PY2:
-        return encodeutils.safe_encode(text)
+    if isinstance(text, bytes):
+        return text.decode('utf-8')
     else:
-        if isinstance(text, bytes):
-            return text.decode('utf-8')
-        else:
-            return text
+        return text
 
 
 def trace_method(f):
@@ -689,8 +679,7 @@ class TraceWrapperMetaclass(type):
     decorated with the trace_method decorator.
 
     To use the metaclass you define a class like so:
-    @six.add_metaclass(utils.TraceWrapperMetaclass)
-    class MyClass(object):
+    class MyClass(object, metaclass=utils.TraceWrapperMetaclass):
     """
     def __new__(meta, classname, bases, classDict):
         newClassDict = {}

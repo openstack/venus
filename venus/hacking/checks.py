@@ -66,7 +66,7 @@ string_translation = re.compile(r"[^_]*_\(\s*('|\")")
 def no_mutable_default_args(logical_line):
     msg = "M322: Method's default argument shouldn't be mutable!"
     if mutable_default_args.match(logical_line):
-        yield (0, msg)
+        yield 0, msg
 
 
 @core.flake8ext
@@ -75,7 +75,7 @@ def assert_equal_not_none(logical_line):
     msg = "M302: assertEqual(A is not None) sentences not allowed."
     res = assert_equal_with_is_not_none_re.search(logical_line)
     if res:
-        yield (0, msg)
+        yield 0, msg
 
 
 @core.flake8ext
@@ -85,7 +85,8 @@ def assert_true_isinstance(logical_line):
     M316
     """
     if assert_true_isinstance_re.match(logical_line):
-        yield (0, "M316: assertTrue(isinstance(a, b)) sentences not allowed")
+        msg = "M316: assertTrue(isinstance(a, b)) sentences not allowed"
+        yield 0, msg
 
 
 @core.flake8ext
@@ -94,12 +95,13 @@ def assert_equal_in(logical_line):
 
     M338
     """
+    msg = "M338: Use assertIn/NotIn(A, B) rather than " \
+          "assertEqual(A in B, True/False) when checking " \
+          "collection contents."
     res = (assert_equal_in_start_with_true_or_false_re.search(logical_line) or
            assert_equal_in_end_with_true_or_false_re.search(logical_line))
     if res:
-        yield (0, "M338: Use assertIn/NotIn(A, B) rather than "
-                  "assertEqual(A in B, True/False) when checking collection "
-                  "contents.")
+        yield 0, msg
 
 
 @core.flake8ext
@@ -108,8 +110,9 @@ def no_xrange(logical_line):
 
     M339
     """
+    msg = "M339: Do not use xrange()."
     if assert_xrange_re.match(logical_line):
-        yield(0, "M339: Do not use xrange().")
+        yield 0, msg
 
 
 @core.flake8ext
@@ -123,16 +126,15 @@ def use_timeutils_utcnow(logical_line, filename):
     for f in datetime_funcs:
         pos = logical_line.find('datetime.%s' % f)
         if pos != -1:
-            yield (pos, msg % f)
+            yield pos, msg % f
 
 
 @core.flake8ext
 def dict_constructor_with_list_copy(logical_line):
-    msg = ("M336: Must use a dict comprehension instead of a dict constructor"
-           " with a sequence of key-value pairs."
-           )
+    msg = "M336: Must use a dict comprehension instead of a dict " \
+          "constructor with a sequence of key-value pairs."
     if dict_constructor_with_list_copy_re.match(logical_line):
-        yield (0, msg)
+        yield 0, msg
 
 
 @core.flake8ext
@@ -145,9 +147,9 @@ def no_log_warn(logical_line):
     M352
     """
 
-    msg = ("M352: LOG.warn is deprecated, please use LOG.warning!")
+    msg = "M352: LOG.warn is deprecated, please use LOG.warning!"
     if "LOG.warn(" in logical_line:
-        yield (0, msg)
+        yield 0, msg
 
 
 @core.flake8ext
@@ -162,6 +164,7 @@ def check_explicit_underscore_import(logical_line, filename):
 
     # Build a list of the files that have _ imported.  No further
     # checking needed once it is found.
+    msg = "M340: Found use of _() without explicit import of _ !"
     if filename in UNDERSCORE_IMPORT_FILES:
         pass
     elif (underscore_import_check.match(logical_line) or
@@ -169,7 +172,7 @@ def check_explicit_underscore_import(logical_line, filename):
         UNDERSCORE_IMPORT_FILES.append(filename)
     elif (translated_log.match(logical_line) or
           string_translation.match(logical_line)):
-        yield(0, "M340: Found use of _() without explicit import of _ !")
+        yield 0, msg
 
 
 @core.flake8ext
@@ -195,6 +198,7 @@ def import_stock_mock(logical_line):
 
     N366
     """
+    msg = "N366: You must explicitly import python's mock: " \
+          "``from unittest import mock``"
     if logical_line == 'import mock':
-        yield (0, "N366: You must explicitly import python's mock: "
-                  "``from unittest import mock``")
+        yield 0, msg

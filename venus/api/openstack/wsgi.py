@@ -16,7 +16,6 @@ import functools
 import inspect
 from lxml import etree
 import math
-import six
 import time
 import webob
 from xml.dom import minidom
@@ -1163,8 +1162,7 @@ class ControllerMetaclass(type):
                                                        cls_dict)
 
 
-@six.add_metaclass(ControllerMetaclass)
-class Controller(object):
+class Controller(object, metaclass=ControllerMetaclass):
     """Default controller."""
 
     _view_builder_class = None
@@ -1212,7 +1210,7 @@ class Controller(object):
     def validate_name_and_description(body):
         name = body.get('name')
         if name is not None:
-            if isinstance(name, six.string_types):
+            if isinstance(name, str):
                 body['name'] = name.strip()
             try:
                 utils.check_string_length(body['name'], 'Name',
@@ -1240,7 +1238,7 @@ class Controller(object):
         :param remove_whitespaces: True if trimming whitespaces is needed
                                    else False
         """
-        if isinstance(value, six.string_types) and remove_whitespaces:
+        if isinstance(value, str) and remove_whitespaces:
             value = value.strip()
         try:
             utils.check_string_length(value, entity_name,

@@ -14,5 +14,15 @@
 #    under the License.
 
 from oslo_config import cfg
+from venus.conf import api
+from venus.conf import common
+from venus.conf import core
+from venus.conf import elasticsearch
+
 
 CONF = cfg.CONF
+
+api.register_opts(CONF)
+common.register_opts(CONF)
+core.register_opts(CONF)
+elasticsearch.register_opts(CONF)

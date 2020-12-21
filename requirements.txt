@@ -30,3 +30,4 @@ elasticsearch>=5.0.0,<6.0.0
 apscheduler # MIT License
 paste>=3.0.2
 webob>=1.8.5
+lxml>=4.4.0

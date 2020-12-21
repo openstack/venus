@@ -27,7 +27,7 @@ XMLNS_V10 = 'https://www.openstack.org/mediawiki/venus/api/v1.0'
 XMLNS_V11 = 'https://www.openstack.org/mediawiki/venus/api/v1.0'
 XMLNS_COMMON_V10 = 'https://www.openstack.org/mediawiki/venus/api/v1.0'
 XMLNS_ATOM = 'http://www.w3.org/2005/Atom'
-XMLNS_VENUS_V1 = ('https://www.openstack.org/mediawiki/venus/1.0/content')
+XMLNS_VENUS_V1 = 'https://www.openstack.org/mediawiki/venus/1.0/content'
 
 _split_pattern = re.compile(r'([^:{]*{[^}]*}[^:]*|[^:]+)')
 
@@ -388,37 +388,37 @@ class TemplateElement(object):
         else:
             tmpattrib = {}
 
-        tagnameList = self._splitTagName(tagname)
-        insertIndex = 0
+        tagname_list = self._splitTagName(tagname)
+        insert_index = 0
 
         # If parent is not none and has same tagname
         if parent is not None:
-            for i in range(0, len(tagnameList)):
-                tmpInsertPos = parent.find(tagnameList[i])
-                if tmpInsertPos is None:
+            for i in range(0, len(tagname_list)):
+                tmp_insert_pos = parent.find(tagname_list[i])
+                if tmp_insert_pos is None:
                     break
                 elif not operator.eq(parent.attrib, tmpattrib):
                     break
-                parent = tmpInsertPos
-                insertIndex = i + 1
+                parent = tmp_insert_pos
+                insert_index = i + 1
 
-        if insertIndex >= len(tagnameList):
-            insertIndex = insertIndex - 1
+        if insert_index >= len(tagname_list):
+            insert_index = insert_index - 1
 
         # Create root elem
-        elem = etree.Element(tagnameList[insertIndex], nsmap=nsmap)
+        elem = etree.Element(tagname_list[insert_index], nsmap=nsmap)
         rootelem = elem
         subelem = elem
 
         # Create subelem
-        for i in range((insertIndex + 1), len(tagnameList)):
-            subelem = etree.SubElement(elem, tagnameList[i])
+        for i in range((insert_index + 1), len(tagname_list)):
+            subelem = etree.SubElement(elem, tagname_list[i])
             elem = subelem
 
         # If we have a parent, append the node to the parent
         if parent is not None:
             # If we can merge this element, then insert
-            if insertIndex > 0:
+            if insert_index > 0:
                 parent.insert(len(list(parent)), rootelem)
             else:
                 parent.append(rootelem)

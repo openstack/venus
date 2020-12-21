@@ -102,7 +102,7 @@ def make_ext(elem):
     elem.set('alias')
     elem.set('updated')
 
-    desc = xmlutil.SubTemplateElement(elem, 'description')
+    desc = xmlutil.sub_template_element(elem, 'description')
     desc.text = 'description'
 
     xmlutil.make_links(elem, 'links')
@@ -121,8 +121,8 @@ class ExtensionTemplate(xmlutil.TemplateBuilder):
 class ExtensionsTemplate(xmlutil.TemplateBuilder):
     def construct(self):
         root = xmlutil.TemplateElement('extensions')
-        elem = xmlutil.SubTemplateElement(root, 'extension',
-                                          selector='extensions')
+        elem = xmlutil.sub_template_element(root, 'extension',
+                                            selector='extensions')
         make_ext(elem)
         return xmlutil.MasterTemplate(root, 1, nsmap=ext_nsmap)
 

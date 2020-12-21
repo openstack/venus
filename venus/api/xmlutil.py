@@ -546,8 +546,8 @@ class TemplateElement(object):
                 (' '.join(contents), ''.join(children), self.tag))
 
 
-def SubTemplateElement(parent, tag, attrib=None, selector=None,
-                       subselector=None, **extra):
+def sub_template_element(parent, tag, attrib=None, selector=None,
+                         subselector=None, **extra):
     """Create a template element as a child of another.
 
     Corresponds to the etree.SubElement interface.  Parameters are as
@@ -918,8 +918,8 @@ class TemplateBuilder(object):
 def make_links(parent, selector=None):
     """Attach an Atom <links> element to the parent."""
 
-    elem = SubTemplateElement(parent, '{%s}link' % XMLNS_ATOM,
-                              selector=selector)
+    elem = sub_template_element(parent, '{%s}link' % XMLNS_ATOM,
+                                selector=selector)
     elem.set('rel')
     elem.set('type')
     elem.set('href')

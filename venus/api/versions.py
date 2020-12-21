@@ -73,7 +73,8 @@ def make_version(elem):
     mts = MediaTypesTemplateElement('media-types')
     elem.append(mts)
 
-    mt = xmlutil.SubTemplateElement(mts, 'media-type', selector='media-types')
+    mt = xmlutil.sub_template_element(mts, 'media-type',
+                                      selector='media-types')
     mt.set('base')
     mt.set('type')
 
@@ -93,7 +94,8 @@ class VersionTemplate(xmlutil.TemplateBuilder):
 class VersionsTemplate(xmlutil.TemplateBuilder):
     def construct(self):
         root = xmlutil.TemplateElement('versions')
-        elem = xmlutil.SubTemplateElement(root, 'version', selector='versions')
+        elem = xmlutil.sub_template_element(root, 'version',
+                                            selector='versions')
         make_version(elem)
         return xmlutil.MasterTemplate(root, 1, nsmap=version_nsmap)
 
@@ -101,7 +103,8 @@ class VersionsTemplate(xmlutil.TemplateBuilder):
 class ChoicesTemplate(xmlutil.TemplateBuilder):
     def construct(self):
         root = xmlutil.TemplateElement('choices')
-        elem = xmlutil.SubTemplateElement(root, 'version', selector='choices')
+        elem = xmlutil.sub_template_element(root, 'version',
+                                            selector='choices')
         make_version(elem)
         return xmlutil.MasterTemplate(root, 1, nsmap=version_nsmap)
 

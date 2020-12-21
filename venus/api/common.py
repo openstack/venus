@@ -422,8 +422,8 @@ class MetadataTemplateElement(xmlutil.TemplateElement):
 class MetadataTemplate(xmlutil.TemplateBuilder):
     def construct(self):
         root = MetadataTemplateElement('metadata', selector='metadata')
-        elem = xmlutil.SubTemplateElement(root, 'meta',
-                                          selector=xmlutil.get_items)
+        elem = xmlutil.sub_template_element(root, 'meta',
+                                            selector=xmlutil.get_items)
         elem.set('key', 0)
         elem.text = 1
         return xmlutil.MasterTemplate(root, 1, nsmap=metadata_nsmap)

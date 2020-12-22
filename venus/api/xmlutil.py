@@ -346,7 +346,7 @@ class TemplateElement(object):
                 # Attribute has no value, so don't include it
                 pass
 
-    def getAttrib(self, obj):
+    def get_attrib(self, obj):
         """Get attribute."""
         tmpattrib = {}
         # Now set up all the attributes...
@@ -359,7 +359,7 @@ class TemplateElement(object):
         return tmpattrib
 
     @staticmethod
-    def _splitTagName(name):
+    def _split_tagname(name):
         return _split_pattern.findall(name)
 
     def _render(self, parent, datum, patches, nsmap):
@@ -384,11 +384,11 @@ class TemplateElement(object):
 
         # If the datum is None
         if datum is not None:
-            tmpattrib = self.getAttrib(datum)
+            tmpattrib = self.get_attrib(datum)
         else:
             tmpattrib = {}
 
-        tagname_list = self._splitTagName(tagname)
+        tagname_list = self._split_tagname(tagname)
         insert_index = 0
 
         # If parent is not none and has same tagname

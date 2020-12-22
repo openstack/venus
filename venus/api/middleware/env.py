@@ -11,10 +11,9 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+from http import client
 
 from oslo_log import log as logging
-
-import six
 
 import webob.dec
 
@@ -23,8 +22,6 @@ import webob.exc
 from venus import exception
 
 from venus.wsgi import common as base_wsgi
-
-from six.moves import http_client
 
 from oslo_serialization import jsonutils
 
@@ -41,7 +38,7 @@ def middleware_exceptions(method):
         try:
             return method(self, request)
         except Exception as e:
-            LOG.exception(six.text_type(e))
+            LOG.exception(str(e))
             return render_exception(e,
                                     request=request)
 
@@ -87,14 +84,14 @@ def render_exception(error, context=None, request=None, user_locale=None):
 
     body = {'error': {
         'code': error.code,
-        'title': http_client.responses[error.code],
+        'title': client.responses[error.code],
         'message': error.message,
     }}
 
     headers = []
 
     return render_response(
-        status=(error.code, http_client.responses[error.code]),
+        status=(error.code, client.responses[error.code]),
         body=body,
         headers=headers)
 
@@ -108,8 +105,8 @@ def render_response(body=None, status=None, headers=None, method=None):
 
     if body is None:
         body = b''
-        status = status or (http_client.NO_CONTENT,
-                            http_client.responses[http_client.NO_CONTENT])
+        status = status or (client.NO_CONTENT,
+                            client.responses[client.NO_CONTENT])
     else:
         content_types = [v for h, v in headers if h == 'Content-Type']
         if content_types:
@@ -121,8 +118,7 @@ def render_response(body=None, status=None, headers=None, method=None):
             body = jsonutils.dump_as_bytes(body, cls=SmarterEncoder)
             if content_type is None:
                 headers.append(('Content-Type', 'application/json'))
-        status = status or (http_client.OK,
-                            http_client.responses[http_client.OK])
+        status = status or (client.OK, client.responses[client.OK])
 
     def _convert_to_str(headers):
         str_headers = []

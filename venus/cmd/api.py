@@ -21,8 +21,7 @@ import sys
 from oslo_log import log as logging
 from oslo_reports import guru_meditation_report as gmr
 
-# from venus.common import config  # noqa
-import venus.conf as cfg
+from venus.conf import CONF
 from venus import i18n
 from venus import objects
 from venus import service
@@ -31,8 +30,6 @@ from venus import version
 
 eventlet.monkey_patch()
 i18n.enable_lazy()
-
-CONF = cfg.CONF
 
 
 def main():

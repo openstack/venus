@@ -14,16 +14,12 @@
 
 """Implementation of SQLAlchemy backend."""
 
+import osprofiler.sqlalchemy
 import sqlalchemy
 import threading
 
-from oslo_config import cfg
 from oslo_db.sqlalchemy import session as db_session
-import osprofiler.sqlalchemy
-
-
-CONF = cfg.CONF
-CONF.import_group("profiler", "venus.service")
+from venus.conf import CONF
 
 
 _LOCK = threading.Lock()

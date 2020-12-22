@@ -25,7 +25,7 @@ from oslo_config import cfg
 from oslo_db.sqlalchemy import migration
 from oslo_log import log as logging
 
-from venus.common import config  # noqa
+from venus.conf import CONF
 from venus import context
 from venus import db
 from venus.db import migration as db_migration
@@ -38,7 +38,6 @@ from venus import version
 
 i18n.enable_lazy()
 
-CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
 
 

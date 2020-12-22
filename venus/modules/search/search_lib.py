@@ -77,10 +77,10 @@ class ESSearchObj(object):
         pass
 
     def get_global_log(self, global_id):
-        ID_FORMAT = (r'^req-[a-f0-9]{8}-[a-f0-9]{4}-'
+        id_format = (r'^req-[a-f0-9]{8}-[a-f0-9]{4}-'
                      r'[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$')
 
-        if not re.match(ID_FORMAT, global_id):
+        if not re.match(id_format, global_id):
             return {"error": "the request param is not correct"}
 
         doc = {
@@ -122,7 +122,7 @@ class ESSearchObj(object):
                 data[logger][programname]["log_list"].append(log)
                 data[logger][programname]["host"] = []
 
-                if (hostname not in data[logger][programname]["host"]):
+                if hostname not in data[logger][programname]["host"]:
                     data[logger][programname]["host"].append(hostname)
 
                 data[logger][programname]["start_time"] = log["timeutc"]
@@ -136,7 +136,7 @@ class ESSearchObj(object):
             else:
                 data[logger][programname]["log_list"].append(log)
 
-                if (hostname not in data[logger][programname]["host"]):
+                if hostname not in data[logger][programname]["host"]:
                     data[logger][programname]["host"].append(hostname)
 
                 data[logger][programname]["end_time"] = log["timeutc"]

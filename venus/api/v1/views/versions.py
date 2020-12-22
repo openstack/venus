@@ -44,10 +44,10 @@ class ViewBuilder(object):
         """
         self.base_url = base_url
 
-    def build_choices(self, VERSIONS, req):
+    def build_choices(self, versions, req):
         version_objs = []
-        for version in VERSIONS:
-            version = VERSIONS[version]
+        for version in versions:
+            version = versions[version]
             version_objs.append({
                 "id": version['id'],
                 "status": version['status'],

@@ -97,7 +97,7 @@ def as_int(obj, quiet=True):
         pass
     # Eck, not sure what this is then.
     if not quiet:
-        raise TypeError(_("Can not translate %s to integer.") % (obj))
+        raise TypeError(_("Can not translate %s to integer.") % obj)
     return obj
 
 
@@ -136,7 +136,7 @@ def check_exclusive_options(**kwargs):
         else:
             names = kwargs.keys()
         names = ", ".join(sorted(names))
-        msg = (_("May specify only one of %s") % (names))
+        msg = (_("May specify only one of %s") % names)
         raise exception.InvalidInput(reason=msg)
 
 
@@ -225,8 +225,8 @@ class ProtectedExpatParser(expatreader.ExpatParser):
     def start_doctype_decl(self, name, sysid, pubid, has_internal_subset):
         raise ValueError("Inline DTD forbidden")
 
-    def entity_decl(self, entityName, is_parameter_entity, value, base,
-                    systemId, publicId, notationName):
+    def entity_decl(self, entity_name, is_parameter_entity, value, base,
+                    system_id, public_id, notation_name):
         raise ValueError("<!ENTITY> forbidden")
 
     def unparsed_entity_decl(self, name, base, sysid, pubid, notation_name):
@@ -681,16 +681,16 @@ class TraceWrapperMetaclass(type):
     To use the metaclass you define a class like so:
     class MyClass(object, metaclass=utils.TraceWrapperMetaclass):
     """
-    def __new__(meta, classname, bases, classDict):
-        newClassDict = {}
-        for attributeName, attribute in classDict.items():
+    def __new__(meta, classname, bases, class_dict):
+        new_class_dict = {}
+        for attributeName, attribute in class_dict.items():
             if isinstance(attribute, types.FunctionType):
                 # replace it with a wrapped version
                 attribute = functools.update_wrapper(trace_method(attribute),
                                                      attribute)
-            newClassDict[attributeName] = attribute
+            new_class_dict[attributeName] = attribute
 
-        return type.__new__(meta, classname, bases, newClassDict)
+        return type.__new__(meta, classname, bases, new_class_dict)
 
 
 class TraceWrapperWithABCMetaclass(abc.ABCMeta, TraceWrapperMetaclass):

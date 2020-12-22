@@ -50,7 +50,7 @@ def middleware_exceptions(method):
 
 class ForwardUnionFilter(base_wsgi.Middleware):
     def process_request(self, req):
-        if (req.headers.get('FORWARD_UNION') == 'ALL'):
+        if req.headers.get('FORWARD_UNION') == 'ALL':
             return self.union(req)
         else:
             return self.forward(req)
@@ -59,7 +59,7 @@ class ForwardUnionFilter(base_wsgi.Middleware):
     @middleware_exceptions
     def __call__(self, req):
         forward_union = req.headers.get('FORWARD_UNION')
-        if (forward_union is None or forward_union == ''):
+        if forward_union is None or forward_union == '':
             response = req.get_response(self.application)
             return self.process_response(response)
 
@@ -76,8 +76,8 @@ class ForwardUnionFilter(base_wsgi.Middleware):
 
 def render_exception(error, context=None, request=None, user_locale=None):
 
-    if (hasattr(error, 'code')):
-        if (error.code is None or error.code == ''):
+    if hasattr(error, 'code'):
+        if error.code is None or error.code == '':
             error = exception.VenusException
     else:
         if '401' in str(error):

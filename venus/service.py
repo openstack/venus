@@ -58,16 +58,9 @@ service_opts = [
                help='Number of workers for OpenStack Venus API service. '
                     'The default is equal to the number of CPUs available.'), ]
 
-profiler_opts = [
-    cfg.BoolOpt("profiler_enabled", default=False,
-                help=_('If False fully disable profiling feature.')),
-    cfg.BoolOpt("trace_sqlalchemy", default=False,
-                help=_("If False doesn't trace SQL requests."))
-]
 
 CONF = cfg.CONF
 CONF.register_opts(service_opts)
-CONF.register_opts(profiler_opts, group="profiler")
 
 
 def setup_profiler(binary, host):

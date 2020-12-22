@@ -18,7 +18,7 @@ from venus.conf import api
 from venus.conf import common
 from venus.conf import core
 from venus.conf import elasticsearch
-
+from venus.conf import profiler
 
 CONF = cfg.CONF
 
@@ -26,3 +26,4 @@ api.register_opts(CONF)
 common.register_opts(CONF)
 core.register_opts(CONF)
 elasticsearch.register_opts(CONF)
+profiler.register_opts(CONF)

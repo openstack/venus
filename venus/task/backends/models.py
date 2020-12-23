@@ -16,13 +16,12 @@
 SQLAlchemy models for venus data.
 """
 
-from oslo_config import cfg
 from oslo_db.sqlalchemy import models
 from oslo_utils import timeutils
 from sqlalchemy import Column
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import DateTime, String
-CONF = cfg.CONF
+from venus.conf import CONF
 BASE = declarative_base()
 
 

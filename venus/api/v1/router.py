@@ -20,9 +20,9 @@ from oslo_log import log as logging
 
 from venus.api import extensions
 import venus.api.openstack
-from venus.api import versions
 from venus.modules.custom_config import controller as custom_config
 from venus.modules.search import controller as search
+from venus.modules.version import versions
 
 
 LOG = logging.getLogger(__name__)

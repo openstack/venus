@@ -19,9 +19,7 @@ import warnings
 
 from oslo_log import log as logging
 
-# Need to register global_opts
 from venus.conf import CONF
-from venus.common import config  # noqa
 from venus import i18n
 from venus import objects
 from venus import version

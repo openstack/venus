@@ -17,10 +17,10 @@
 import sys
 import warnings
 
-from oslo_config import cfg
 from oslo_log import log as logging
 
 # Need to register global_opts
+from venus.conf import CONF
 from venus.common import config  # noqa
 from venus import i18n
 from venus import objects
@@ -29,7 +29,6 @@ from venus.wsgi import common as wsgi_common
 
 warnings.simplefilter('once', DeprecationWarning)
 i18n.enable_lazy()
-CONF = cfg.CONF
 
 
 def _application():

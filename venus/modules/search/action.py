@@ -16,37 +16,14 @@ import datetime
 import json
 import time
 
-from oslo_config import cfg
 from oslo_log import log as logging
 from oslo_utils import timeutils
 
 from venus.common import utils
+from venus.conf import CONF
 from venus.modules.search import es_template
 
-CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
-
-"""
-config the elasticsearch info
-from /etc/venus/venus.conf
-if not exists ,default
-"""
-elasticsearch_group = cfg.OptGroup(name='elasticsearch',
-                                   title='elasticsearch')
-
-elasticsearch_opts = [
-    cfg.StrOpt('url',
-               default='',
-               help='the es url'),
-    cfg.StrOpt('username',
-               default='',
-               help='the es username'),
-    cfg.StrOpt('password',
-               default='',
-               help='the es password')
-]
-CONF.register_group(elasticsearch_group)
-CONF.register_opts(elasticsearch_opts, elasticsearch_group)
 
 
 class SearchCore(object):

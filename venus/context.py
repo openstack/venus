@@ -17,27 +17,13 @@
 import copy
 import six
 
-from oslo_config import cfg
 from oslo_context import context
 from oslo_log import log as logging
 from oslo_utils import timeutils
 
+from venus.conf import CONF
 from venus.i18n import _, _LW
 
-context_opts = [
-    cfg.StrOpt('venus_internal_tenant_project_id',
-               default=None,
-               help='ID of the project which will be used as the Venus '
-                    'internal tenant.'),
-    cfg.StrOpt('venus_internal_tenant_user_id',
-               default=None,
-               help='ID of the user to be used'
-                    ' in venusmanager operations as the '
-                    'Venus internal tenant.'),
-]
-
-CONF = cfg.CONF
-CONF.register_opts(context_opts)
 
 LOG = logging.getLogger(__name__)
 

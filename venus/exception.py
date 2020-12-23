@@ -22,25 +22,16 @@ SHOULD include dedicated exception logging.
 
 import sys
 
-from oslo_config import cfg
 from oslo_log import log as logging
 from oslo_versionedobjects import exception as obj_exc
 import six
 import webob.exc
 
+from venus.conf import CONF
 from venus.i18n import _, _LE
 
 
 LOG = logging.getLogger(__name__)
-
-exc_log_opts = [
-    cfg.BoolOpt('fatal_exception_format_errors',
-                default=False,
-                help='Make exception message format errors fatal.'),
-]
-
-CONF = cfg.CONF
-CONF.register_opts(exc_log_opts)
 
 
 class ConvertedException(webob.exc.WSGIHTTPException):

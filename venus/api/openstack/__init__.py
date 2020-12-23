@@ -83,6 +83,10 @@ class APIRouter(base_wsgi.Router):
         self._setup_routes(mapper, ext_mgr)
         self._setup_ext_routes(mapper, ext_mgr)
         self._setup_extensions(ext_mgr)
+        for url in mapper.matchlist:
+            LOG.debug('URL methid: s%   register: %s   ',
+                      url.conditions, url.routepath)
+
         super(APIRouter, self).__init__(mapper)
 
     def _setup_ext_routes(self, mapper, ext_mgr):

@@ -17,7 +17,6 @@ import os.path
 import re
 
 from lxml import etree
-import six
 
 from venus.i18n import _
 from venus import utils
@@ -205,7 +204,7 @@ class TemplateElement(object):
     def __getitem__(self, idx):
         """Retrieve a child node by index or name."""
 
-        if isinstance(idx, six.string_types):
+        if isinstance(idx, str):
             # Allow access by node name
             return self._childmap[idx]
         else:
@@ -336,12 +335,12 @@ class TemplateElement(object):
 
         # Start with the text...
         if self.text is not None:
-            elem.text = six.text_type(self.text(obj))
+            elem.text = str(self.text(obj))
 
         # Now set up all the attributes...
         for key, value in self.attrib.items():
             try:
-                elem.set(key, six.text_type(value(obj, True)))
+                elem.set(key, str(value(obj, True)))
             except KeyError:
                 # Attribute has no value, so don't include it
                 pass

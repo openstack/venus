@@ -15,7 +15,6 @@
 """RequestContext: context for requests that persist through all of venus."""
 
 import copy
-import six
 
 from oslo_context import context
 from oslo_log import log as logging
@@ -65,7 +64,7 @@ class RequestContext(context.RequestContext):
         self.remote_address = remote_address
         if not timestamp:
             timestamp = timeutils.utcnow()
-        elif isinstance(timestamp, six.string_types):
+        elif isinstance(timestamp, str):
             timestamp = timeutils.parse_isotime(timestamp)
         self.timestamp = timestamp
         self.quota_class = quota_class

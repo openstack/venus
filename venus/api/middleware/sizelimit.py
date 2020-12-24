@@ -18,18 +18,8 @@ Compatibility shim for Kilo, while operators migrate to oslo.middleware.
 """
 
 
-from oslo_config import cfg
 from oslo_log import versionutils
 from oslo_middleware import sizelimit
-
-
-# Default request size is 112k
-max_request_body_size_opt = cfg.IntOpt('osapi_max_request_body_size',
-                                       default=114688,
-                                       help='Max size for body of a request')
-
-CONF = cfg.CONF
-CONF.register_opt(max_request_body_size_opt)
 
 
 @versionutils.deprecated(as_of=versionutils.deprecated.KILO,

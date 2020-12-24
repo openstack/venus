@@ -15,20 +15,7 @@
 import copy
 import os
 
-from oslo_config import cfg
-
-
-versions_opts = [
-    cfg.StrOpt('public_endpoint', default=None,
-               help="Public url to use for versions endpoint. The default "
-                    "is None, which will use the request's host_url "
-                    "attribute to populate the URL base. If Venus is "
-                    "operating behind a proxy, you will want to change "
-                    "this to represent the proxy's URL."),
-]
-
-CONF = cfg.CONF
-CONF.register_opts(versions_opts)
+from venus.conf import CONF
 
 
 def get_view_builder(req):

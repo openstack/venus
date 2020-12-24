@@ -149,7 +149,30 @@ global_opts = [
                     'Venus internal tenant.'),
     cfg.StrOpt('db_driver',
                default='venus.db',
-               help='Driver to use for database access')
+               help='Driver to use for database access'),
+    cfg.BoolOpt('use_forwarded_for',
+                default=False,
+                help='Treat X-Forwarded-For as the canonical remote address. '
+                     'Only enable this if you have a sanitizing proxy.'),
+    # Default request size is 112k
+    cfg.IntOpt('osapi_max_request_body_size',
+               default=114688,
+               help='Max size for body of a request'),
+    cfg.StrOpt('public_endpoint', default=None,
+               help="Public url to use for versions endpoint. The default "
+                    "is None, which will use the request's host_url "
+                    "attribute to populate the URL base. If Venus is "
+                    "operating behind a proxy, you will want to change "
+                    "this to represent the proxy's URL."),
+    cfg.IntOpt('osapi_max_limit',
+               default=1000,
+               help='The maximum number of items that a collection '
+                    'resource returns in a single response'),
+    cfg.StrOpt('osapi_venus_base_URL',
+               default=None,
+               help='Base URL that will be presented to users in links '
+                    'to the OpenStack Venus API',
+               deprecated_name='osapi_compute_link_prefix'),
 ]
 
 

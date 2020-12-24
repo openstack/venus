@@ -16,31 +16,16 @@ import os
 import re
 
 import enum
-from oslo_config import cfg
 from oslo_log import log as logging
 from six.moves import urllib
 import webob
 
 from venus.api.openstack import wsgi
 from venus.api import xmlutil
+from venus.conf import CONF
 from venus.i18n import _
 from venus import utils
 
-
-api_common_opts = [
-    cfg.IntOpt('osapi_max_limit',
-               default=1000,
-               help='The maximum number of items that a collection '
-                    'resource returns in a single response'),
-    cfg.StrOpt('osapi_venus_base_URL',
-               default=None,
-               help='Base URL that will be presented to users in links '
-                    'to the OpenStack Venus API',
-               deprecated_name='osapi_compute_link_prefix'),
-]
-
-CONF = cfg.CONF
-CONF.register_opts(api_common_opts)
 
 LOG = logging.getLogger(__name__)
 

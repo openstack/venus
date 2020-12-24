@@ -12,12 +12,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from oslo_config import cfg
 from oslo_log import log as logging
 import paste.urlmap
 
+from venus.conf import CONF
 
-CONF = cfg.CONF
 LOG = logging.getLogger(__name__)
 
 

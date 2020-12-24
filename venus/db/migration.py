@@ -17,10 +17,10 @@
 import os
 import threading
 
-from oslo_config import cfg
 from oslo_db import options
 from stevedore import driver
 
+from venus.conf import CONF
 from venus.db.sqlalchemy import api as db_api
 
 INIT_VERSION = 000
@@ -28,7 +28,7 @@ INIT_VERSION = 000
 _IMPL = None
 _LOCK = threading.Lock()
 
-options.set_defaults(cfg.CONF)
+options.set_defaults(CONF)
 
 MIGRATE_REPO_PATH = os.path.join(
     os.path.abspath(os.path.dirname(__file__)),
@@ -44,7 +44,7 @@ def get_backend():
             if _IMPL is None:
                 _IMPL = driver.DriverManager(
                     "venus.database.migration_backend",
-                    cfg.CONF.database.backend).driver
+                    CONF.database.backend).driver
     return _IMPL
 
 

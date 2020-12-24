@@ -16,6 +16,7 @@ import functools
 import inspect
 from lxml import etree
 import math
+import six
 import time
 import webob
 from xml.dom import minidom
@@ -23,7 +24,9 @@ from xml.parsers import expat
 
 from oslo_log import log as logging
 from oslo_serialization import jsonutils
+from oslo_utils import encodeutils
 from oslo_utils import excutils
+
 
 from venus import exception
 from venus import i18n
@@ -659,14 +662,22 @@ class ResponseObject(object):
                                                       default_serializers)
             serializer = _serializer()
 
-        response = webob.Response()
-        response.status_int = self.code
-        for hdr, value in self._headers.items():
-            response.headers[hdr] = value
-        response.headers['Content-Type'] = content_type
         if self.obj is not None:
-            response.body = serializer.serialize(self.obj)
-
+            body = serializer.serialize(self.obj)
+        response = webob.Response(body=body)
+        response.status_int = self.code
+        for hdr, val in self._headers.items():
+            # In Py3.X Headers must be a str that was first safely
+            # encoded to UTF-8 (to catch any bad encodings) and then
+            # decoded back to a native str.
+            response.headers[hdr] = \
+                encodeutils.safe_decode(encodeutils.safe_encode(val))
+        # Deal with content_type
+        if not isinstance(content_type, six.text_type):
+            content_type = six.text_type(content_type)
+        # In Py3.X Headers must be a str.
+        response.headers['Content-Type'] = \
+            encodeutils.safe_decode(encodeutils.safe_encode(content_type))
         return response
 
     @property

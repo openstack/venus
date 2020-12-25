@@ -17,15 +17,14 @@
 import contextlib
 import datetime
 
-from oslo_log import log as logging
 from oslo_versionedobjects import base
 from oslo_versionedobjects import fields
 
+from venus.common.utils import LOG
 from venus import exception
 from venus import objects
 
 
-LOG = logging.getLogger('object')
 remotable = base.remotable
 remotable_classmethod = base.remotable_classmethod
 obj_make_list = base.obj_make_list

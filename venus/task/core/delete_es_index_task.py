@@ -16,19 +16,14 @@ import datetime
 import six
 import time
 
-
-from oslo_log import log as logging
-
-
 from venus.common import utils
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus.modules.custom_config.backends.sql import CustomConfigSql
 from venus.modules.search.search_lib import ESSearchObj
 from venus.i18n import _LE, _LI
 from venus.task.backends.sql import TaskSql
 
-
-LOG = logging.getLogger(__name__)
 
 TASK_NAME = "delete_es_index"
 

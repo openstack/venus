@@ -17,8 +17,8 @@ import socket
 import time
 
 from oslo_db import options
-from oslo_log import log as logging
 
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus.db.common import _create_facade_lazily
 from venus.i18n import _LE
@@ -26,7 +26,6 @@ from venus.task.backends import models
 
 # abc
 CONF.import_group("profiler", "venus.service")
-log = logging.getLogger(__name__)
 options.set_defaults(CONF, connection='sqlite:///$state_path/venus.sqlite')
 
 
@@ -44,7 +43,7 @@ class TaskSql(object):
             tasks = session.query(models.RegitsterTask).filter_by(
                 task_name=t_name).with_lockmode('update').all()
             if len(tasks) != 1:
-                log.error(_LE("unsupported task type:%s, please check it"),
+                LOG.error(_LE("unsupported task type:%s, please check it"),
                           t_name)
                 return False
 

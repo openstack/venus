@@ -25,17 +25,16 @@ import time
 import eventlet
 import eventlet.wsgi
 import greenlet
+
 from oslo_log import log as logging
 from oslo_service import service
 from oslo_utils import excutils
 from oslo_utils import netutils
 
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus import exception
 from venus.i18n import _, _LE, _LI
-
-
-LOG = logging.getLogger(__name__)
 
 
 class Server(service.ServiceBase):

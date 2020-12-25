@@ -14,13 +14,9 @@
 
 """The template api."""
 
-from oslo_log import log as logging
-
 from venus.api.openstack import wsgi
 from venus.modules.search.action import SearchCore
 from venus.modules.search.search_lib import ESSearchObj
-
-LOG = logging.getLogger(__name__)
 
 
 class SearchController(wsgi.Controller):

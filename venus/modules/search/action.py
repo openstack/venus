@@ -16,14 +16,11 @@ import datetime
 import json
 import time
 
-from oslo_log import log as logging
 from oslo_utils import timeutils
 
 from venus.common import utils
 from venus.conf import CONF
 from venus.modules.search import es_template
-
-LOG = logging.getLogger(__name__)
 
 
 class SearchCore(object):
@@ -39,7 +36,7 @@ class SearchCore(object):
         index_names = []
         status, indexes = utils.request_es(url, 'GET')
         if status != 200:
-            LOG.error("failed to get all es indexes")
+            utils.LOG.error("failed to get all es indexes")
             return ""
         indexes_array = json.loads(indexes)
         for index in indexes_array:

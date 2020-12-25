@@ -20,20 +20,17 @@ Common Auth Middleware.
 
 import os
 
-from oslo_log import log as logging
 from oslo_middleware import request_id
 from oslo_serialization import jsonutils
 import webob.dec
 import webob.exc
 
 from venus.api.openstack import wsgi
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus import context
 from venus.i18n import _
 from venus.wsgi import common as base_wsgi
-
-
-LOG = logging.getLogger(__name__)
 
 
 def pipeline_factory(loader, global_conf, **local_conf):

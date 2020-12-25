@@ -14,10 +14,8 @@
 
 """A Timer Task With APScheduler."""
 from apscheduler.schedulers.blocking import BlockingScheduler
-from oslo_log import log as logging
 from venus.task import adapter
 
-LOG = logging.getLogger(__name__)
 
 sched = BlockingScheduler()
 

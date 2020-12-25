@@ -12,18 +12,15 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from oslo_log import log as logging
 import webob.dec
 import webob.exc
 
 from venus.api.openstack import wsgi
+from venus.common.utils import LOG
 from venus import exception
 from venus.i18n import _, _LI
 from venus import utils
 from venus.wsgi import common as base_wsgi
-
-
-LOG = logging.getLogger(__name__)
 
 
 class FaultWrapper(base_wsgi.Middleware):

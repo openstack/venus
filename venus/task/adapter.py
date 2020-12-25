@@ -13,11 +13,7 @@
 # under the License.
 
 """A Timer Task With APScheduler."""
-
-from oslo_log import log as logging
 from venus.task.core import delete_es_index_task
-
-LOG = logging.getLogger(__name__)
 
 
 def delete_es_index_job():

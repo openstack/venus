@@ -22,12 +22,11 @@ import webob
 from xml.dom import minidom
 from xml.parsers import expat
 
-from oslo_log import log as logging
 from oslo_serialization import jsonutils
 from oslo_utils import encodeutils
 from oslo_utils import excutils
 
-
+from venus.common.utils import LOG
 from venus import exception
 from venus import i18n
 from venus.i18n import _, _LE, _LI
@@ -38,7 +37,6 @@ from venus.wsgi import common as wsgi
 XML_NS_V1 = 'https://www.openstack.org/mediawiki/Venus/1.0/content'
 XML_NS_ATOM = 'http://www.w3.org/2005/Atom'
 
-LOG = logging.getLogger(__name__)
 
 SUPPORTED_CONTENT_TYPES = (
     'application/json',

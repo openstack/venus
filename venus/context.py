@@ -17,14 +17,11 @@
 import copy
 
 from oslo_context import context
-from oslo_log import log as logging
 from oslo_utils import timeutils
 
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus.i18n import _, _LW
-
-
-LOG = logging.getLogger(__name__)
 
 
 class RequestContext(context.RequestContext):

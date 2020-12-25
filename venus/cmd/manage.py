@@ -38,8 +38,6 @@ from venus import version
 
 i18n.enable_lazy()
 
-LOG = logging.getLogger(__name__)
-
 
 # Decorators for actions
 def args(*args, **kwargs):

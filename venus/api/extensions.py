@@ -13,19 +13,16 @@
 # under the License.
 
 import os
-from oslo_log import log as logging
 from oslo_utils import importutils
 import webob.dec
 import webob.exc
 
 from venus.api.openstack import wsgi
 from venus.api import xmlutil
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus import exception
 from venus.i18n import _LE, _LI, _LW
-
-
-LOG = logging.getLogger(__name__)
 
 
 class ExtensionDescriptor(object):

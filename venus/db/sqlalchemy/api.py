@@ -18,7 +18,6 @@ import sys
 import warnings
 
 from oslo_db import options
-from oslo_log import log as logging
 
 from venus.conf import CONF
 from venus.db.common import _create_facade_lazily
@@ -27,7 +26,6 @@ from venus.i18n import _
 
 
 CONF.import_group("profiler", "venus.service")
-log = logging.getLogger(__name__)
 options.set_defaults(CONF, connection='sqlite:///$state_path/venus.sqlite')
 
 

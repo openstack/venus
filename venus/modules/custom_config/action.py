@@ -12,10 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from oslo_log import log as logging
 from venus.modules.custom_config.backends.sql import CustomConfigSql
-
-LOG = logging.getLogger(__name__)
 
 
 class CustomConfigCore(object):

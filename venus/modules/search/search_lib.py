@@ -18,11 +18,8 @@ from elasticsearch import Elasticsearch
 import re
 from urllib.parse import urlparse
 
-from oslo_log import log as logging
-
+from venus.common.utils import LOG
 from venus.conf import CONF
-
-LOG = logging.getLogger(__name__)
 
 
 class ESSearchObj(object):

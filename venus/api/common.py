@@ -16,18 +16,17 @@ import os
 import re
 
 import enum
-from oslo_log import log as logging
+
 from six.moves import urllib
 import webob
 
 from venus.api.openstack import wsgi
 from venus.api import xmlutil
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus.i18n import _
 from venus import utils
 
-
-LOG = logging.getLogger(__name__)
 
 XML_NS_V1 = 'https://www.openstack.org/mediawiki/Venus/1.0/content'
 

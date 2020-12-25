@@ -20,7 +20,6 @@ import os
 import random
 
 from oslo_concurrency import processutils
-from oslo_log import log as logging
 from oslo_service import loopingcall
 from oslo_service import service
 from oslo_utils import importutils
@@ -28,6 +27,7 @@ import osprofiler.notifier
 from osprofiler import profiler
 import osprofiler.web
 
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus import context
 from venus import exception
@@ -35,9 +35,6 @@ from venus.i18n import _, _LI, _LW
 from venus import version
 from venus.wsgi import common as wsgi_common
 from venus.wsgi import eventlet_server as wsgi
-
-
-LOG = logging.getLogger(__name__)
 
 
 def setup_profiler(binary, host):

@@ -20,14 +20,11 @@ import sys
 import webob.dec
 import webob.exc
 
-from oslo_log import log as logging
-
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus import exception
 from venus.i18n import _, _LE
 from venus import utils
-
-LOG = logging.getLogger(__name__)
 
 
 class Request(webob.Request):

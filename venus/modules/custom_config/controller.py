@@ -14,13 +14,8 @@
 
 """The template api."""
 
-from oslo_log import log as logging
-
 from venus.api.openstack import wsgi
-
 from venus.modules.custom_config.action import CustomConfigCore
-
-LOG = logging.getLogger(__name__)
 
 
 class CustomConfigController(wsgi.Controller):

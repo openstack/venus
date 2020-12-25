@@ -13,11 +13,11 @@
 # under the License.
 from http import client
 
-from oslo_log import log as logging
-
 import webob.dec
 
 import webob.exc
+
+from venus.common.utils import LOG
 
 from venus import exception
 
@@ -27,7 +27,6 @@ from oslo_serialization import jsonutils
 
 import functools
 
-LOG = logging.getLogger(__name__)
 
 JSON_ENCODE_CONTENT_TYPES = {'application/json', 'application/json-home'}
 

@@ -18,13 +18,9 @@ It can't be called 'extensions' because that causes namespacing problems.
 
 """
 
-from oslo_log import log as logging
-
 from venus.api import extensions
+from venus.common.utils import LOG
 from venus.conf import CONF
-
-
-LOG = logging.getLogger(__name__)
 
 
 def standard_extensions(ext_mgr):

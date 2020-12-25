@@ -22,16 +22,13 @@ SHOULD include dedicated exception logging.
 
 import sys
 
-from oslo_log import log as logging
 from oslo_versionedobjects import exception as obj_exc
 import six
 import webob.exc
 
+from venus.common.utils import LOG
 from venus.conf import CONF
 from venus.i18n import _, _LE
-
-
-LOG = logging.getLogger(__name__)
 
 
 class ConvertedException(webob.exc.WSGIHTTPException):

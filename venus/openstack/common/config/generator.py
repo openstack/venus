@@ -26,7 +26,6 @@ import textwrap
 
 from oslo_config import cfg
 from oslo_utils import importutils
-import six
 
 from venus.openstack.common import gettextutils
 
@@ -245,7 +244,7 @@ def _print_opt(opt):
         if opt_default is None:
             print('#%s=<None>' % opt_name)
         elif opt_type == STROPT:
-            assert(isinstance(opt_default, six.string_types))
+            assert(isinstance(opt_default, str))
             print('#%s=%s' % (opt_name, _sanitize_default(opt_name,
                                                           opt_default)))
         elif opt_type == BOOLOPT:

@@ -224,7 +224,6 @@ class GetLogCommands(object):
         """Get <num_entries> of the venus syslog events."""
         entries = int(num_entries)
         count = 0
-        log_file = ''
         if os.path.exists('/var/log/syslog'):
             log_file = '/var/log/syslog'
         elif os.path.exists('/var/log/messages'):
@@ -305,7 +304,6 @@ category_opt = cfg.SubCommandOpt('category',
 
 
 def get_arg_string(args):
-    arg = None
     if args[0] == '-':
         # (Note)zhiteng: args starts with FLAGS.oparser.prefix_chars
         # is optional args. Notice that cfg module takes care of

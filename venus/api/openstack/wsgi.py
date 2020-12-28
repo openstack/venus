@@ -1000,7 +1000,7 @@ class Resource(wsgi.Application):
 
         project_id = action_args.pop("project_id", None)
         context = request.environ.get('venus.context')
-        if (context and project_id and (project_id != context.project_id)):
+        if context and project_id and (project_id != context.project_id):
             msg = _("Malformed request url")
             return Fault(webob.exc.HTTPBadRequest(explanation=msg))
 

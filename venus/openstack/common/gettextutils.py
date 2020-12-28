@@ -27,8 +27,6 @@ from logging import handlers
 import os
 import oslo_i18n
 
-import six
-
 _AVAILABLE_LANGUAGES = {}
 
 # FIXME(dhellmann): Remove this when moving to oslo.i18n.
@@ -76,7 +74,7 @@ class TranslatorFactory(object):
                                 fallback=True)
         # Use the appropriate method of the translation object based
         # on the python version.
-        m = t.gettext if six.PY3 else t.ugettext
+        m = t.gettext
 
         def f(msg):
             """oslo.i18n.gettextutils translation function."""
@@ -166,12 +164,12 @@ def install(domain):
 
     :param domain: the translation domain
     """
-    from six import moves
+    import builtins
     tf = TranslatorFactory(domain)
-    moves.builtins.__dict__['_'] = tf.primary
+    builtins.__dict__['_'] = tf.primary
 
 
-class Message(six.text_type):
+class Message(str):
     """A Message object is a unicode object that can be translated.
 
     Translation of Message is done explicitly using the translate() method.
@@ -243,10 +241,7 @@ class Message(six.text_type):
                                    localedir=locale_dir,
                                    languages=[desired_locale],
                                    fallback=True)
-        if six.PY3:
-            translator = lang.gettext
-        else:
-            translator = lang.ugettext
+        translator = lang.gettext
 
         translated_message = translator(msgid)
         return translated_message
@@ -293,7 +288,7 @@ class Message(six.text_type):
         except Exception:
             # Fallback to casting to unicode this will handle the
             # python code-like objects that can't be deep-copied
-            return six.text_type(param)
+            return str(param)
 
     def __add__(self, other):
         msg = _('Message objects do not support addition.')
@@ -301,15 +296,6 @@ class Message(six.text_type):
 
     def __radd__(self, other):
         return self.__add__(other)
-
-    if six.PY2:
-        def __str__(self):
-            # NOTE(luisg): Logging in python 2.6 tries to str() log records,
-            # and it expects specifically a UnicodeError in order to proceed.
-            msg = _('Message objects do not support str() because they may '
-                    'contain non-ascii characters. '
-                    'Please use unicode() or translate() instead.')
-            raise UnicodeError(msg)
 
 
 def get_available_languages(domain):
@@ -336,7 +322,7 @@ def translate(obj, desired_locale=None):
     if not isinstance(message, Message):
         # If the object to translate is not already translatable,
         # let's first get its unicode representation
-        message = six.text_type(obj)
+        message = str(obj)
     if isinstance(message, Message):
         # Even after unicoding() we still need to check if we are
         # running with translatable unicode before translating
@@ -363,7 +349,7 @@ def _translate_args(args, desired_locale=None):
         return tuple(translate(v, desired_locale) for v in args)
     if isinstance(args, dict):
         translated_dict = {}
-        for (k, v) in six.iteritems(args):
+        for (k, v) in args.items():
             translated_v = translate(v, desired_locale)
             translated_dict[k] = translated_v
         return translated_dict

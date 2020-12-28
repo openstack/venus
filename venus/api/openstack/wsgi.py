@@ -16,7 +16,6 @@ import functools
 import inspect
 from lxml import etree
 import math
-import six
 import time
 import webob
 from xml.dom import minidom
@@ -671,8 +670,8 @@ class ResponseObject(object):
             response.headers[hdr] = \
                 encodeutils.safe_decode(encodeutils.safe_encode(val))
         # Deal with content_type
-        if not isinstance(content_type, six.text_type):
-            content_type = six.text_type(content_type)
+        if not isinstance(content_type, str):
+            content_type = str(content_type)
         # In Py3.X Headers must be a str.
         response.headers['Content-Type'] = \
             encodeutils.safe_decode(encodeutils.safe_encode(content_type))

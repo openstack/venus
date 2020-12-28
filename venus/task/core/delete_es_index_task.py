@@ -13,7 +13,6 @@
 # under the License.
 
 import datetime
-import six
 import time
 
 from venus.common import utils
@@ -64,7 +63,7 @@ class DeleteESIndexTask(object):
                     self.delete_index(index_name)
             except Exception as e:
                 LOG.error("delete index {} error:{}".format(
-                    index["index"], six.text_type(e)))
+                    index["index"], str(e)))
 
     def start_task(self):
         try:
@@ -82,8 +81,8 @@ class DeleteESIndexTask(object):
                 self.delete_es_history_index()
             except Exception as e:
                 LOG.error(_LE("delete es index, catch exception:%s"),
-                          six.text_type(e))
+                          str(e))
             LOG.info(_LI("delete es index task done"))
         except Exception as e:
             LOG.error(_LE("delete es index task, catch exception:%s"),
-                      six.text_type(e))
+                      str(e))

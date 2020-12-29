@@ -1261,8 +1261,8 @@ class Controller(object, metaclass=ControllerMetaclass):
 
         :param value: the value of the integer
         :param name: the name of the integer
-        :param min_length: the min_length of the integer
-        :param max_length: the max_length of the integer
+        :param min_value: the min_value of the integer
+        :param max_value: the max_value of the integer
         :returns: integer
         """
         try:

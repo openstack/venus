@@ -17,11 +17,13 @@
 from __future__ import print_function
 
 import argparse
-import imp
 import os
 import re
 import socket
 import sys
+
+from importlib import machinery
+
 import textwrap
 
 from oslo_config import cfg
@@ -117,7 +119,9 @@ def generate(argv):
 def _import_module(mod_str):
     try:
         if mod_str.startswith('bin.'):
-            imp.load_source(mod_str[4:], os.path.join('bin', mod_str[4:]))
+            machinery.SourceFileLoader(mod_str[4:],
+                                       os.path.join('bin', mod_str[4:])).\
+                load_module()
             return sys.modules[mod_str[4:]]
         else:
             return importutils.import_module(mod_str)
@@ -131,7 +135,7 @@ def _is_in_group(opt, group):
     for value in group._opts.values():
         # NOTE(llu): Temporary workaround for bug #1262148, wait until
         # newly released oslo.config support '==' operator.
-        if not(value['opt'] != opt):
+        if not (value['opt'] != opt):
             return True
     return False
 
@@ -244,29 +248,29 @@ def _print_opt(opt):
         if opt_default is None:
             print('#%s=<None>' % opt_name)
         elif opt_type == STROPT:
-            assert(isinstance(opt_default, str))
+            assert (isinstance(opt_default, str))
             print('#%s=%s' % (opt_name, _sanitize_default(opt_name,
                                                           opt_default)))
         elif opt_type == BOOLOPT:
-            assert(isinstance(opt_default, bool))
+            assert (isinstance(opt_default, bool))
             print('#%s=%s' % (opt_name, str(opt_default).lower()))
         elif opt_type == INTOPT:
-            assert(isinstance(opt_default, int) and
-                   not isinstance(opt_default, bool))
+            assert (isinstance(opt_default, int) and
+                    not isinstance(opt_default, bool))
             print('#%s=%s' % (opt_name, opt_default))
         elif opt_type == FLOATOPT:
-            assert(isinstance(opt_default, float))
+            assert (isinstance(opt_default, float))
             print('#%s=%s' % (opt_name, opt_default))
         elif opt_type == LISTOPT:
-            assert(isinstance(opt_default, list))
+            assert (isinstance(opt_default, list))
             print('#%s=%s' % (opt_name, ','.join(opt_default)))
         elif opt_type == DICTOPT:
-            assert(isinstance(opt_default, dict))
+            assert (isinstance(opt_default, dict))
             opt_default_strlist = [str(key) + ':' + str(value)
                                    for (key, value) in opt_default.items()]
             print('#%s=%s' % (opt_name, ','.join(opt_default_strlist)))
         elif opt_type == MULTISTROPT:
-            assert(isinstance(opt_default, list))
+            assert (isinstance(opt_default, list))
             if not opt_default:
                 opt_default = ['']
             for default in opt_default:

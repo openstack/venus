@@ -16,8 +16,8 @@ import os
 import re
 
 import enum
+from urllib import parse
 
-from six.moves import urllib
 import webob
 
 from venus.api.openstack import wsgi
@@ -205,9 +205,9 @@ def get_request_url(request):
     headers = request.headers
     forwarded = headers.get('X-Forwarded-Host')
     if forwarded:
-        url_parts = list(urllib.parse.urlsplit(url))
+        url_parts = list(parse.urlsplit(url))
         url_parts[1] = re.split(',\s?', forwarded)[-1]
-        url = urllib.parse.urlunsplit(url_parts).rstrip('/')
+        url = parse.urlunsplit(url_parts).rstrip('/')
     return url
 
 
@@ -221,7 +221,7 @@ def remove_version_from_href(href):
     Returns: 'http://www.venus.com'
 
     """
-    parsed_url = urllib.parse.urlsplit(href)
+    parsed_url = parse.urlsplit(href)
     url_parts = parsed_url.path.split('/', 2)
 
     # NOTE: this should match vX.X or vX
@@ -238,7 +238,7 @@ def remove_version_from_href(href):
 
     parsed_url = list(parsed_url)
     parsed_url[2] = new_path
-    return urllib.parse.urlunsplit(parsed_url)
+    return parse.urlunsplit(parsed_url)
 
 
 class ViewBuilder(object):
@@ -261,7 +261,7 @@ class ViewBuilder(object):
         url = os.path.join(prefix,
                            request.environ["venus.context"].project_id,
                            collection_name)
-        return "%s?%s" % (url, urllib.parse.urlencode(params))
+        return "%s?%s" % (url, parse.urlencode(params))
 
     def _get_href_link(self, request, identifier):
         """Return an href string pointing to this object."""
@@ -333,12 +333,12 @@ class ViewBuilder(object):
     def _update_link_prefix(self, orig_url, prefix):
         if not prefix:
             return orig_url
-        url_parts = list(urllib.parse.urlsplit(orig_url))
-        prefix_parts = list(urllib.parse.urlsplit(prefix))
+        url_parts = list(parse.urlsplit(orig_url))
+        prefix_parts = list(parse.urlsplit(prefix))
         url_parts[0:2] = prefix_parts[0:2]
         url_parts[2] = prefix_parts[2] + url_parts[2]
 
-        return urllib.parse.urlunsplit(url_parts).rstrip('/')
+        return parse.urlunsplit(url_parts).rstrip('/')
 
 
 class MetadataDeserializer(wsgi.MetadataXMLDeserializer):

@@ -201,7 +201,7 @@ def list_of_dicts_to_dict(seq, key):
     indexed by <key>
 
     :param seq: list of dicts
-    :parm key: key in dicts to index by
+    :param key: key in dicts to index by
 
     example:
       lst = [{'id': 1, ...}, {'id': 2, ...}...]

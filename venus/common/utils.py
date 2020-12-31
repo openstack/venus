@@ -28,7 +28,7 @@ LOG = logging.getLogger(__name__)
 def request_es(url, method, data=None):
     http = urllib3.PoolManager(timeout=30.0)
     try:
-        if method == "GET" or method == "DELETE":
+        if method in ["GET", "DELETE"]:
             resp = http.request(method, url=url)
         elif method == "POST":
             resp = http.request(method, url=url, body=json.dumps(data))

@@ -21,7 +21,7 @@ class CustomConfigCore(object):
         super(CustomConfigCore, self).__init__()
 
     def get_config(self, id):
-        res = {}
+        res = dict()
         res["value"] = self.config_sql.get_config(id)
         return res
 

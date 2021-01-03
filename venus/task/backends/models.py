@@ -36,7 +36,6 @@ class VenusBase(models.TimestampMixin,
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
     deleted_at = Column(DateTime)
-    # deleted = Column(Boolean, default=False)
     deleted = Column(String(1), default=0)
     metadata = None
 

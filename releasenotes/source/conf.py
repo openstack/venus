@@ -28,8 +28,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-copyright = u'2020, Venus developers'
-author = u'venus developers'
+copyright = '2020, Venus developers'
+author = 'venus developers'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -98,8 +98,8 @@ htmlhelp_basename = 'VenusReleaseNotesdoc'
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'VenusReleaseNotes.tex',
-     u'Venus Release Notes Documentation',
-     u'Venus developers', 'manual'),
+     'Venus Release Notes Documentation',
+     'Venus developers', 'manual'),
 ]
 
 
@@ -108,7 +108,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'VenusReleaseNotes', u'Venus Release Notes Documentation',
+    (master_doc, 'VenusReleaseNotes', 'Venus Release Notes Documentation',
      [author], 1)
 ]
 
@@ -119,7 +119,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'VenusReleaseNotes', u'Venus Release Notes Documentation',
+    (master_doc, 'VenusReleaseNotes', 'Venus Release Notes Documentation',
      author, 'VenusReleaseNotes', 'One line description of project.',
      'Miscellaneous'),
 ]

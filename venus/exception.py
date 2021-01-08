@@ -95,9 +95,6 @@ class VenusException(Exception):
     def _should_format(self):
         return self.kwargs['message'] is None or '%(message)' in self.message
 
-    def __unicode__(self):
-        return str(self.msg)
-
 
 class NotAuthorized(VenusException):
     message = _("Not authorized.")

@@ -134,7 +134,8 @@ global_opts = [
                 default=True,
                 help='If False, closes the client socket connection '
                      'explicitly. Setting it to True to maintain backward '
-                     'compatibility. Recommended setting is set it to False.'),
+                     'compatibility. Recommended settings is set it '
+                     'to False.'),
     cfg.BoolOpt('fatal_exception_format_errors',
                 default=False,
                 help='Make exception message format errors fatal.'),

@@ -17,42 +17,41 @@
 import os
 import threading
 
-from oslo_db import options
-from stevedore import driver
-
-from venus.conf import CONF
-from venus.db.sqlalchemy import api as db_api
+from oslo_config import cfg
+from oslo_db import options as db_options
+from oslo_db.sqlalchemy.migration import db_sync as sync
+from oslo_db.sqlalchemy import session as db_session
 
 INIT_VERSION = 000
 
 _IMPL = None
 _LOCK = threading.Lock()
 
-options.set_defaults(CONF)
+db_options.set_defaults(cfg.CONF)
 
 MIGRATE_REPO_PATH = os.path.join(
     os.path.abspath(os.path.dirname(__file__)),
-    'sqlalchemy',
-    'migrate_repo',
+    'sqlalchemy/migrate_repo',
 )
 
 
-def get_backend():
+def get_engine():
+    print(cfg.CONF)
     global _IMPL
     if _IMPL is None:
         with _LOCK:
             if _IMPL is None:
-                _IMPL = driver.DriverManager(
-                    "venus.database.migration_backend",
-                    CONF.database.backend).driver
-    return _IMPL
+                _IMPL = db_session.EngineFacade(
+                    cfg.CONF.database.connection,
+                    **dict(cfg.CONF.database)
+                )
+    return _IMPL.get_engine()
 
 
 def db_sync(version=None, init_version=INIT_VERSION, engine=None):
     """Migrate the database to `version` or the most recent version."""
-    if engine is None:
-        engine = db_api.get_engine()
-    return get_backend().db_sync(engine=engine,
-                                 abs_path=MIGRATE_REPO_PATH,
-                                 version=version,
-                                 init_version=init_version)
+    engine = get_engine()
+    return sync(engine=engine,
+                abs_path=MIGRATE_REPO_PATH,
+                version=version,
+                init_version=init_version)

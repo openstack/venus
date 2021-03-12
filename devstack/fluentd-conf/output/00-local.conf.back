@@ -1,0 +1,18 @@
+<match syslog.**>
+  @type copy
+  <store>
+       type elasticsearch
+       host localhost
+       port 9200
+       logstash_format true
+       logstash_prefix slog
+       buffer_type memory
+       buffer_chunk_limit 8m
+       buffer_queue_limit 8
+       buffer_queue_full_action drop_oldest_chunk
+       flush_interval 30s
+       num_threads 4
+       reconnect_on_error true
+       resurrect_after 5s
+  </store>
+</match>

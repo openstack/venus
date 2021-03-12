@@ -23,7 +23,7 @@ service_opts = [
                default=60,
                help='Range, in seconds, to randomly delay when starting the'
                     ' periodic task scheduler to reduce stampeding.'
-                    ' (Disable by setting to 0)'),
+                    ' (Disable by settings to 0)'),
     cfg.StrOpt('osapi_venus_listen',
                default="0.0.0.0",
                help='IP address on which OpenStack Venus API listens'),

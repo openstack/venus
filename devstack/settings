@@ -1,0 +1,9 @@
+# settings file for venus
+
+# API Service
+enable_service venus-api
+
+# Default directories
+VENUS_DIR=$DEST/venus
+VENUS_CONF_DIR=/etc/venus
+VENUS_CONF=$VENUS_CONF_DIR/venus.conf

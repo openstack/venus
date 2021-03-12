@@ -3,4 +3,6 @@ include ChangeLog
 exclude .gitignore
 exclude .gitreview
 
+recursive-include venus/db/sqlalchemy/migrate_repo *
+
 global-exclude *.pyc

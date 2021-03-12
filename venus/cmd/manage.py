@@ -345,10 +345,10 @@ def main():
     try:
         CONF(sys.argv[1:], project='venus',
              version=version.version_string())
-        logdir = CONF.log_dir
-        is_exits = os.path.exists(logdir)
-        if not is_exits:
-            os.makedirs(logdir)
+        # logdir = CONF.log_dir
+        # is_exits = os.path.exists(logdir)
+        # if not is_exits:
+        #     os.makedirs(logdir)
         logging.setup(CONF, "venus")
     except cfg.ConfigDirNotFoundError as details:
         print(_("Invalid directory: %s") % details)

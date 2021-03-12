@@ -7,6 +7,10 @@
 .stestr/
 *.DS_Store
 
+devstack/files/*.deb
+devstack/files/*.deb.*
+venv/
+
 dist
 build/*
 venus.egg-info/

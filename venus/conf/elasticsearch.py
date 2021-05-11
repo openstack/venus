@@ -26,7 +26,10 @@ elasticsearch_opts = [
                help='the es username'),
     cfg.StrOpt('password',
                default='',
-               help='the es password')
+               help='the es password'),
+    cfg.IntOpt('es_index_days',
+               default=30,
+               help='the es log store days')
 ]
 
 

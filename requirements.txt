@@ -30,7 +30,6 @@ apscheduler>=3.6.3
 paste>=3.0.2
 webob>=1.8.5
 lxml>=4.4.0
-
 stevedore>=3.3.0
 Routes>=2.5.1
 eventlet>=0.30.0

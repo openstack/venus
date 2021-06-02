@@ -68,12 +68,12 @@ class ESSearchObj(object):
         }
         result = self.es.search(index="flog*", body=doc)
         log_list = self.parse_result(result)
-        self.sort_result_by_time(log_list)
+        # self.sort_result_by_time(log_list)
 
         data = {}
         data["log_size"] = len(log_list)
         data["global_id"] = global_id
-        data["analysis"] = self.analysis_log(log_list)
+        data["analysis"] = log_list
 
         return data
 

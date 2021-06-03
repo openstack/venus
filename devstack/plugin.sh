@@ -8,7 +8,7 @@ else
   VENUS_BIN_DIR=$(get_python_exec_prefix)
 fi
 
-FILES=$VENUS_DIR/devstack/files
+VENUS_FILES=$VENUS_DIR/devstack/VENUS_FILES
 
 function install_venus() {
   setup_develop "$VENUS_DIR" openstack
@@ -57,14 +57,14 @@ function install_elastic_search() {
     ES_DOWNLOAD_URL=${ES_DOWNLOAD_URL:-https://artifacts.elastic.co/downloads/elasticsearch}
     ES_DOWNLOAD_FILE="elasticsearch-$ES_VERSION.deb"
 
-    if [[ ! -f $FILES/$ES_DOWNLOAD_FILE ]]; then
-      sudo wget --progress=dot:giga -t 2 -c $ES_DOWNLOAD_URL/$ES_DOWNLOAD_FILE -O $FILES/$ES_DOWNLOAD_FILE
+    if [[ ! -f $VENUS_FILES/$ES_DOWNLOAD_FILE ]]; then
+      sudo wget --progress=dot:giga -t 2 -c $ES_DOWNLOAD_URL/$ES_DOWNLOAD_FILE -O $VENUS_FILES/$ES_DOWNLOAD_FILE
       if [[ $? -ne 0 ]]; then
         die "$ES_DOWNLOAD_FILE could not be downloaded"
       fi
     fi
 
-    sudo dpkg -i $FILES/$ES_DOWNLOAD_FILE
+    sudo dpkg -i $VENUS_FILES/$ES_DOWNLOAD_FILE
     $SYSTEMCTL daemon-reload
     $SYSTEMCTL enable $FLUENTD_SERVICE
     $SYSTEMCTL start $FLUENTD_SERVICE
@@ -80,14 +80,14 @@ function install_fluentd() {
     FLUENTD_DOWNLOAD_URL=${FLUENTD_DOWNLOAD_URL:-http://packages.treasuredata.com.s3.amazonaws.com/4/ubuntu/bionic/pool/contrib/t/td-agent}
     FLUENTD_DOWNLOAD_FILE="td-agent_$FLUENTD_VERSION.deb"
 
-    if [[ ! -f $FILES/$FLUENTD_DOWNLOAD_FILE ]]; then
-      sudo wget --progress=dot:giga -t 2 -c $FLUENTD_DOWNLOAD_URL/$FLUENTD_DOWNLOAD_FILE -O $FILES/$FLUENTD_DOWNLOAD_FILE
+    if [[ ! -f $VENUS_FILES/$FLUENTD_DOWNLOAD_FILE ]]; then
+      sudo wget --progress=dot:giga -t 2 -c $FLUENTD_DOWNLOAD_URL/$FLUENTD_DOWNLOAD_FILE -O $VENUS_FILES/$FLUENTD_DOWNLOAD_FILE
       if [[ $? -ne 0 ]]; then
         die "$FLUENTD_DOWNLOAD_FILE could not be downloaded"
       fi
     fi
 
-    sudo dpkg -i $FILES/$FLUENTD_DOWNLOAD_FILE
+    sudo dpkg -i $VENUS_FILES/$FLUENTD_DOWNLOAD_FILE
   else
     exit_distro_not_supported "install fluentd"
   fi
@@ -101,8 +101,28 @@ function install_fluentd() {
   $SYSTEMCTL restart td-agent
 }
 
+function venus_service_url {
+    if [[ "$VENUS_DEPLOY" == "mod_wsgi" ]]; then
+       echo "$VENUS_SERVICE_PROTOCOL://$VENUS_SERVICE_HOST:$VENUS_SERVICE_PORT"
+    else
+       echo "$VENUS_SERVICE_PROTOCOL://$VENUS_SERVICE_HOST/venus"
+    fi
+}
+
 function venus_create_accounts() {
   create_service_user "venus"
+
+  get_or_create_user "venus" "$ADMIN_PASSWORD" "$ADMIN_DOMAIN_NAME"
+  get_or_add_user_project_role "admin" "venus" "$SERVICE_PROJECT_NAME" "$SERVICE_DOMAIN_NAME" "$SERVICE_DOMAIN_NAME"
+  get_or_add_user_project_role "admin" "venus" "admin" "$ADMIN_DOMAIN_NAME" "$ADMIN_DOMAIN_NAME"
+
+  local venus_service=$(get_or_create_service "venus" "log-system" "Log Search And Analysis Service")
+  get_or_create_endpoint $venus_service \
+    "$REGION_NAME" \
+    "$(venus_service_url)" \
+    "$(venus_service_url)" \
+    "$(venus_service_url)"
+
 }
 
 function uninstall_elastic_search() {

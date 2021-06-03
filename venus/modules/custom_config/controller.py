@@ -25,7 +25,9 @@ class CustomConfigController(wsgi.Controller):
 
     @wsgi.wrap_check_policy
     def get_config(self, req):
-        return CONF.elasticsearch.es_index_days
+        result = dict()
+        result["log_save_days"] = CONF.elasticsearch.es_index_days
+        return result
 
 
 def create_resource(ext_mgr):

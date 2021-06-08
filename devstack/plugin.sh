@@ -8,7 +8,7 @@ else
   VENUS_BIN_DIR=$(get_python_exec_prefix)
 fi
 
-VENUS_FILES=$VENUS_DIR/devstack/VENUS_FILES
+VENUS_FILES=$VENUS_DIR/devstack/files
 
 function install_venus() {
   setup_develop "$VENUS_DIR" openstack

@@ -20,7 +20,6 @@ function init_venus() {
   venus_create_accounts
 
   recreate_database venus utf8
-  sudo $VENUS_BIN_DIR/venus-manage --config-file=${VENUS_CONF} db sync
 }
 
 function configure_venus() {

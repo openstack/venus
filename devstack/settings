@@ -1,5 +1,7 @@
 # settings file for venus
 
+VENUS_DEPLOY=mod_wsgi
+
 # API Service
 enable_service venus-api
 

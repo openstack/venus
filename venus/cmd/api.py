@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-"""Starter script for Venus OS API."""
+"""Starter script for Venus API."""
 
 import eventlet
 import sys
@@ -22,7 +22,6 @@ from oslo_reports import guru_meditation_report as gmr
 
 from venus.conf import CONF
 from venus import i18n
-from venus import objects
 from venus import service
 from venus import utils
 from venus import version
@@ -32,7 +31,6 @@ i18n.enable_lazy()
 
 
 def main():
-    objects.register_all()
     CONF(sys.argv[1:], project='venus',
          version=version.version_string())
     # logdir = CONF.log_dir

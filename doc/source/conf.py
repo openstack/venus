@@ -23,10 +23,6 @@ sys.path.insert(0, os.path.abspath('../..'))
 extensions = [
     'sphinx.ext.autodoc',
     'openstackdocstheme',
-    'oslo_config.sphinxconfiggen',
-    'oslo_config.sphinxext',
-    'oslo_policy.sphinxext',
-    'oslo_policy.sphinxpolicygen',
     'sphinxcontrib.rsvgconverter',
 ]
 

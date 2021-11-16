@@ -1,6 +1,9 @@
 - project:
     templates:
-      - openstack-python-jobs
+      - check-requirements
+      - release-notes-jobs-python3
+      - openstack-python3-yoga-jobs
+      - publish-openstack-docs-pti
     check:
       jobs:
         - openstack-tox-pep8

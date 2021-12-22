@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Cyborg Release Notes documentation build configuration file, created by
+# Venus Release Notes documentation build configuration file, created by
 # sphinx-quickstart on Thu April 1 16:50:32 2020.
 #
 # This file is execfile()d with the current directory set to its

@@ -25,13 +25,13 @@ Contacting the Core Team
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The core reviewers of Venus and their emails are listed in
-`Cyborg core team <https://review.opendev.org/#/admin/groups/1243,members>`_.
+`Venus core team <https://review.opendev.org/#/admin/groups/1243,members>`_.
 
 New Feature Planning
 ~~~~~~~~~~~~~~~~~~~~
 
 To propose or plan new features, we add a new story in the
-`Cyborg Launchpad
+`Venus Launchpad
 <https://blueprints.launchpad.net/openstack-venus>`_
 and/or propose a specification in the
 `venus-specs <https://opendev.org/openstack/venus-specs>`_ repository.

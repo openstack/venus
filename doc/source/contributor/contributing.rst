@@ -18,13 +18,13 @@ We use the #openstack-venus IRC channel.
 
 The weekly meetings happen in this channel. You can find the meeting times,
 previous meeting logs and proposed meeting agendas at
-`Cyborg Team Meeting Page
-<https://wiki.openstack.org/wiki/Meetings/CyborgTeamMeeting>`_.
+`Venus Team Meeting Page
+<https://wiki.openstack.org/wiki/Meetings/VenusTeamMeeting>`_.
 
 Contacting the Core Team
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The core reviewers of Cyborg and their emails are listed in
+The core reviewers of Venus and their emails are listed in
 `Cyborg core team <https://review.opendev.org/#/admin/groups/1243,members>`_.
 
 New Feature Planning

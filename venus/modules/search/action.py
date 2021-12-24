@@ -65,27 +65,27 @@ class SearchCore(object):
         diff = end_time - start_time
         per_diff = diff / 60
         if per_diff <= 1:
-            return "1s", "", "1second"
+            return "1s", "1秒", "1second"
         elif per_diff <= 10:
-            return "10s", "10seconds", "10seconds"
+            return "10s", "10秒", "10seconds"
         elif per_diff <= 30:
-            return "30s", "30seconds", "30seconds"
+            return "30s", "30秒", "30seconds"
         elif per_diff <= 60:
-            return "1m", "1minute", "1minute"
+            return "1m", "1分钟", "1minute"
         elif per_diff <= 600:
-            return "10m", "10minutes", "10minutes"
+            return "10m", "10分钟", "10minutes"
         elif per_diff <= 1800:
-            return "30m", "30minutes", "30minutes"
+            return "30m", "30分钟", "30minutes"
         elif per_diff <= 3600:
-            return "1h", "1hour", "1hour"
+            return "1h", "1小时", "1hour"
         elif per_diff <= 14400:
-            return "3h", "3hours", "3hours"
+            return "3h", "3小时", "3hours"
         elif per_diff <= 21600:
-            return "6h", "6hours", "6hours"
+            return "6h", "6小时", "6hours"
         elif per_diff <= 43200:
-            return "12h", "12hours", "12hours"
+            return "12h", "12小时", "12hours"
         else:
-            return "24h", "1day", "1day"
+            return "24h", "1天", "1day"
 
     def params(self, type, module_name, index_type):
         field = ""

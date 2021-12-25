@@ -25,7 +25,7 @@ Contacting the Core Team
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The core reviewers of Venus and their emails are listed in
-`Venus core team <https://review.opendev.org/#/admin/groups/1243,members>`_.
+`Venus core team <https://review.opendev.org/admin/groups/c5c6849cdb8c46f19e2cb128686c128f36a50f60,members>`_.
 
 New Feature Planning
 ~~~~~~~~~~~~~~~~~~~~
@@ -59,7 +59,7 @@ To merge a patch, it must pass all voting Zuul checks and get two +2s from
 core reviewers. We strive to avoid scenarios where one person from a company
 or organization proposes a patch, and two other core reviewers from the
 same organization approve it to get it merged. In other words, at least
-one among the patch author and the two approving reviwers must be from
+one among the patch author and the two approving reviewers must be from
 another organization.
 
 We are constantly striving to improve quality. Proposed patches must

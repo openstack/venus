@@ -17,10 +17,7 @@ import re
 
 from oslo_log import log as logging
 
-try:
-    from urllib.request import parse_http_list   # pylint: disable=E0611
-except ImportError:
-    from urllib2 import parse_http_list   # Python 2
+from urllib.request import parse_http_list   # pylint: disable=E0611
 
 from venus.api.openstack import wsgi
 

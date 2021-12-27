@@ -19,3 +19,18 @@ the level of platform management.
 Additionally, this project plans to use machine learning algorithms to
 quickly locate IT failures and root causes, and improve operation and
 maintenance efficiency.
+
+* Free software: Apache license
+* Wiki: https://wiki.openstack.org/wiki/Venus
+* Source: https://opendev.org/openstack/venus
+* Blueprints: https://blueprints.launchpad.net/openstack-venus
+* Bugs: https://bugs.launchpad.net/openstack-venus
+* Documentation: https://docs.openstack.org/venus/latest/
+* Release notes: https://docs.openstack.org/releasenotes/venus/
+* Design specifications: https://specs.openstack.org/openstack/venus-specs/
+
+Features
+--------
+
+* REST API for retrieval, storage and analysis of logs on the OpenStack platform.
+* One-stop solution to log collection, cleaning, indexing, analysis, alarm, visualization, report generation.

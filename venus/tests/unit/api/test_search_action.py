@@ -13,11 +13,15 @@
 # under the License.
 
 import unittest
+from unittest import mock
 
 from venus.modules.search.action import SearchCore
 
 
 class TestSearchAction(unittest.TestCase):
+    def setUp(self):
+        super(TestSearchAction, self).setUp()
+
     def test_get_interval(self):
         action = SearchCore()
 
@@ -120,6 +124,21 @@ class TestSearchAction(unittest.TestCase):
         self.assertEqual(want1, res1)
         self.assertEqual(want2, res2)
         self.assertEqual(want3, res3)
+
+    @mock.patch('venus.common.utils.request_es')
+    def test_get_all_index_empty(self, mock_req_es):
+        action = SearchCore()
+        mock_req_es.return_value = (400, '')
+        index_names = action.get_all_index('test_index')
+        self.assertEqual("", index_names)
+
+    @mock.patch('venus.common.utils.request_es')
+    def test_get_all_index(self, mock_req_es):
+        action = SearchCore()
+        mock_req_es.return_value = (
+            200, '[{"index":"index1"},{"index":"index2"}]')
+        index_names = action.get_all_index('test_index')
+        self.assertEqual(["index1", "index2"], index_names)
 
 
 if __name__ == "__main__":

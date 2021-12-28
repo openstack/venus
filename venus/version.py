@@ -16,7 +16,7 @@ from pbr import version as pbr_version
 
 VENUS_VENDOR = "OpenStack Foundation"
 VENUS_PRODUCT = "OpenStack Venus"
-VENUS_PACKAGE = None  # OS distro package version suffix
+VENUS_PACKAGE = None
 
 loaded = False
 version_info = pbr_version.VersionInfo('venus')

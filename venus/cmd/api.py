@@ -15,6 +15,7 @@
 """Starter script for Venus API."""
 
 import eventlet
+import os
 import sys
 
 from oslo_log import log as logging
@@ -33,10 +34,10 @@ i18n.enable_lazy()
 def main():
     CONF(sys.argv[1:], project='venus',
          version=version.version_string())
-    # logdir = CONF.log_dir
-    # is_exits = os.path.exists(logdir)
-    # if not is_exits:
-    #     os.makedirs(logdir)
+    logdir = CONF.log_dir
+    is_exits = os.path.exists(logdir)
+    if not is_exits:
+        os.makedirs(logdir)
     logging.setup(CONF, "venus")
     utils.monkey_patch()
 

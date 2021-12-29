@@ -163,6 +163,73 @@ class TestSearchAction(unittest.TestCase):
             'test_index', start_time, end_time)
         self.assertEqual(",".join(names), index_names)
 
+    def test_params_invalid_param(self):
+        action = SearchCore()
+        result = action.params('', '', None)
+        expected = {"code": -1, "msg": "invalid param"}
+        self.assertEqual(expected, result)
+        result = action.params('host_name', '', '')
+        self.assertEqual(expected, result)
+
+    def test_params_no_index_data(self):
+        action = SearchCore()
+        result = action.params('host_name', '', None)
+        expected = {'code': 0, 'msg': 'no data, no index'}
+        self.assertEqual(expected, result)
+
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_params_internal_error(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
+        mock_req_es.return_value = (400, {})
+        action = SearchCore()
+        result = action.params('host_name', '', None)
+        expected = {"code": -1, "msg": "internal error, bad request"}
+        self.assertEqual(expected, result)
+
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_params_no_aggregations_data(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
+        mock_req_es.return_value = (200, '{}')
+        action = SearchCore()
+        result = action.params('host_name', '', None)
+        expected = {"code": 0, "msg": "no data, no aggregations"}
+        self.assertEqual(expected, result)
+
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_params_level_type(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_req_es.return_value = (
+            200, '{"aggregations": {"search_values": '
+                 '{"buckets": [{"key": "val1"}, {"key": "val2"}]}}}')
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
+        action = SearchCore()
+        result = action.params('level', '', None)
+        expected = {'code': 1, 'msg': 'OK',
+                    "values": ['VAL1', 'VAL2', 'NO EXIST']}
+        self.assertEqual(expected, result)
+
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_params_not_level_type(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_req_es.return_value = (
+            200, '{"aggregations": {"search_values": '
+                 '{"buckets": [{"key": "val1"}, {"key": "val2"}]}}}')
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
+        action = SearchCore()
+        result = action.params('program_name', '', None)
+        expected = {'code': 1, 'msg': 'OK', "values": ['val1', 'val2']}
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

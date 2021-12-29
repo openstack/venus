@@ -127,13 +127,13 @@ class SearchCore(object):
             return {"code": -1, "msg": "internal error, bad request"}
         res = json.loads(text)
 
-        aggr = res.get("aggregations", None)
+        aggr = res.get("aggregations")
         if aggr is None:
             return {"code": 0, "msg": "no data, no aggregations"}
-        search_values = aggr.get("search_values", None)
+        search_values = aggr.get("search_values")
         if search_values is None:
             return {"code": 0, "msg": "no data, no values"}
-        buckets = search_values.get("buckets", None)
+        buckets = search_values.get("buckets")
         if buckets is None:
             return {"code": 0, "msg": "no data, no buckets"}
         for bucket in buckets:
@@ -270,27 +270,27 @@ class SearchCore(object):
             return {"code": -1, "msg": "internal error, bad request"}
         res = json.loads(text)
 
-        aggr = res.get("aggregations", None)
+        aggr = res.get("aggregations")
         if aggr is None:
             return {"code": 0, "msg": "no data, no aggregations"}
-        search_values = aggr.get("data_count", None)
+        search_values = aggr.get("data_count")
         if search_values is None:
             return {"code": 0, "msg": "no data, no count data"}
-        buckets = search_values.get("buckets", None)
+        buckets = search_values.get("buckets")
         if buckets is None:
             return {"code": 0, "msg": "no data, no buckets"}
         for bucket in buckets:
             data_count.append(bucket)
-        hits1 = res.get("hits", None)
+        hits1 = res.get("hits")
         if hits1 is None:
             return {"code": 0, "msg": "no data, no hit"}
-        hits = hits1.get("hits", None)
+        hits = hits1.get("hits")
         total = hits1.get("total", 0)
         if hits is None:
             return {"code": 0, "msg": "no data, no hit"}
         for hit in hits:
             d = {}
-            _source = hit.get("_source", None)
+            _source = hit.get("_source")
             if _source is not None:
                 d["host_name"] = _source.get("Hostname", "")
                 d["time"] = _source.get("@timestamp", "")
@@ -387,13 +387,13 @@ class SearchCore(object):
         if status != 200:
             return {"code": -1, "msg": "internal error, bad request"}
         res = json.loads(text)
-        aggr = res.get("aggregations", None)
+        aggr = res.get("aggregations")
         if aggr is None:
             return {"code": 0, "msg": "no data, no aggregations"}
-        search_values = aggr.get("data_count", None)
+        search_values = aggr.get("data_count")
         if search_values is None:
             return {"code": 0, "msg": "no data, no count data"}
-        buckets = search_values.get("buckets", None)
+        buckets = search_values.get("buckets")
         if buckets is None:
             return {"code": 0, "msg": "no data, no buckets"}
         data_count = buckets
@@ -465,23 +465,23 @@ class SearchCore(object):
             return {"code": -1, "msg": "internal error, bad request"}
         res = json.loads(text)
 
-        aggr = res.get("aggregations", None)
+        aggr = res.get("aggregations")
         if aggr is None:
             return {"code": 0, "msg": "no data, no aggregations"}
-        data_group = aggr.get("data_group", None)
+        data_group = aggr.get("data_group")
         if data_group is None:
             return {"code": 0, "msg": "no data, no data group"}
-        buckets = data_group.get("buckets", None)
+        buckets = data_group.get("buckets")
         if buckets is None:
             return {"code": 0, "msg": "no data, no buckets"}
         for bucket in buckets:
             d = {}
             d["key"] = bucket.get("key", "")
             d["total"] = bucket.get("doc_count", 0)
-            data_count = bucket.get("data_count", None)
+            data_count = bucket.get("data_count")
             if data_count is None:
                 continue
-            sub_buckets = data_count.get("buckets", None)
+            sub_buckets = data_count.get("buckets")
             if sub_buckets is None:
                 continue
             d["count"] = sub_buckets
@@ -517,19 +517,19 @@ class SearchCore(object):
         if status != 200:
             return None, "internal error, bad request"
         res = json.loads(text)
-        hits1 = res.get("hits", None)
+        hits1 = res.get("hits")
         if hits1 is None:
             return [], "no data, no hit"
-        hits = hits1.get("hits", None)
+        hits = hits1.get("hits")
         if hits is None:
             return [], "no data, no hit"
         hostinfos = {}
         for hit in hits:
             info = {}
-            _source = hit.get("_source", None)
+            _source = hit.get("_source")
             if _source is not None:
                 hostname = _source.get("Hostname", "")
-                if hostinfos.get(hostname, None) is None:
+                if hostinfos.get(hostname) is None:
                     hostinfos[hostname] = []
                 info["payload"] = _source.get("Payload", "")
                 info["time"] = _source.get("@timestamp", "")
@@ -543,7 +543,7 @@ class SearchCore(object):
             end_time = ""
             is_success = 0
             for i in v:
-                payload = i.get("payload", None)
+                payload = i.get("payload")
                 if "Took" in payload and "seconds to build" in payload:
                     end_time = i.get("time", "")
                     is_success = 1
@@ -573,18 +573,18 @@ class SearchCore(object):
         if status != 200:
             return [], "internal error, bad request"
         json_text = json.loads(text)
-        hits1 = json_text.get("hits", None)
+        hits1 = json_text.get("hits")
         if hits1 is None:
             return [], "no data, no hit"
-        hits = hits1.get("hits", None)
+        hits = hits1.get("hits")
 
         hostinfos = {}
         for hit in hits:
             info = {}
-            _source = hit.get("_source", None)
+            _source = hit.get("_source")
             if _source is not None:
                 hostname = _source.get("Hostname", "")
-                if hostinfos.get(hostname, None) is None:
+                if hostinfos.get(hostname) is None:
                     hostinfos[hostname] = []
                 info["level"] = _source.get("log_level", "")
                 info["time"] = _source.get("@timestamp", "")

@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import datetime
 import unittest
 from unittest import mock
 
@@ -139,6 +140,28 @@ class TestSearchAction(unittest.TestCase):
             200, '[{"index":"index1"},{"index":"index2"}]')
         index_names = action.get_all_index('test_index')
         self.assertEqual(["index1", "index2"], index_names)
+
+    @mock.patch('venus.modules.search.action.SearchCore.get_all_index')
+    def test_get_index_names_none(self, mock_get_all_index):
+        action = SearchCore()
+        names = ["test_index-2021.01.03", "test_index-2021.01.04"]
+        mock_get_all_index.return_value = names
+        end_time = datetime.datetime(2021, 1, 2)
+        start_time = datetime.datetime(2021, 1, 1)
+        index_names = action.get_index_names(
+            'test_index', start_time, end_time)
+        self.assertIsNone(index_names)
+
+    @mock.patch('venus.modules.search.action.SearchCore.get_all_index')
+    def test_get_index_names(self, mock_get_all_index):
+        action = SearchCore()
+        names = ["test_index-2021.01.01", "test_index-2021.01.02"]
+        mock_get_all_index.return_value = names
+        end_time = datetime.datetime(2021, 1, 2)
+        start_time = datetime.datetime(2021, 1, 1)
+        index_names = action.get_index_names(
+            'test_index', start_time, end_time)
+        self.assertEqual(",".join(names), index_names)
 
 
 if __name__ == "__main__":

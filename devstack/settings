@@ -9,6 +9,7 @@ enable_service venus-api
 VENUS_DIR=$DEST/venus
 VENUS_CONF_DIR=/etc/venus
 VENUS_CONF=$VENUS_CONF_DIR/venus.conf
+VENUS_LOG_DIR=/var/log/venus
 
 # HOST and PORT
 VENUS_SERVICE_PROTOCOL=$SERVICE_PROTOCOL

@@ -43,7 +43,7 @@ function configure_venus() {
 }
 
 function start_venus() {
-  run_process venus-api "$VENUS_BIN_DIR/venus-api"
+  run_process venus-api "$VENUS_BIN_DIR/venus-api --log-dir=$VENUS_LOG_DIR"
 }
 
 function install_elastic_search() {
@@ -92,7 +92,6 @@ function install_fluentd() {
   fi
 
   # Create log dir
-  VENUS_LOG_DIR="/var/log/kolla"
   sudo install -d -o $STACK_USER -m 777 $VENUS_LOG_DIR
 
   # Copy fluentd conf

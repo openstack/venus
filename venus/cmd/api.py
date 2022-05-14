@@ -35,8 +35,8 @@ def main():
     CONF(sys.argv[1:], project='venus',
          version=version.version_string())
     logdir = CONF.log_dir
-    is_exits = os.path.exists(logdir)
-    if not is_exits:
+    is_exists = os.path.exists(logdir)
+    if not is_exists:
         os.makedirs(logdir)
     logging.setup(CONF, "venus")
     utils.monkey_patch()

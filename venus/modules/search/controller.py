@@ -28,26 +28,26 @@ class SearchController(wsgi.Controller):
 
     @wsgi.wrap_check_policy
     def search_params(self, req):
-        type = req.params.get("type", None)
-        module_name = req.params.get("module_name", None)
-        index_type = req.params.get("index_type", None)
+        type = req.params.get("type")
+        module_name = req.params.get("module_name")
+        index_type = req.params.get("index_type")
         text = self.search_api.params(type, module_name, index_type)
         return text
 
     @wsgi.wrap_check_policy
     def search_logs(self, req):
-        host_name = req.params.get("host_name", None)
-        module_name = req.params.get("module_name", None)
-        program_name = req.params.get("program_name", None)
-        level = req.params.get("level", None)
-        user_id = req.params.get("user_id", None)
-        project_id = req.params.get("project_id", None)
-        query = req.params.get("query", None)
-        index_type = req.params.get("index_type", None)
-        start_time = req.params.get("start_time", None)
-        end_time = req.params.get("end_time", None)
-        page_num = req.params.get("page_num", None)
-        page_size = req.params.get("page_size", None)
+        host_name = req.params.get("host_name")
+        module_name = req.params.get("module_name")
+        program_name = req.params.get("program_name")
+        level = req.params.get("level")
+        user_id = req.params.get("user_id")
+        project_id = req.params.get("project_id")
+        query = req.params.get("query")
+        index_type = req.params.get("index_type")
+        start_time = req.params.get("start_time")
+        end_time = req.params.get("end_time")
+        page_num = req.params.get("page_num")
+        page_size = req.params.get("page_size")
         text = self.search_api.logs(host_name, module_name, program_name,
                                     level, user_id, project_id, query,
                                     index_type, start_time, end_time,
@@ -56,13 +56,13 @@ class SearchController(wsgi.Controller):
 
     @wsgi.wrap_check_policy
     def search_analyse_logs(self, req):
-        group_name = req.params.get("group_name", None)
-        host_name = req.params.get("host_name", None)
-        module_name = req.params.get("module_name", None)
-        program_name = req.params.get("program_name", None)
-        level = req.params.get("level", None)
-        start_time = req.params.get("start_time", None)
-        end_time = req.params.get("end_time", None)
+        group_name = req.params.get("group_name")
+        host_name = req.params.get("host_name")
+        module_name = req.params.get("module_name")
+        program_name = req.params.get("program_name")
+        level = req.params.get("level")
+        start_time = req.params.get("start_time")
+        end_time = req.params.get("end_time")
         text = self.search_api.analyse_logs(group_name, host_name,
                                             module_name, program_name,
                                             level, start_time, end_time)
@@ -70,22 +70,22 @@ class SearchController(wsgi.Controller):
 
     @wsgi.wrap_check_policy
     def search_typical_logs(self, req):
-        type = req.params.get("type", None)
-        start_time = req.params.get("start_time", None)
-        end_time = req.params.get("end_time", None)
+        type = req.params.get("type")
+        start_time = req.params.get("start_time")
+        end_time = req.params.get("end_time")
         text = self.search_api.typical_logs(type, start_time, end_time)
         return text
 
     @wsgi.wrap_check_policy
     def instance_call_chain(self, req):
-        request_id = req.params.get("request_id", None)
-        uuid = req.params.get("uuid", None)
+        request_id = req.params.get("request_id")
+        uuid = req.params.get("uuid")
         text = self.search_api.instance_call_chain(request_id, uuid)
         return text
 
     @wsgi.wrap_check_policy
     def search_global_id(self, req):
-        global_id = req.params.get("global_id", None)
+        global_id = req.params.get("global_id")
         text = self.search_lib.get_global_log(global_id)
         return text
 

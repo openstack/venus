@@ -219,6 +219,13 @@ class TestSearchAction(unittest.TestCase):
         expected = {'code': 1, 'msg': 'OK', "values": ['val1', 'val2']}
         self.assertEqual(expected, result)
 
+    def test_generate_must_not(self):
+        action = SearchCore()
+        result = action.generate_must_not({'log_level.keyword':
+                                          ['test1', 'test2']})
+        expected = [{'exists': {'field': ['test1', 'test2']}}]
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

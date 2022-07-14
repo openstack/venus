@@ -225,6 +225,18 @@ class TestSearchAction(unittest.TestCase):
         expected = [{'terms': {'log_level.keyword': ['test', 'TEST']}}]
         self.assertEqual(expected, result)
 
+    def test_generate_must_lower(self):
+        action = SearchCore()
+        result = action.generate_must({'log_level.keyword': 'TEST'})
+        expected = [{'terms': {'log_level.keyword': ['TEST', 'test']}}]
+        self.assertEqual(expected, result)
+
+    def test_generate_must_other(self):
+        action = SearchCore()
+        result = action.generate_must({'key': ['value1', 'value2']})
+        expected = [{'match_phrase': {'key': {'query': ['value1', 'value2']}}}]
+        self.assertEqual(expected, result)
+
     def test_generate_must_not(self):
         action = SearchCore()
         result = action.generate_must_not({'log_level.keyword':

@@ -244,6 +244,24 @@ class TestSearchAction(unittest.TestCase):
         expected = [{'exists': {'field': ['test1', 'test2']}}]
         self.assertEqual(expected, result)
 
+    def test_logs_invalid_param(self):
+        action = SearchCore()
+        expected = {"code": -1, "msg": "invalid param"}
+        result = action.logs('', '', '', '', '', '', '', None, None, '', '',
+                             '')
+        self.assertEqual(expected, result)
+        result = action.logs('', '', '', '', '', '', '', None, '', None, '',
+                             '')
+        self.assertEqual(expected, result)
+        result = action.logs('', '', '', '', '', '', '', None, '', '', None,
+                             '')
+        self.assertEqual(expected, result)
+        result = action.logs('', '', '', '', '', '', '', None, '', '', '',
+                             None)
+        self.assertEqual(expected, result)
+        result = action.logs('', '', '', '', '', '', '', '', '', '', '', '')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

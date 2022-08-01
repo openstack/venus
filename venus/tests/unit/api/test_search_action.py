@@ -329,6 +329,20 @@ class TestSearchAction(unittest.TestCase):
         expected = {"code": 0, "msg": "no data, no aggregations"}
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_logs')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_logs_no_buckets(
+            self, mock_req_es, mock_get_index_names, mock_search_logs):
+        action = SearchCore()
+        mock_get_index_names.return_value = 'flog-2022.08.01,flog-2022.08.02'
+        mock_req_es.return_value = (200, '{"aggregations": {"data_count": '
+                                    '{}}}')
+        result = action.logs('host', '', '', 'NO EXIST', '', '', None, None,
+                             '1659339607', '1659426007', '10', '10')
+        expected = {"code": 0, "msg": "no data, no buckets"}
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

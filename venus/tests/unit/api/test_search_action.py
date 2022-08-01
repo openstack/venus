@@ -316,6 +316,19 @@ class TestSearchAction(unittest.TestCase):
                              '1659339607', '1659426007', '10', '10')
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_logs')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_logs_no_aggregations_data(
+            self, mock_req_es, mock_get_index_names, mock_search_logs):
+        action = SearchCore()
+        mock_get_index_names.return_value = 'flog-2022.08.01,flog-2022.08.02'
+        mock_req_es.return_value = (200, '{}')
+        result = action.logs('host', '', '', 'NO EXIST', '', '', None, None,
+                             '1659339607', '1659426007', '10', '10')
+        expected = {"code": 0, "msg": "no data, no aggregations"}
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

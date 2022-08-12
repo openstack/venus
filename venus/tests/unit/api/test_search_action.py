@@ -343,6 +343,14 @@ class TestSearchAction(unittest.TestCase):
         expected = {"code": 0, "msg": "no data, no buckets"}
         self.assertEqual(expected, result)
 
+    def test_analyse_logs_invalid_param(self):
+        action = SearchCore()
+        expected = {"code": -1, "msg": "invalid param"}
+        result = action.analyse_logs('', '', '', '', '', '', '')
+        self.assertEqual(expected, result)
+        result = action.analyse_logs('None', '', '', '', '', '', '')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

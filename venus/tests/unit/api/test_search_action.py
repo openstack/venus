@@ -351,6 +351,12 @@ class TestSearchAction(unittest.TestCase):
         result = action.analyse_logs('None', '', '', '', '', '', '')
         self.assertEqual(expected, result)
 
+    def test_analyse_logs_no_index(self):
+        action = SearchCore()
+        expected = {"code": 0, "msg": "no data, no index"}
+        result = action.analyse_logs('host_name', '', '', '', '', '2', '1')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

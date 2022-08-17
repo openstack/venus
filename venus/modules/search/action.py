@@ -322,28 +322,28 @@ class SearchCore(object):
 
         if group_name == "host_name":
             g_name = "Hostname.keyword"
-            title_cn = "Host Log Analysis Histogram TOP5".decode('utf-8')
+            title_cn = "Host Log Analysis Histogram TOP5"
             title_en = "Host Log Analysis Histogram TOP5"
         elif group_name == "program_name":
             g_name = "programname.keyword"
-            title_cn = "Program Log Analysis Histogram TOP5".decode('utf-8')
+            title_cn = "Program Log Analysis Histogram TOP5"
             title_en = "Program Log Analysis Histogram TOP5"
         else:
             return {"code": -1, "msg": "invalid param"}
 
         if host_name:
             gen_params["Hostname.keyword"] = host_name
-            title_cn_params.append("host=".decode('utf-8') + host_name)
+            title_cn_params.append("host=" + host_name)
             title_en_params.append("host=" + host_name)
 
         if module_name:
             gen_params["Logger.keyword"] = module_name
-            title_cn_params.append("module=".decode('utf-8') + module_name)
+            title_cn_params.append("module=" + module_name)
             title_en_params.append("module=" + module_name)
 
         if program_name:
             gen_params["programname.keyword"] = program_name
-            title_cn_params.append("program=".decode('utf-8') + program_name)
+            title_cn_params.append("program=" + program_name)
             title_en_params.append("program=" + program_name)
 
         if level:
@@ -351,7 +351,7 @@ class SearchCore(object):
                 gen_not_params["log_level.keyword"] = "log_level"
             else:
                 gen_params["log_level.keyword"] = level
-            title_cn_params.append("level=".decode('utf-8') + level)
+            title_cn_params.append("level=" + level)
             title_en_params.append("level=" + level)
 
         if len(title_cn_params) > 0:

@@ -438,6 +438,19 @@ class TestSearchAction(unittest.TestCase):
                                       '1')
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_typical_stats_internal_error(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2022.08.17,flog-2022.08.18'
+        mock_req_es.return_value = (400, {})
+        action = SearchCore()
+        result = action.typical_stats({'log_level.keyword': 'test'}, '',
+                                      '1660722534', '1660808934')
+        expected = {"code": -1, "msg": "internal error, bad request"}
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

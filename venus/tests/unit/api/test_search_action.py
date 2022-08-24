@@ -491,6 +491,23 @@ class TestSearchAction(unittest.TestCase):
         expected = {"code": 0, "msg": "no data, no buckets"}
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_typical_stats_data(
+            self, mock_req_es, mock_get_index_names, mock_search_logs):
+        action = SearchCore()
+        mock_req_es.return_value = (200, '{"aggregations": {"data_group":'
+                                         ' {"buckets": [{"key": "value"}'
+                                         ' ]}}}')
+        mock_get_index_names.return_value = 'flog-2022.08.17,flog-2022.08.18'
+        result = action.typical_stats({'log_level.keyword': 'test'}, '',
+                                      '1660722534', '1660808934')
+        expected = {'code': 1, 'msg': 'OK',
+                    "data": {'stats': [], 'interval_cn': '30分钟',
+                             'interval_en': '30minutes'}}
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

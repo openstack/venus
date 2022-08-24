@@ -431,6 +431,13 @@ class TestSearchAction(unittest.TestCase):
                                                           'Histogram TOP5'}}
         self.assertEqual(expected, result)
 
+    def test_typical_stats_no_index(self):
+        action = SearchCore()
+        expected = {"code": 0, "msg": "no data, no index"}
+        result = action.typical_stats({'log_level.keyword': 'test'}, '', '2',
+                                      '1')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

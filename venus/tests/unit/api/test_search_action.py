@@ -508,6 +508,18 @@ class TestSearchAction(unittest.TestCase):
                              'interval_en': '30minutes'}}
         self.assertEqual(expected, result)
 
+    def test_typical_logs_no_index(self):
+        action = SearchCore()
+        expected = {"code": 0, "msg": "no data, no index"}
+        result = action.typical_logs('error_stats', '2', '1')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('rabbitmq_error_stats', '2', '1')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('mysql_error_stats', '2', '1')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('novalidhost_error_stats', '2', '1')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

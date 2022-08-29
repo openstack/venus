@@ -520,6 +520,27 @@ class TestSearchAction(unittest.TestCase):
         result = action.typical_logs('novalidhost_error_stats', '2', '1')
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_typical_logs_internal_error(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2022.08.17,flog-2022.08.18'
+        mock_req_es.return_value = (400, {})
+        action = SearchCore()
+        expected = {"code": -1, "msg": "internal error, bad request"}
+        result = action.typical_logs('error_stats', '1660722534', '1660808934')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('rabbitmq_error_stats', '1660722534',
+                                     '1660808934')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('mysql_error_stats', '1660722534',
+                                     '1660808934')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('novalidhost_error_stats', '1660722534',
+                                     '1660808934')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -605,6 +605,31 @@ class TestSearchAction(unittest.TestCase):
                                      '1660808934')
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_typical_logs_data(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2022.08.17,flog-2022.08.18'
+        mock_req_es.return_value = (200, '{"aggregations": {"data_group":'
+                                         ' {"buckets": [{"key": "value"}'
+                                         ' ]}}}')
+        action = SearchCore()
+        expected = {'code': 1, 'msg': 'OK',
+                    "data": {'stats': [], 'interval_cn': '30分钟',
+                             'interval_en': '30minutes'}}
+        result = action.typical_logs('error_stats', '1660722534', '1660808934')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('rabbitmq_error_stats', '1660722534',
+                                     '1660808934')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('mysql_error_stats', '1660722534',
+                                     '1660808934')
+        self.assertEqual(expected, result)
+        result = action.typical_logs('novalidhost_error_stats', '1660722534',
+                                     '1660808934')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

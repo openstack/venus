@@ -1,0 +1,9 @@
+0:
+  default: |
+    Request was successful.
+1:
+  default: |
+    Request was successful, but no data caused by some reasons.
+-1:
+  default: |
+    Some content in the request was invalid.

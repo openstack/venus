@@ -5,3 +5,7 @@ OpenStack Log API V1 (CURRENT)
 ==============================
 
 .. rest_expand_all::
+
+.. version discovery document.
+.. include:: api-versions.inc
+

@@ -1,0 +1,24 @@
+{
+    "v1.0": {
+        "id": "v1.0",
+        "status": "SUPPORTED",
+        "updated": "2014-06-28T12:20:21Z",
+        "links": [
+            {
+                "rel": "describedby",
+                "type": "text/html",
+                "href": "http://docs.openstack.org/"
+            }
+        ],
+        "media-types": [
+            {
+                "base": "application/xml",
+                "type": "application/vnd.openstack.venus+xml;version=1"
+            },
+            {
+                "base": "application/json",
+                "type": "application/vnd.openstack.venus+json;version=1"
+            }
+        ]
+    }
+}

@@ -681,6 +681,18 @@ class TestSearchAction(unittest.TestCase):
         expected = ([], 'internal error, bad request')
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_stat_instance_created_other_no_hit(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2022.08.17,flog-2022.08.18'
+        action = SearchCore()
+        mock_req_es.return_value = (200, '{}')
+        result = action.stat_instance_created_other('', '')
+        expected = ([], "no data, no hit")
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

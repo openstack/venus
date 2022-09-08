@@ -114,7 +114,7 @@ function venus_create_accounts() {
   get_or_add_user_project_role "admin" "venus" "$SERVICE_PROJECT_NAME" "$SERVICE_DOMAIN_NAME" "$SERVICE_DOMAIN_NAME"
   get_or_add_user_project_role "admin" "venus" "admin" "$ADMIN_DOMAIN_NAME" "$ADMIN_DOMAIN_NAME"
 
-  local venus_service=$(get_or_create_service "venus" "log-system" "Log Search And Analysis Service")
+  local venus_service=$(get_or_create_service "venus" "log-management" "Log Management Service")
   get_or_create_endpoint $venus_service \
     "$REGION_NAME" \
     "$(venus_service_url)" \

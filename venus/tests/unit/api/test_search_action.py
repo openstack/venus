@@ -208,6 +208,19 @@ class TestSearchAction(unittest.TestCase):
     @mock.patch('venus.modules.search.es_template.search_params')
     @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
     @mock.patch('venus.common.utils.request_es')
+    def test_params_no_buckets(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
+        mock_req_es.return_value = (
+            200, '{"aggregations": {"search_values": {}}}')
+        action = SearchCore()
+        result = action.params('host_name', '', None)
+        expected = {"code": 0, "msg": "no data, no buckets"}
+        self.assertEqual(expected, result)
+
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
     def test_params_level_type(
             self, mock_req_es, mock_get_index_names, mock_search_params):
         mock_req_es.return_value = (

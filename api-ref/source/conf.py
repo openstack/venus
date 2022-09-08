@@ -58,6 +58,7 @@ html_theme_options = {
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-    ('index', 'Venus.tex', u'OpenStack Log API Documentation',
+    ('index', 'Venus.tex',
+     u'OpenStack Log Management Service API Documentation',
      u'OpenStack Foundation', 'manual'),
 ]

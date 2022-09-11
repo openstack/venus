@@ -1,0 +1,22 @@
+{
+    "msg": "OK",
+    "code": 1,
+    "data":{
+        "count": [
+            {
+                "key": "node31",
+                "doc_count": 4510027
+            },
+            {
+                "key": "node32",
+                "doc_count": 1865824
+            },
+            {
+                "key": "node34",
+                "doc_count": 954416
+            }
+        ],
+        "title_en": "Program Log Analysis Histogram",
+        "title_cn": "\u7ec4\u4ef6\u65e5\u5fd7\u5206\u6790\u67f1\u72b6\u56fe"
+    }
+}

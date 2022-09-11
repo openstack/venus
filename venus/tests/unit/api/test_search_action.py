@@ -131,8 +131,12 @@ class TestSearchAction(unittest.TestCase):
         index_names = self.action.get_all_index('test_index')
         self.assertEqual("", index_names)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
     @mock.patch('venus.common.utils.request_es')
-    def test_get_all_index(self, mock_req_es):
+    def test_get_all_index(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
         mock_req_es.return_value = (
             200, '[{"index":"index1"},{"index":"index2"}]')
         index_names = self.action.get_all_index('test_index')

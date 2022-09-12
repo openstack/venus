@@ -9,7 +9,7 @@
                 "level": "info",
                 "host_name": [
                     "@skyline-highlighted-field@node31@/skyline-highlighted-field@"
-                },
+                ],
                 "time": "2022-09-10T12:33:35+08:00",
                 "module_name": "openstack.keystone",
                 "program_name": "keystone-apache-admin-access",

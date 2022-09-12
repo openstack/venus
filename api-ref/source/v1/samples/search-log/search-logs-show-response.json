@@ -3,7 +3,7 @@
     "code": 1,
     "data":{
         "total": 4510027,
-        "values"[
+        "values": [
             {
                 "user_id": "8a89984958192849ac1829400182e2410000",
                 "level": "info",
@@ -29,7 +29,7 @@
                 "key_as_string": "2019-09-27T12:30:00.000+08:00",
                 "key": 1569558600000,
                 "doc_count": 9171
-            },
+            }
         ],
         "interval_en": "30minutes",
         "interval_cn": "30\u5206\u949f"

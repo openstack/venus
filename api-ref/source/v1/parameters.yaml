@@ -3,11 +3,11 @@
 # variables in path
 
 # variables in query
-param_type:
+index_type:
   description: |
-    the type of parameter, such as host_name, level, program_name, module_name
+    the type of elasticsearch index, flog:Openstack log, slog:the host OS log
   in: query
-  required: true
+  required: false
   type: string
 module_name:
   description: |
@@ -15,9 +15,9 @@ module_name:
   in: query
   required: false
   type: string
-index_type:
+param_type:
   description: |
-    the type of elasticsearch index, flog:Openstack log, slog:the host OS log
+    the type of parameter, such as host_name, level, program_name, module_name
   in: query
-  required: false
+  required: true
   type: string

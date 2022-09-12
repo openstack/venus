@@ -12,4 +12,7 @@ OpenStack Log API V1 (CURRENT)
 .. custom config document.
 .. include:: custom-config.inc
 
+.. search log document.
+.. include:: search-params.inc
+
 

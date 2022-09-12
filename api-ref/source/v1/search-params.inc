@@ -36,5 +36,5 @@ Response
 **Example: JSON request**
 
 
-.. literalinclude:: ./samples/search-log/search-params-show-response.json.json
+.. literalinclude:: ./samples/search-log/search-params-show-response.json
    :language: javascript

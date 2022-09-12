@@ -1,1 +1,23 @@
-ADD INPUT PARAMETERS HERE
+# variables in header
+
+# variables in path
+
+# variables in query
+param_type:
+  description: |
+    the type of parameter, such as host_name, level, program_name, module_name
+  in: query
+  required: true
+  type: string
+module_name:
+  description: |
+    the module name.
+  in: query
+  required: false
+  type: string
+index_type:
+  description: |
+    the type of elasticsearch index, flog:Openstack log, slog:the host OS log
+  in: query
+  required: false
+  type: string

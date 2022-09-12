@@ -1,0 +1,21 @@
+{
+    "msg": "OK",
+    "code": 1,
+    "data": {
+        "interval_en": "30minutes",
+        "interval_cn": "30\u5206\u949f",
+        "stats": [
+            {
+                "count": [
+                    {
+                        "key_as_string": "2019-11-07T14:00:00.000+08:00",
+                        "key": 1573106400000,
+                        "doc_count": 3213
+                    }
+                ]
+                "total": 78870,
+                "key": "nova-api"
+            }
+        ]
+    }
+}

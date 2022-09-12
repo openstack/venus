@@ -9,3 +9,7 @@ OpenStack Log API V1 (CURRENT)
 .. versions document.
 .. include:: api-versions.inc
 
+.. custom config document.
+.. include:: custom_config.inc
+
+

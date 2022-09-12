@@ -1,14 +1,14 @@
 .. -*- rst -*-
 
-API versions
-============
+Custom Config
+=============
 
-List All Api Versions
+Get Custom Config
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. rest_method:: GET /
+.. rest_method:: GET /custom_config
 
-Lists information for all Venus API versions.
+Get the value of all custom config.
 
 Response codes
 --------------
@@ -24,8 +24,8 @@ Response codes
 Response
 --------
 
-**Example List Api Versions: JSON request**
+**Example: JSON request**
 
 
-.. literalinclude:: ./samples/versions-response.json
+.. literalinclude:: ./samples/custom-config/custom-config-show-response.json
    :language: javascript

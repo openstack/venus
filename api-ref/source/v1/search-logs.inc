@@ -13,10 +13,11 @@ List host_name, module_name,program_name,level more informations for all Venus m
 Response codes
 --------------
 
-.. rest_status_code:: success ../parameters.yaml
+.. rest_status_code:: success ../status.yaml
 
    - 0
 
-.. rest_status_code:: error ../parameters.yaml
+.. rest_status_code:: error ../status.yaml
 
    - -1
+

@@ -5,7 +5,7 @@
 # variables in query
 index_type:
   description: |
-    the type of elasticsearch index, flog:Openstack log, slog:the host OS log
+    the type of elasticsearch index, flog(default):Openstack log, slog:host OS log
   in: query
   required: false
   type: string

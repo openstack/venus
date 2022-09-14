@@ -22,6 +22,15 @@ Response codes
    - 0
    - -1
 
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - type: typical_log_type
+   - start_time: start_time
+   - end_time: end_time
+
 Response
 --------
 

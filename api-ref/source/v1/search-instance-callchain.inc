@@ -22,6 +22,13 @@ Response codes
    - 0
    - -1
 
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - request_id: request_id
+
 Response
 --------
 

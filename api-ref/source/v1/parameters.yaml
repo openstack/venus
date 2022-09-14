@@ -5,7 +5,7 @@
 # variables in query
 end_time:
   description: |
-    end timestamp
+    the end timestamp of time frame.
   in: query
   required: false
   type: int
@@ -13,7 +13,7 @@ group_name:
   description: |
     group name
   in: query
-  required: false
+  required: true
   type: string
 host_name:
   description: |
@@ -29,7 +29,7 @@ index_type:
   type: string
 level:
   description: |
-    the level of log, such as error, info
+    the level of log, such as error, info.
   in: query
   required: false
   type: string
@@ -79,11 +79,11 @@ request_id:
   description: |
     request id.
   in: query
-  required: false
+  required: true
   type: string
 start_time:
   description: |
-    start timestamp
+    the start timestamp of time frame.
   in: query
   required: false
   type: int

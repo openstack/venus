@@ -259,7 +259,12 @@ class TestSearchAction(unittest.TestCase):
         expected = {'code': 1, 'msg': 'OK', "values": ['val1', 'val2']}
         self.assertEqual(expected, result)
 
-    def test_generate_must_upper(self):
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_generate_must_upper(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
         action = SearchCore()
         result = action.generate_must({'log_level.keyword': 'test'})
         expected = [{'terms': {'log_level.keyword': ['test', 'TEST']}}]

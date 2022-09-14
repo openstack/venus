@@ -32,7 +32,7 @@ Request
 Response
 --------
 
-**Example List Api Versions: JSON response**
+**Example: JSON response**
 
 
 .. literalinclude:: ./samples/search-log/search-instance-callchain-show-response.json

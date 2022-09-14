@@ -22,6 +22,22 @@ Response codes
    - 0
    - -1
 
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - host_name: host_name
+   - module_name: module_name
+   - program_name: program_name
+   - level: level
+   - user_id: user_id
+   - project_id: project_id
+   - query: query
+   - start_time: start_time
+   - page_size: page_size
+   - index_type: index_type
+
 Response
 --------
 

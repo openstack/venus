@@ -3,9 +3,33 @@
 # variables in path
 
 # variables in query
+end_time:
+  description: |
+    end timestamp
+  in: query
+  required: false
+  type: int
+group_name:
+  description: |
+    group name
+  in: query
+  required: false
+  type: string
+host_name:
+  description: |
+    host name
+  in: query
+  required: false
+  type: string
 index_type:
   description: |
     the type of elasticsearch index, flog(default):Openstack log, slog:host OS log
+  in: query
+  required: false
+  type: string
+level:
+  description: |
+    the level of log, such as error, info
   in: query
   required: false
   type: string
@@ -15,9 +39,63 @@ module_name:
   in: query
   required: false
   type: string
+page_num:
+  description: |
+    the page num, first and default is 1.
+  in: query
+  required: false
+  type: int
+page_size:
+  description: |
+    the size of page, default is 10.
+  in: query
+  required: false
+  type: int
 param_type:
   description: |
     the type of parameter, such as host_name, level, program_name, module_name
   in: query
   required: true
+  type: string
+program_name:
+  description: |
+    the program name.
+  in: query
+  required: false
+  type: string
+project_id:
+  description: |
+    the project id.
+  in: query
+  required: false
+  type: string
+query:
+  description: |
+    the search query for elasticsearch.
+  in: query
+  required: false
+  type: string
+request_id:
+  description: |
+    request id.
+  in: query
+  required: false
+  type: string
+start_time:
+  description: |
+    start timestamp
+  in: query
+  required: false
+  type: int
+typical_log_type:
+  description: |
+    the typical log type, such as error_stats, rabbitmq_error_stats, mysql_error_stats
+  in: query
+  required: true
+  type: string
+user_id:
+  description: |
+    the user id.
+  in: query
+  required: false
   type: string

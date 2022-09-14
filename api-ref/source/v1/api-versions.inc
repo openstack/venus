@@ -15,7 +15,7 @@ Response codes
 
 .. rest_status_code:: success ../status.yaml
 
-   - 0
+   - 1
 
 .. rest_status_code:: error ../status.yaml
 

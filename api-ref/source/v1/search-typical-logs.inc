@@ -15,8 +15,18 @@ Response codes
 
 .. rest_status_code:: success ../status.yaml
 
-   - 0
+   - 1
 
 .. rest_status_code:: error ../status.yaml
 
+   - 0
    - -1
+
+Response
+--------
+
+**Example: JSON request**
+
+
+.. literalinclude:: ./samples/search-log/search-typical-logs-show-response.json
+   :language: javascript

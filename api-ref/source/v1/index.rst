@@ -15,8 +15,8 @@ OpenStack Log API V1 (CURRENT)
 .. search log document.
 .. include:: search-params.inc
 .. include:: search-logs.inc
-.. include:: search-analyse-logs.inc
 .. include:: search-logs-download.inc
-.. include:: search-instance-callchain.inc
+.. include:: search-analyse-logs.inc
 .. include:: search-typical-logs.inc
 .. include:: search-instance-requestids.inc
+.. include:: search-instance-callchain.inc

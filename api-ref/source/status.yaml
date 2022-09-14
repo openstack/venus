@@ -1,7 +1,7 @@
-0:
+1:
   default: |
     Request was successful.
-1:
+0:
   default: |
     Request was successful, but no data caused by some reasons.
 -1:

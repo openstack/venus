@@ -166,7 +166,13 @@ class TestSearchAction(unittest.TestCase):
             'test_index', start_time, end_time)
         self.assertEqual(",".join(names), index_names)
 
-    def test_params_invalid_param(self):
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_params_invalid_param(
+            self, mock_req_es, mock_get_index_names, mock_search_params):
+        mock_get_index_names.return_value = 'flog-2021.01.03,flog-2021.01.04'
+        mock_req_es.return_value = (400, {})
         result = self.action.params('', '', None)
         expected = {"code": -1, "msg": "invalid param"}
         self.assertEqual(expected, result)

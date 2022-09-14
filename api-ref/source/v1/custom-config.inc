@@ -27,7 +27,7 @@ Response codes
 Response
 --------
 
-**Example: JSON request**
+**Example: JSON response**
 
 
 .. literalinclude:: ./samples/custom-config/custom-config-show-response.json

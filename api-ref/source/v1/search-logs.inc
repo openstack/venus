@@ -43,7 +43,7 @@ Response codes
 Response
 --------
 
-**Example: JSON request**
+**Example: JSON response**
 
 
 .. literalinclude:: ./samples/search-log/search-logs-show-response.json

@@ -24,7 +24,7 @@ Response codes
 Response
 --------
 
-**Example List Api Versions: JSON request**
+**Example List Api Versions: JSON response**
 
 
 .. literalinclude:: ./samples/versions-response.json

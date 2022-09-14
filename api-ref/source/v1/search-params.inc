@@ -33,7 +33,7 @@ Request
 Response
 --------
 
-**Example: JSON request**
+**Example: JSON response**
 
 
 .. literalinclude:: ./samples/search-log/search-params-show-response.json

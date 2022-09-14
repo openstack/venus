@@ -14,7 +14,7 @@
                 "module_name": "openstack.keystone",
                 "program_name": "keystone-apache-admin-access",
                 "project_id": "7e02058126cc4950b75f9970368ba177",
-                "desc": "100.2.80.232 - - [27/Sep/2019:12:33:35 +0800] \"HEAD /v3/auth/tokens HTTP/1.1\" 200 - 142459 \"-\" \"OpenStack4j / OpenStack Client\"",
+                "desc": "100.2.80.232 - - [27/Sep/2019:12:33:35 +0800] \"HEAD /v3/auth/tokens HTTP/1.1\" 200 - 142459 \"-\" \"OpenStack4j / OpenStack Client\""
             }
         ]
     },

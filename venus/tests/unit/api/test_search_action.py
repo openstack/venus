@@ -388,6 +388,27 @@ class TestSearchAction(unittest.TestCase):
         expected = {"code": 0, "msg": "no data, no buckets"}
         self.assertEqual(expected, result)
 
+    @mock.patch('venus.modules.search.es_template.search_params')
+    @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
+    @mock.patch('venus.common.utils.request_es')
+    def test_logs_data(
+            self, mock_req_es, mock_get_index_names, mock_search_logs):
+        action = SearchCore()
+        mock_req_es.return_value = (200, '{"aggregations": {"data_count": '
+                                    '{"buckets": [{"key": "val1"}, {"key": '
+                                    '"val2"}]}}, "hits": {"hits": {}}}')
+        mock_get_index_names.return_value = 'flog-2022.08.17,flog-2022.08.18'
+        result = action.logs('host', '', '', 'NO EXIST', '', '', None, None,
+                             '1659339607', '1659426007', '10', '10')
+        expected =\
+            {'code': 1, 'msg': 'OK', "data_stats": {'count': [{'key': 'val1'},
+                                                              {'key': 'val2'}],
+                                                    'interval_cn': '30分钟',
+                                                    'interval_en': '30minutes'
+                                                    }, "data": {"total": 0,
+                                                                "values": []}}
+        self.assertEqual(expected, result)
+
     def test_analyse_logs_invalid_param(self):
         action = SearchCore()
         expected = {"code": -1, "msg": "invalid param"}

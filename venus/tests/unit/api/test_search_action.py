@@ -759,6 +759,12 @@ class TestSearchAction(unittest.TestCase):
         expected = ([], "no data, no hit")
         self.assertEqual(expected, result)
 
+    def test_instance_call_chain_no_index(self):
+        action = SearchCore()
+        expected = {"code": 0, "msg": "no data, no index"}
+        result = action.instance_call_chain('1', '2')
+        self.assertEqual(expected, result)
+
 
 if __name__ == "__main__":
     unittest.main()

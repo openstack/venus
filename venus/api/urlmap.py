@@ -258,7 +258,7 @@ class URLMap(paste.urlmap.URLMap):
         # 2) Accept header (eg application/json;q=0.8, application/xml;q=0.2)
 
         # The API version is determined in one of three ways:
-        # 1) URL path prefix (eg /v1.1/tenant/servers/detail)
+        # 1) URL path prefix (eg /v1.1/project/servers/detail)
         # 2) Content-Type header (eg application/json;version=1.1)
         # 3) Accept header (eg application/json;q=0.8;version=1.1)
 

@@ -223,7 +223,7 @@ class SearchCore(object):
             gen_params["user_id.keyword"] = user_id
 
         if project_id:
-            gen_params["tenant_id.keyword"] = project_id
+            gen_params["project_id.keyword"] = project_id
 
         must_params = self.generate_must(gen_params)
         must_not_params = self.generate_must_not(gen_not_params)
@@ -300,7 +300,7 @@ class SearchCore(object):
                     d["desc"] = _source.get("message", "")
                 d["program_name"] = _source.get("programname", "")
                 d["user_id"] = _source.get("user_id", "")
-                d["project_id"] = _source.get("tenant_id", "")
+                d["project_id"] = _source.get("project_id", "")
                 d["module_name"] = _source.get("Logger", "")
             res_values.append(d)
 

@@ -82,9 +82,9 @@ global_opts = [
                help='Password associated with the OpenStack '
                     'privileged account.',
                secret=True),
-    cfg.StrOpt('os_privileged_user_tenant',
+    cfg.StrOpt('os_privileged_user_project',
                default=None,
-               help='Tenant name associated with the OpenStack '
+               help='Project name associated with the OpenStack '
                     'privileged account.'),
     cfg.StrOpt('os_privileged_user_auth_url',
                default=None,
@@ -139,15 +139,15 @@ global_opts = [
     cfg.BoolOpt('fatal_exception_format_errors',
                 default=False,
                 help='Make exception message format errors fatal.'),
-    cfg.StrOpt('venus_internal_tenant_project_id',
+    cfg.StrOpt('venus_internal_project_id',
                default=None,
                help='ID of the project which will be used as the Venus '
-                    'internal tenant.'),
-    cfg.StrOpt('venus_internal_tenant_user_id',
+                    'internal project.'),
+    cfg.StrOpt('venus_internal_user_id',
                default=None,
                help='ID of the user to be used'
                     ' in venusmanager operations as the '
-                    'Venus internal tenant.'),
+                    'Venus internal project.'),
     cfg.StrOpt('db_driver',
                default='venus.db',
                help='Driver to use for database access'),

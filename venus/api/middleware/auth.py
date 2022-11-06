@@ -73,14 +73,14 @@ class VenusKeystoneContext(base_wsgi.Middleware):
             return webob.exc.HTTPUnauthorized()
         # get the roles
         roles = [r.strip() for r in req.headers.get('X_ROLE', '').split(',')]
-        if 'X_TENANT_ID' in req.headers:
+        if 'X_PROJECT_ID' in req.headers:
             # This is the new header since Keystone went to ID/Name
-            project_id = req.headers['X_TENANT_ID']
+            project_id = req.headers['X_PROJECT_ID']
         else:
             # This is for legacy compatibility
-            project_id = req.headers['X_TENANT']
+            project_id = req.headers['X_PROJECT']
 
-        project_name = req.headers.get('X_TENANT_NAME')
+        project_name = req.headers.get('X_PROJECT_NAME')
 
         req_id = req.environ.get(request_id.ENV_REQUEST_ID)
 

@@ -49,7 +49,7 @@ class RequestContext(context.RequestContext):
 
         super(RequestContext, self).__init__(auth_token=auth_token,
                                              user=user_id,
-                                             tenant=project_id,
+                                             project_id=project_id,
                                              domain=domain,
                                              user_domain=user_domain,
                                              project_domain=project_domain,
@@ -134,18 +134,18 @@ class RequestContext(context.RequestContext):
         return copy.deepcopy(self)
 
     # NOTE(sirp): the openstack/common version of RequestContext uses
-    # tenant/user whereas the Venus version uses project_id/user_id.
+    # project_id/user whereas the Venus version uses project_id/user_id.
     # NOTE(adrienverge): The Venus version of RequestContext now uses
-    # tenant/user internally, so it is compatible with context-aware code from
-    # openstack/common. We still need this shim for the rest of Venus's
+    # project_id/user internally, so it is compatible with context-aware code
+    # from openstack/common. We still need this shim for the rest of Venus's
     # code.
     @property
     def project_id(self):
-        return self.tenant
+        return self.project_id
 
     @project_id.setter
     def project_id(self, value):
-        self.tenant = value
+        self.project_id = value
 
     @property
     def user_id(self):
@@ -164,21 +164,21 @@ def get_admin_context(read_deleted="no"):
                           overwrite=False)
 
 
-def get_internal_tenant_context():
-    """Build and return the Venus internal tenant context object
+def get_internal_project_context():
+    """Build and return the Venus internal project context object
 
     This request context will only work for internal Venus operations. It will
     not be able to make requests to remote services. To do so it will need to
     use the keystone client to get an auth_token.
     """
-    project_id = CONF.venus_internal_tenant_project_id
-    user_id = CONF.venus_internal_tenant_user_id
+    project_id = CONF.venus_internal_project_id
+    user_id = CONF.venus_internal_user_id
 
     if project_id and user_id:
         return RequestContext(user_id=user_id,
                               project_id=project_id,
                               is_admin=True)
     else:
-        LOG.warning(_LW('Unable to get internal tenant context: Missing '
+        LOG.warning(_LW('Unable to get internal context: Missing '
                         'required config parameters.'))
         return None

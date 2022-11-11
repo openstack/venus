@@ -36,3 +36,11 @@ class TestSearchController(unittest.TestCase):
         req = fakes.HTTPRequest.blank('?type=test')
         res1 = self.controller.search_params(req)
         self.assertEqual(ret, res1)
+
+    @mock.patch('venus.modules.search.action.SearchCore.params')
+    def test_search_params_valid_type(self, action_params):
+        ret = {'code': 0, 'msg': 'no data, no index'}
+        action_params.return_value = ret
+        req = fakes.HTTPRequest.blank('?type=host_name')
+        res1 = self.controller.search_params(req)
+        self.assertEqual(ret, res1)

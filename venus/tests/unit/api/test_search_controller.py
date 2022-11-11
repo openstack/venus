@@ -44,3 +44,20 @@ class TestSearchController(unittest.TestCase):
         req = fakes.HTTPRequest.blank('?type=host_name')
         res1 = self.controller.search_params(req)
         self.assertEqual(ret, res1)
+
+    @mock.patch('venus.modules.search.action.SearchCore.logs')
+    def test_search_logs_invalid_params(self, action_params):
+        ret = {"code": -1, "msg": "invalid param"}
+        action_params.return_value = ret
+        req = fakes.HTTPRequest.blank('?start_time=None')
+        res1 = self.controller.search_logs(req)
+        self.assertEqual(ret, res1)
+        req1 = fakes.HTTPRequest.blank('?end_time=None')
+        res2 = self.controller.search_logs(req1)
+        self.assertEqual(ret, res2)
+        req2 = fakes.HTTPRequest.blank('?page_num=None')
+        res3 = self.controller.search_logs(req2)
+        self.assertEqual(ret, res3)
+        req3 = fakes.HTTPRequest.blank('?page_size=None')
+        res4 = self.controller.search_logs(req3)
+        self.assertEqual(ret, res4)

@@ -86,3 +86,12 @@ class TestSearchController(unittest.TestCase):
         req = fakes.HTTPRequest.blank('?group_name=None')
         res1 = self.controller.search_analyse_logs(req)
         self.assertEqual(ret, res1)
+
+    @mock.patch('venus.modules.search.action.SearchCore.analyse_logs')
+    def test_search_analyse_logs_no_index(self, action_analyse_logs):
+        ret = {"code": 0, "msg": "no data, no index"}
+        action_analyse_logs.return_value = ret
+        req = fakes.HTTPRequest.blank('?group_name=host_name&?start_time=2&'
+                                      '?end_time=1')
+        res1 = self.controller.search_analyse_logs(req)
+        self.assertEqual(ret, res1)

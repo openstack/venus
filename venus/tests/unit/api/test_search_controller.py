@@ -112,3 +112,12 @@ class TestSearchController(unittest.TestCase):
                                       '?end_time=1')
         res1 = self.controller.search_typical_logs(req)
         self.assertEqual(ret, res1)
+
+    @mock.patch('venus.modules.search.action.SearchCore.instance_call_chain')
+    def test_search_instance_call_chain_no_index(self,
+                                                 action_instance_call_chain):
+        ret = {"code": 0, "msg": "no data, no index"}
+        action_instance_call_chain.return_value = ret
+        req = fakes.HTTPRequest.blank('?request_id=test&?uuid=test')
+        res1 = self.controller.instance_call_chain(req)
+        self.assertEqual(ret, res1)

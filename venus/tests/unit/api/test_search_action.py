@@ -574,6 +574,14 @@ class TestSearchAction(unittest.TestCase):
                              'interval_en': '30minutes'}}
         self.assertEqual(expected, result)
 
+    def test_typical_logs_invalid_param(self):
+        action = SearchCore()
+        expected = {"code": -1, "msg": "invalid param"}
+        result = action.typical_logs('', '', '')
+        self.assertEqual(expected, result)
+        result = action.typical_logs(None, '', '')
+        self.assertEqual(expected, result)
+
     def test_typical_logs_no_index(self):
         action = SearchCore()
         expected = {"code": 0, "msg": "no data, no index"}

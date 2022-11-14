@@ -78,3 +78,11 @@ class TestSearchController(unittest.TestCase):
                                       '?end_time=1&?page_num=10&?page_size=10')
         res1 = self.controller.search_logs(req)
         self.assertEqual(ret, res1)
+
+    @mock.patch('venus.modules.search.action.SearchCore.analyse_logs')
+    def test_search_analyse_logs_invalid_param(self, action_analyse_logs):
+        ret = {"code": -1, "msg": "invalid param"}
+        action_analyse_logs.return_value = ret
+        req = fakes.HTTPRequest.blank('?group_name=None')
+        res1 = self.controller.search_analyse_logs(req)
+        self.assertEqual(ret, res1)

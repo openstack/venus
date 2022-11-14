@@ -69,3 +69,12 @@ class TestSearchController(unittest.TestCase):
         req = fakes.HTTPRequest.blank('?index_type=test')
         res1 = self.controller.search_logs(req)
         self.assertEqual(ret, res1)
+
+    @mock.patch('venus.modules.search.action.SearchCore.logs')
+    def test_search_logs_valid_index_type(self, action_logs):
+        ret = {"code": 0, "msg": "no data, no index"}
+        action_logs.return_value = ret
+        req = fakes.HTTPRequest.blank('?index_type=None&?start_time=2&'
+                                      '?end_time=1&?page_num=10&?page_size=10')
+        res1 = self.controller.search_logs(req)
+        self.assertEqual(ret, res1)

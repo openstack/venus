@@ -46,9 +46,9 @@ class TestSearchController(unittest.TestCase):
         self.assertEqual(ret, res1)
 
     @mock.patch('venus.modules.search.action.SearchCore.logs')
-    def test_search_logs_invalid_params(self, action_params):
+    def test_search_logs_invalid_params(self, action_logs):
         ret = {"code": -1, "msg": "invalid param"}
-        action_params.return_value = ret
+        action_logs.return_value = ret
         req = fakes.HTTPRequest.blank('?start_time=None')
         res1 = self.controller.search_logs(req)
         self.assertEqual(ret, res1)
@@ -61,3 +61,11 @@ class TestSearchController(unittest.TestCase):
         req3 = fakes.HTTPRequest.blank('?page_size=None')
         res4 = self.controller.search_logs(req3)
         self.assertEqual(ret, res4)
+
+    @mock.patch('venus.modules.search.action.SearchCore.logs')
+    def test_search_logs_invalid_index_type(self, action_logs):
+        ret = {"code": -1, "msg": "invalid param"}
+        action_logs.return_value = ret
+        req = fakes.HTTPRequest.blank('?index_type=test')
+        res1 = self.controller.search_logs(req)
+        self.assertEqual(ret, res1)

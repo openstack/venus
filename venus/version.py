@@ -19,5 +19,5 @@ VENUS_PRODUCT = "OpenStack Venus"
 VENUS_PACKAGE = None
 
 loaded = False
-version_info = pbr_version.VersionInfo('venus')
+version_info = pbr_version.VersionInfo('openstack-venus')
 version_string = version_info.version_string

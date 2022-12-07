@@ -22,6 +22,7 @@ import os
 import sys
 
 from oslo_config import cfg
+from oslo_db.sqlalchemy import migration
 from oslo_log import log as logging
 
 from venus.conf import CONF
@@ -30,6 +31,12 @@ from venus.i18n import _
 from venus import objects
 from venus.task import timer
 from venus import version
+
+from venus import context
+from venus import db
+from venus.db import migration as db_migration
+from venus.db.sqlalchemy import api as db_api
+
 
 i18n.enable_lazy()
 
@@ -220,8 +227,39 @@ class TaskCommands(object):
         timer.init_advanced_timer()
 
 
+class DbCommands(object):
+    """Class for managing the database."""
+
+    def __init__(self):
+        pass
+
+    @args('version', nargs='?', default=None,
+          help='Database version')
+    def sync(self, version=None):
+        """Sync the database up to the most recent version."""
+        return db_migration.db_sync(version)
+
+    def version(self):
+        """Print the current database version."""
+        print(migration.db_version(db_api.get_engine(),
+                                   db_migration.MIGRATE_REPO_PATH,
+                                   db_migration.INIT_VERSION))
+
+    @args('age_in_days', type=int,
+          help='Purge deleted rows older than age in days')
+    def purge(self, age_in_days):
+        """Purge deleted rows older than a given age from venus tables."""
+        age_in_days = int(age_in_days)
+        if age_in_days <= 0:
+            print(_("Must supply a positive, non-zero value for age"))
+            exit(1)
+        ctxt = context.get_admin_context()
+        db.purge_deleted_rows(ctxt, age_in_days)
+
+
 CATEGORIES = {
     'config': ConfigCommands,
+    'db': DbCommands,
     'logs': GetLogCommands,
     'shell': ShellCommands,
     'version': VersionCommands,

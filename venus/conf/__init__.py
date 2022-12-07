@@ -17,6 +17,7 @@ from oslo_config import cfg
 from venus.conf import api
 from venus.conf import common
 from venus.conf import core
+from venus.conf import db
 from venus.conf import elasticsearch
 from venus.conf import profiler
 
@@ -27,3 +28,4 @@ common.register_opts(CONF)
 core.register_opts(CONF)
 elasticsearch.register_opts(CONF)
 profiler.register_opts(CONF)
+db.register_opts(CONF)

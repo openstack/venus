@@ -204,4 +204,5 @@ def import_stock_mock(logical_line):
     N366
     """
     if logical_line == 'import mock':
-        yield 0, msg.get(366)
+        yield (0, "N366: You must explicitly import python's mock: "
+                  "``from unittest import mock``")

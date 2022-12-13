@@ -153,8 +153,11 @@ class HackingTestCase(unittest.TestCase):
     def test_import_stock_mock(self):
         self.assertEqual(1, len(list(checks.import_stock_mock(
             'import mock'))))
-        self.assertEqual(0, len(list(checks.import_stock_mock(
-            'from unittest import mock'))))
+        code = """
+                    from unittest import mock
+                    import unittest.mock
+               """
+        self.assertEqual(0, len(list(checks.import_stock_mock(code))))
 
     def test_no_xrange(self):
         line = 'xrange(10)'

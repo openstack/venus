@@ -15,13 +15,8 @@
 """Implementation of SQLAlchemy backend."""
 
 import time
-from venus.db.sqlalchemy.api import _create_facade_lazily
+from venus.db.sqlalchemy.api import get_session
 from venus.modules.custom_config.backends import models
-
-
-def get_session(**kwargs):
-    facade = _create_facade_lazily()
-    return facade.get_session(**kwargs)
 
 
 class CustomConfigSql(object):

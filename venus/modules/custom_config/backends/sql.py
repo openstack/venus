@@ -14,51 +14,9 @@
 
 """Implementation of SQLAlchemy backend."""
 
-import sqlalchemy
-
-import threading
-
 import time
-
-from oslo_config import cfg
-
-from oslo_db import options
-
-from oslo_db.sqlalchemy import session as db_session
-
-from oslo_log import log as logging
-
-import osprofiler.sqlalchemy
-
+from venus.db.sqlalchemy.api import _create_facade_lazily
 from venus.modules.custom_config.backends import models
-
-
-CONF = cfg.CONF
-CONF.import_group("profiler", "venus.service")
-log = logging.getLogger(__name__)
-options.set_defaults(CONF, connection='sqlite:///$state_path/venus.sqlite')
-
-_LOCK = threading.Lock()
-_FACADE = None
-
-
-def _create_facade_lazily():
-    global _LOCK
-    with _LOCK:
-        global _FACADE
-        if _FACADE is None:
-            _FACADE = db_session.EngineFacade(
-                CONF.database.connection,
-                **dict(CONF.database)
-            )
-
-            if CONF.profiler.profiler_enabled:
-                if CONF.profiler.trace_sqlalchemy:
-                    osprofiler.sqlalchemy.add_tracing(sqlalchemy,
-                                                      _FACADE.get_engine(),
-                                                      "db")
-
-        return _FACADE
 
 
 def get_session(**kwargs):

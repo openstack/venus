@@ -141,11 +141,11 @@ class RequestContext(context.RequestContext):
     # code.
     @property
     def project_id(self):
-        return self.project_id
+        return self.tenant
 
     @project_id.setter
     def project_id(self, value):
-        self.project_id = value
+        self.tenant = value
 
     @property
     def user_id(self):

@@ -15,18 +15,19 @@
 """The template api."""
 
 from venus.api.openstack import wsgi
-from venus.conf import CONF
+from venus.modules.custom_config.action import CustomConfigCore
 
 
 class CustomConfigController(wsgi.Controller):
     def __init__(self, ext_mgr):
         self.ext_mgr = ext_mgr
+        self.config_api = CustomConfigCore()
         super(CustomConfigController, self).__init__()
 
     @wsgi.wrap_check_policy
     def get_config(self, req):
         result = dict()
-        result["log_save_days"] = CONF.elasticsearch.es_index_days
+        result["log_save_days"] = self.config_api.get_config("es_index_length")
         return result
 
 

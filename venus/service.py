@@ -303,7 +303,8 @@ def wait():
         if ("_password" in flag or "_key" in flag or
                 (flag == "sql_connection" and
                     ("mysql:" in flag_get or "postgresql:" in flag_get))):
-            LOG.debug('%s : FLAG SET ', flag)
+            LOG.debug('%(flag)s : %(flag_get)s',
+                      {'flag': flag, 'flag_get': flag_get})
         else:
             LOG.debug('%(flag)s : %(flag_get)s',
                       {'flag': flag, 'flag_get': flag_get})

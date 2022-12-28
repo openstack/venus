@@ -48,20 +48,20 @@ class DeleteESIndexTask(object):
             LOG.error(_LE("es_index_length no exist"))
             return
         today = time.strftime('%Y-%m-%d')
-        indexes_array = self.search_lib.get_all_index()
-        for index in indexes_array:
-            try:
+        try:
+            indexes_array = self.search_lib.get_all_index()
+            for index in indexes_array:
                 index_name = index["index"]
                 index_day = index_name.split('-')[1]
-                diff_day = datetime.datetime.strptime(today, "%Y-%m-%d") - \
-                    datetime.datetime.strptime(index_day, '%Y.%m.%d')
+                today_start = datetime.datetime.strptime(today, "%Y-%m-%d")
+                index_start = datetime.datetime.strptime(index_day, '%Y.%m.%d')
+                diff_day = today_start - index_start
                 if diff_day.days >= int(len_d):
                     LOG.info("delete index {}, diff_day {}"
                              .format(index_name, diff_day))
                     self.delete_index(index_name)
-            except Exception as e:
-                LOG.error("delete index {} error:{}".format(
-                    index["index"], str(e)))
+        except Exception as e:
+            LOG.error("delete es inidex error" + str(e))
 
     def start_task(self):
         try:

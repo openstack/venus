@@ -18,6 +18,7 @@ import time
 from venus.common import utils
 from venus.common.utils import LOG
 from venus.conf import CONF
+from venus.modules.custom_config.action import CustomConfigCore
 from venus.modules.search.search_lib import ESSearchObj
 from venus.i18n import _LE, _LI
 
@@ -30,6 +31,7 @@ class DeleteESIndexTask(object):
 
     def __init__(self):
         self.elasticsearch_url = CONF.elasticsearch.url
+        self.config_api = CustomConfigCore()
         self.search_lib = ESSearchObj()
 
     def delete_index(self, name):
@@ -40,7 +42,7 @@ class DeleteESIndexTask(object):
             return
 
     def delete_es_history_index(self):
-        len_d = CONF.elasticsearch.es_index_days
+        len_d = self.config_api.get_config("es_index_length")
         LOG.info("the elasticsearch indexes keep days {}".format(len_d))
         if len_d is None:
             LOG.error(_LE("es_index_length no exist"))
@@ -63,16 +65,7 @@ class DeleteESIndexTask(object):
 
     def start_task(self):
         try:
-
-            if CONF.elasticsearch.url == "":
-                LOG.info(_LI("not deploy es and not need execute"))
-                return
-
-            try:
-                self.delete_es_history_index()
-            except Exception as e:
-                LOG.error(_LE("delete es index, catch exception:%s"),
-                          str(e))
+            self.delete_es_history_index()
             LOG.info(_LI("delete es index task done"))
         except Exception as e:
             LOG.error(_LE("delete es index task, catch exception:%s"),

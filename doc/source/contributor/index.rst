@@ -22,7 +22,7 @@ Reviewing
 * :doc:`/contributor/releasenotes`: When we need a release note for a
   contribution.
 
-.. # NOTE: toctree needs to be placed at the end of the secion to
+.. # NOTE: toctree needs to be placed at the end of the section to
    # keep the document structure in the PDF doc.
 .. toctree::
    :hidden:

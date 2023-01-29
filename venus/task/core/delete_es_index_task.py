@@ -52,6 +52,7 @@ class DeleteESIndexTask(object):
             indexes_array = self.search_lib.get_all_index()
             for index in indexes_array:
                 index_name = index["index"]
+
                 index_day = index_name.split('-')[1]
                 today_start = datetime.datetime.strptime(today, "%Y-%m-%d")
                 index_start = datetime.datetime.strptime(index_day, '%Y.%m.%d')
@@ -60,8 +61,12 @@ class DeleteESIndexTask(object):
                     LOG.info("delete index {}, diff_day {}"
                              .format(index_name, diff_day))
                     self.delete_index(index_name)
+                else:
+                    LOG.info("no delete index {}, diff_day {}"
+                             .format(index_name, diff_day))
+
         except Exception as e:
-            LOG.error("delete es inidex error" + str(e))
+            LOG.error("try delete es inidex error" + str(e))
 
     def start_task(self):
         try:

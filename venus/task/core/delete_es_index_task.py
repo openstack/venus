@@ -43,10 +43,10 @@ class DeleteESIndexTask(object):
 
     def delete_es_history_index(self):
         len_d = self.config_api.get_config("es_index_length")
-        LOG.info("the elasticsearch indexes keep days {}".format(len_d))
         if len_d is None:
             LOG.error(_LE("es_index_length no exist"))
             return
+        LOG.info("the elasticsearch indexes keep days {}".format(len_d))
         today = time.strftime('%Y-%m-%d')
         try:
             indexes_array = self.search_lib.get_all_index()

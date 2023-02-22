@@ -31,3 +31,39 @@ Response
 
 .. literalinclude:: ./samples/custom-config/get-custom-config-show-response.json
    :language: javascript
+
+
+Set Custom Config
+~~~~~~~~~~~~~~~~~~~~~
+
+.. rest_method:: POST /v1/custom_config
+
+Set one custom config.
+
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - id: id
+   - value: value
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 1
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
+
+Response
+--------
+
+**Example: JSON response**
+
+
+.. literalinclude:: ./samples/custom-config/set-custom-config-show-response.json
+   :language: javascript

@@ -99,3 +99,15 @@ user_id:
   in: query
   required: false
   type: string
+id:
+  description: |
+    custom config id
+  in: body
+  required: true
+  type: string
+value:
+  description: |
+    custom config value
+  in: body
+  required: true
+  type: string

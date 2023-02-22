@@ -4,7 +4,6 @@ Custom Config
 =============
 
 Users can customize some important configurations, such as the retention days of ElasticSearch index.
-However, only these configurations can be read now, implement modification later.
 
 Get Custom Config
 ~~~~~~~~~~~~~~~~~~~~~

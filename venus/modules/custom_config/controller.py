@@ -30,6 +30,15 @@ class CustomConfigController(wsgi.Controller):
         result["log_save_days"] = self.config_api.get_config("es_index_length")
         return result
 
+    @wsgi.wrap_check_policy
+    def set_config(self, req, body):
+        id = body.get("id", None)
+        value = body.get("value", None)
+        if id is None or value is None:
+            return {"code": -1, "msg": "invalid param"}
+        self.config_api.set_config(id, value)
+        return {"code": 0, "msg": "OK"}
+
 
 def create_resource(ext_mgr):
     return wsgi.Resource(CustomConfigController(ext_mgr))

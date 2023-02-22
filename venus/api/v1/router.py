@@ -50,6 +50,11 @@ class APIRouter(venus.api.openstack.APIRouter):
                        action='get_config',
                        conditions={'method': ['GET']})
 
+        mapper.connect("set_custom_config", "/custom_config",
+                       controller=config_resource,
+                       action='set_config',
+                       conditions={'method': ['POST']})
+
         mapper.connect("search_params", "/search/params",
                        controller=search_resource,
                        action='search_params',

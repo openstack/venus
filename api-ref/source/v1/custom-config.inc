@@ -29,5 +29,5 @@ Response
 **Example: JSON response**
 
 
-.. literalinclude:: ./samples/custom-config/custom-config-show-response.json
+.. literalinclude:: ./samples/custom-config/get-custom-config-show-response.json
    :language: javascript

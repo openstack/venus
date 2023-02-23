@@ -3,12 +3,14 @@
 Search API
 =============
 
+Users can search, download and analyze logs, instance callchain.
+
 Get Search Params
 ~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/params
 
-Get the value list of one search parameter.
+Get the value list of search parameter, such as host list, module list.
 
 Response codes
 --------------
@@ -41,12 +43,12 @@ Response
 .. -*- rst -*-
 
 
-Search logs of all modules
+Search logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/logs
 
-Search logs.
+Search logs by host name, modules name, level, etc.
 
 Request
 -------
@@ -89,12 +91,12 @@ Response
 .. -*- rst -*-
 
 
-Search logs download of all modules
+Download Logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/logs/download
 
-Download the search logs of all Venus modules.
+Download the logs searched.
 
 Response codes
 --------------
@@ -135,12 +137,12 @@ Response
 .. -*- rst -*-
 
 
-Search analyse logs of all modules
+Search analyse logs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET v1/search/analyse/logs
 
-Search host_name, module_name,program_name,level more informations for all Venus modules analyse logs.
+Analyse logs of by host_name, module_name, program_name, level, etc.
 
 Response codes
 --------------
@@ -183,7 +185,7 @@ Search typical error logs of all modules
 
 .. rest_method:: GET v1/search/typical/logs
 
-Search host_name, module_name,program_name,level more informations for all Venus modules typical error  logs.
+Search typical error log, such as error logs of all modules, RabbitMQ related error logs, MariaDB related error logs.
 
 Response codes
 --------------
@@ -222,7 +224,7 @@ Search the list of instance request id
 
 .. rest_method:: GET v1/search/instance/request_ids
 
-Search instance request id from a start time to end time
+Get instance request id list.
 
 Response codes
 --------------
@@ -255,12 +257,12 @@ Response
 .. -*- rst -*-
 
 
-Search instance callchain of all modules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Search instance callchain(Only create operation)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/instance/callchain
 
-Search nova-api, nova-conductor, nova-scheduler and nova-compute informations for all Venus modules instance callchain
+Search instance callchain, export the logs of nova-api, nova-conductor, nova-scheduler and nova-compute.
 
 Response codes
 --------------

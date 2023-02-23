@@ -3,12 +3,12 @@
 API versions
 ============
 
-List All Api Versions
+List Api Versions
 ~~~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /
 
-Lists information for all Venus API versions.
+Lists information of Venus API versions.
 
 Response codes
 --------------

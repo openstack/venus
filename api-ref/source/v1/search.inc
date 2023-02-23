@@ -44,7 +44,7 @@ Response
 
 
 Search logs
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/logs
 
@@ -137,8 +137,8 @@ Response
 .. -*- rst -*-
 
 
-Search analyse logs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Analyse logs
+~~~~~~~~~~~~
 
 .. rest_method:: GET v1/search/analyse/logs
 

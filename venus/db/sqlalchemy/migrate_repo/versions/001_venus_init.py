@@ -71,7 +71,7 @@ def upgrade(migrate_engine):
 
     t_mo_custom_config.create(migrate_engine, checkfirst=True)
     new_data = {
-        'id': 'es_index_length',
+        'id': 'log_save_days',
         'value': '30',
         'update_time': '1900-01-01 00:00:00'
     }

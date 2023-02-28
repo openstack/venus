@@ -38,7 +38,7 @@ class DeleteESIndexTask(object):
         url = self.elasticsearch_url + '/' + name
         status, text = utils.request_es(url, "DELETE")
         if status != 200:
-            LOG.error(_LE("failed to delete es index"))
+            LOG.error(_LE("failed to delete es index: %s"), name)
             return
 
     def delete_es_history_index(self):
@@ -46,7 +46,7 @@ class DeleteESIndexTask(object):
         if len_d is None:
             LOG.error(_LE("the config of log_save_days do not exist"))
             return
-        LOG.info("the elasticsearch indexes(log) save days {}".format(len_d))
+        LOG.info(_LI("elasticsearch indexes(log) save days: %d"), len_d)
         today = time.strftime('%Y-%m-%d')
         try:
             indexes_array = self.search_lib.get_all_index()
@@ -58,15 +58,15 @@ class DeleteESIndexTask(object):
                 index_start = datetime.datetime.strptime(index_day, '%Y.%m.%d')
                 diff_day = today_start - index_start
                 if diff_day.days >= int(len_d):
-                    LOG.info("delete index {}, diff_day {}"
-                             .format(index_name, diff_day))
+                    LOG.info(_LI("delete index %s, diff day %d"),
+                             index_name, diff_day.days)
                     self.delete_index(index_name)
                 else:
-                    LOG.info("no delete index {}, diff_day {}"
-                             .format(index_name, diff_day))
+                    LOG.info(_LI("not delete index %s, diff day %d"),
+                             index_name, diff_day.days)
 
         except Exception as e:
-            LOG.error("try delete es inidex error" + str(e))
+            LOG.error(_LE("delete es inidex, catch exception:%s"), str(e))
 
     def start_task(self):
         try:

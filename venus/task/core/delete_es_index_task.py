@@ -67,8 +67,8 @@ class DeleteESIndexTask(object):
                              index_name, diff_day.days)
                     self.delete_index(index_name)
                 else:
-                    LOG.info(_LI("not delete index %s, diff day %d"),
-                             index_name, diff_day.days)
+                    LOG.debug(_LI("not delete index %s, diff day %d"),
+                              index_name, diff_day.days)
 
         except Exception as e:
             LOG.error(_LE("delete es inidex, catch exception:%s"), str(e))

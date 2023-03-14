@@ -57,8 +57,9 @@ def wrap_check_policy(func):
 
     @functools.wraps(func)
     def wrapped(self, req, *args, **kwargs):
-        context = req.environ['venus.context']
-        check_policy(context, func.__name__, None)
+        # context = req.environ['venus.context']
+        # check_policy(context, func.__name__, None)
+
         return func(self, req, *args, **kwargs)
     return wrapped
 

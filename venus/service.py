@@ -163,7 +163,8 @@ class Service(service.Service):
         for x in self.timers:
             try:
                 x.stop()
-            except Exception:
+            except Exception as e:
+                LOG.error(e)
                 pass
         self.timers = []
         super(Service, self).stop()
@@ -172,7 +173,8 @@ class Service(service.Service):
         for x in self.timers:
             try:
                 x.wait()
-            except Exception:
+            except Exception as e:
+                LOG.error(e)
                 pass
         if self.rpcserver:
             self.rpcserver.wait()
@@ -311,6 +313,9 @@ def wait():
     try:
         _launcher.wait()
     except KeyboardInterrupt:
+        _launcher.stop()
+    except Exception as e:
+        LOG.error(e)
         _launcher.stop()
 
 

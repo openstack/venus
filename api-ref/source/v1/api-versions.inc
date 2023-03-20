@@ -4,7 +4,7 @@ API versions
 ============
 
 List Api Versions
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /
 

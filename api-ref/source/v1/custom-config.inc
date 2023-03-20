@@ -34,7 +34,7 @@ Response
 
 
 Set Custom Config
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 .. rest_method:: POST /v1/custom_config
 

@@ -1,7 +1,7 @@
 .. -*- rst -*-
 
 Search API
-=============
+==========
 
 Users can search, download and analyze logs, instance callchain.
 
@@ -92,7 +92,7 @@ Response
 
 
 Download Logs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/logs/download
 

@@ -136,7 +136,7 @@ def render_response(body=None, status=None, headers=None, method=None):
     headers = _convert_to_str(headers)
 
     resp = webob.Response(body=body,
-                          status='%d %s' % status,
+                          status='%s' % status,
                           headerlist=headers)
 
     if method and method.upper() == 'HEAD':

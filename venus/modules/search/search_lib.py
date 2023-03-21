@@ -42,7 +42,7 @@ class ESSearchObj(object):
             if index.index == index_name:
                 exist = True
                 break
-
+        result = None
         if not exist:
             result = self.es.indices.create(index_name)
 

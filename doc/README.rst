@@ -13,5 +13,5 @@ Building Documentation
 
 Doc builds are performed using tox with the ``docs`` target::
 
- % cd ..
- % tox -e docs
+% cd ..
+% tox -e docs

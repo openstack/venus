@@ -88,7 +88,6 @@ class SearchCore(object):
             return "24h", "1天", "1day"
 
     def params(self, type, module_name, index_type):
-        field = ""
         if type == "host_name":
             field = "Hostname.keyword"
         elif type == "level":

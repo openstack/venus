@@ -29,7 +29,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-copyright = u'2016-present, OpenStack Foundation'
+copyright = '2016-present, OpenStack Foundation'
 
 # openstackdocstheme options
 openstackdocs_repo_name = 'openstack/venus'
@@ -59,6 +59,6 @@ html_theme_options = {
 # [howto/manual]).
 latex_documents = [
     ('index', 'Venus.tex',
-     u'OpenStack Log Management Service API Documentation',
-     u'OpenStack Foundation', 'manual'),
+     'OpenStack Log Management Service API Documentation',
+     'OpenStack Foundation', 'manual'),
 ]

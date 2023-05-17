@@ -1,4 +1,4 @@
 {
-    "log_save_days": "30"  // the retention days of logs(ElasticSearch indexes).
+    "log_save_days": "30"
 
 }

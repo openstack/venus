@@ -33,10 +33,10 @@ class CustomConfigController(wsgi.Controller):
 
     @wsgi.wrap_check_policy
     def set_config(self, req, body):
-        LOG.info(req)
+        LOG.debug(req)
         if len(req.body) == 0:
             return {"code": -1, "msg": "invalid param"}
-        LOG.info(body)
+        LOG.debug(body)
         id = body.get("id", None)
         value = body.get("value", None)
         if id is None or value is None:

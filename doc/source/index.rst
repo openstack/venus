@@ -2,7 +2,7 @@ Log management service (Venus)
 ==============================
 
 What is Venus?
----------------
+--------------
 
 Venus is an OpenStack project that aims to provide a one-stop solution
 to log collection, cleaning, indexing, analysis, alarm, visualization,
@@ -15,7 +15,7 @@ platform service logs, and virtualized application related logs.
 
 
 Using the Venus API
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 All features of Venus are exposed via a REST API. The following resources
 can help you get started consuming the API directly.

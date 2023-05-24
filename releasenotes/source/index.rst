@@ -1,6 +1,6 @@
-======================
- Venus Release Notes
-======================
+===================
+Venus Release Notes
+===================
 
 .. toctree::
    :maxdepth: 1

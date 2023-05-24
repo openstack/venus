@@ -45,7 +45,7 @@ class DeleteESIndexTask(object):
             LOG.error(_LE("delete es inidex:%s, catch exception:%s"),
                       name, str(e))
 
-    def delete_es_history_index(self):
+    def delete_es_outdated_index(self):
         len_d = self.config_api.get_config("log_save_days")
         if len_d is None:
             LOG.error(_LE("the config of log_save_days do not exist"))
@@ -75,7 +75,7 @@ class DeleteESIndexTask(object):
 
     def start_task(self):
         try:
-            self.delete_es_history_index()
+            self.delete_es_outdated_index()
             LOG.info(_LI("delete es index task done"))
         except Exception as e:
             LOG.error(_LE("delete es index task, catch exception:%s"), str(e))

@@ -40,7 +40,7 @@ class CustomConfigController(wsgi.Controller):
         id = body.get("id", None)
         value = body.get("value", None)
         if id is None or value is None:
-            return {"code": -1, "msg": "invalid param: id and value is need"}
+            return {"code": -1, "msg": "invalid param: id or value is missed"}
         self.config_api.set_config(id, value)
         return {"code": 0, "msg": "OK"}
 

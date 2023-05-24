@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-"""Implementation of Template."""
+"""Implementation of Search Template."""
 
 
 def search_params(field, must_params):

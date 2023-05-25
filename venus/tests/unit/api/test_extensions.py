@@ -13,10 +13,15 @@
 # under the License.
 
 import unittest
-from venus.api import extensions
+from venus.api.extensions import ExtensionDescriptor
+from venus.api.extensions import ExtensionManager
 
 
 class TestExtensions(unittest.TestCase):
     def setUp(self):
-        self.extensions = extensions
+        self.extension_descriptor = ExtensionDescriptor(ExtensionManager())
         super(TestExtensions, self).setUp()
+
+    def test_get_resources(self):
+        result = self.extension_descriptor.get_resources()
+        self.assertEqual(result, [])

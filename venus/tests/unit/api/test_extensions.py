@@ -25,3 +25,7 @@ class TestExtensions(unittest.TestCase):
     def test_get_resources(self):
         result = self.extension_descriptor.get_resources()
         self.assertEqual(result, [])
+
+    def test_get_controller_extensions(self):
+        result = self.extension_descriptor.get_controller_extensions()
+        self.assertEqual(result, [])

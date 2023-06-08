@@ -15,7 +15,8 @@
 """Implementation of SQLAlchemy backend."""
 
 import time
-from venus.db.sqlalchemy.api import get_session
+
+from venus.db.api import get_session
 from venus.modules.custom_config.backends import models
 
 

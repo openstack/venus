@@ -14,21 +14,12 @@
 
 """Base class for classes that need modular database access."""
 
-from oslo_config import cfg
 from oslo_utils import importutils
-
-
-db_driver_opt = cfg.StrOpt('db_driver',
-                           default='venus.db',
-                           help='Driver to use for database access')
-
-CONF = cfg.CONF
-CONF.register_opt(db_driver_opt)
+from venus.conf import CONF
 
 
 class Base(object):
     """DB driver is injected in the init method."""
-
     def __init__(self, db_driver=None):
         # NOTE(mriedem): Without this call, multiple inheritance involving
         # the db Base class does not work correctly.

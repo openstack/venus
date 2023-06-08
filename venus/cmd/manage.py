@@ -22,21 +22,19 @@ import os
 import sys
 
 from oslo_config import cfg
-from oslo_db.sqlalchemy import migration
 from oslo_log import log as logging
 
 from venus.conf import CONF
-from venus import i18n
-from venus.i18n import _
-from venus import objects
-from venus.task import timer
-from venus import version
 
 from venus import context
 from venus import db
-from venus.db import migration as db_migration
-from venus.db.sqlalchemy import api as db_api
+from venus import i18n
+from venus import objects
+from venus import version
 
+from venus.db import migration as db_migration
+from venus.i18n import _
+from venus.task import timer
 
 i18n.enable_lazy()
 
@@ -241,9 +239,7 @@ class DbCommands(object):
 
     def version(self):
         """Print the current database version."""
-        print(migration.db_version(db_api.get_engine(),
-                                   db_migration.MIGRATE_REPO_PATH,
-                                   db_migration.INIT_VERSION))
+        print(db_migration.db_version())
 
     @args('age_in_days', type=int,
           help='Purge deleted rows older than age in days')

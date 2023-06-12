@@ -31,12 +31,14 @@ depends_on = None
 
 def upgrade() -> None:
     t_mo_regitster_task = op.create_table(
-        't_mo_regitster_task1',
+        't_mo_regitster_task',
         sa.Column('Id', sa.Integer, nullable=False, primary_key=True),
         sa.Column('task_name', sa.String(255), nullable=True,
                   primary_key=False),
         sa.Column('host_name', sa.String(255), nullable=True,
                   primary_key=False),
+        sa.Column('update_time', sa.DateTime, nullable=True,
+                  primary_key=False, default='0000-00-00 00:00:00'),
         sa.Column('created_at', sa.DateTime, nullable=True, primary_key=False),
         sa.Column('updated_at', sa.DateTime, nullable=True, primary_key=False),
         sa.Column('deleted', sa.String(1), nullable=True, primary_key=False),

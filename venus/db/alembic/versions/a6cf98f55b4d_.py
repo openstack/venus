@@ -61,3 +61,24 @@ def upgrade() -> None:
             new_data,
         ],
     )
+
+    t_mo_custom_config = op.Table(
+        't_mo_custom_config',
+        op.Column('id', op.String(64), primary_key=True),
+        op.Column('value', op.String(10240), nullable=False),
+        op.Column('update_time', op.DateTime),
+        mysql_engine='InnoDB',
+        mysql_charset='utf8')
+
+    new_data = {
+        'id': 'log_save_days',
+        'value': '30',
+        'update_time': now
+    }
+
+    op.bulk_insert(
+        t_mo_custom_config,
+        [
+            new_data,
+        ],
+    )

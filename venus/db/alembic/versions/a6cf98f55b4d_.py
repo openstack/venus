@@ -62,7 +62,7 @@ def upgrade() -> None:
         ],
     )
 
-    t_mo_custom_config = op.Table(
+    t_mo_custom_config = op.create_table(
         't_mo_custom_config',
         op.Column('id', op.String(64), primary_key=True),
         op.Column('value', op.String(10240), nullable=False),

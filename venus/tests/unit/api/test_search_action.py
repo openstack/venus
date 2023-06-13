@@ -344,7 +344,7 @@ class TestSearchAction(unittest.TestCase):
     @mock.patch('venus.modules.search.action.SearchCore.get_index_names')
     @mock.patch('venus.common.utils.request_es')
     def test_logs_no_hit(
-        self, mock_req_es, mock_get_index_names, mock_search_logs):
+            self, mock_req_es, mock_get_index_names, mock_search_logs):
         action = SearchCore()
         mock_get_index_names.return_value = 'flog-2022.08.01,flog-2022.08.02'
         expected = {"code": 0, "msg": "no data, no hit"}

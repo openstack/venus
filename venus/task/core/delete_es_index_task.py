@@ -51,7 +51,7 @@ class DeleteESIndexTask(object):
             LOG.error(_LE("the config of log_save_days do not exist"))
             return
 
-        LOG.info(_LI("elasticsearch indexes(log) save days: %d"), len_d)
+        LOG.info(_LI("elasticsearch indexes(log) save days: %s"), len_d)
         today = time.strftime('%Y-%m-%d')
         try:
             indexes_array = self.search_lib.get_all_index()

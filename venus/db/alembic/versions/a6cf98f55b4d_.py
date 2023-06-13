@@ -64,9 +64,9 @@ def upgrade() -> None:
 
     t_mo_custom_config = op.create_table(
         't_mo_custom_config',
-        op.Column('id', op.String(64), primary_key=True),
-        op.Column('value', op.String(10240), nullable=False),
-        op.Column('update_time', op.DateTime),
+        sa.Column('id', sa.String(64), primary_key=True),
+        sa.Column('value', sa.String(10240), nullable=False),
+        sa.Column('update_time', sa.DateTime),
         mysql_engine='InnoDB',
         mysql_charset='utf8')
 

@@ -391,7 +391,7 @@ def sanitize_hostname(hostname):
     hostname = hostname.decode('latin-1')
 
     hostname = re.sub('[ _]', '-', hostname)
-    hostname = re.sub('[^\w.-]+', '', hostname)
+    hostname = re.sub('[^\\w.-]+', '', hostname)
     hostname = hostname.lower()
     hostname = hostname.strip('.-')
 

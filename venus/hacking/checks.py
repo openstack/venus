@@ -105,7 +105,8 @@ def assert_true_isinstance(logical_line):
 
 @core.flake8ext
 def assert_equal_in(logical_line):
-    """Check for assertEqual(True|False, A in B), assertEqual(A in B, True|False)
+    """Check for assertEqual(True|False, A in B),
+    assertEqual(A in B, True|False)
 
     M338
     """

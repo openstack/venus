@@ -1,6 +1,6 @@
-=======================
+======================
 Venus Development Docs
-=======================
+======================
 
 Files under this directory tree are used for generating the documentation
 for the Venus source code.

@@ -20,3 +20,7 @@ class TestXmlUtil(unittest.TestCase):
     def setUp(self):
         self.xmlutil = xmlutil
         super(TestXmlUtil, self).setUp()
+
+    def test_get_items(self):
+        result = self.xmlutil.get_items({'test1': 1, 'test2': '2'})
+        self.assertEqual(result, [('test1', 1), ('test2', '2')])

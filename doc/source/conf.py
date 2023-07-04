@@ -16,7 +16,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
-# -- General configuration ----------------------------------------------------
+# -- General configuration ------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
@@ -61,7 +61,7 @@ add_module_names = True
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'native'
 
-# -- Options for HTML output --------------------------------------------------
+# -- Options for HTML output ------------------------------------------------
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'venusdoc'
@@ -71,7 +71,7 @@ htmlhelp_basename = 'venusdoc'
 html_title = 'Venus'
 html_theme = 'openstackdocs'
 
-# -- Options for LaTeX output -------------------------------------------------
+# -- Options for LaTeX output -----------------------------------------------
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').

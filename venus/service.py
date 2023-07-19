@@ -93,10 +93,14 @@ class Service(service.Service):
         self.manager.init_host()
         LOG.debug("Creating RPC server for service %s", self.topic)
 
-        # target = messaging.Target(topic=self.topic, server=self.host)
+        target = messaging.Target(topic=self.topic, server=self.host)
         endpoints = [self.manager]
         endpoints.extend(self.manager.additional_endpoints)
-        # serializer = objects_base.VenusObjectSerializer()
+        serializer = objects_base.VenusObjectSerializer()
+        self.rpcserver = rpc.get_server(target, endpoints, serializer)
+        self.rpcserver.start()
+
+        self.notifier = rpc.get_notifier("venus", self.host)
 
         self.manager.init_host_with_rpc()
 
@@ -134,8 +138,10 @@ class Service(service.Service):
             host = CONF.host
         if not binary:
             binary = os.path.basename(inspect.stack()[-1][1])
+        LOG.info(binary)
         if not topic:
             topic = binary
+        LOG.info(topic)
         if not manager:
             subtopic = topic.rpartition('venus-')[2]
             manager = CONF.get('%s_manager' % subtopic, None)

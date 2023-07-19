@@ -17,10 +17,10 @@ from oslo_config import cfg
 
 service_opts = [
     cfg.IntOpt('periodic_interval',
-               default=60,
+               default=1,
                help='Interval, in seconds, between running periodic tasks'),
     cfg.IntOpt('periodic_fuzzy_delay',
-               default=60,
+               default=1,
                help='Range, in seconds, to randomly delay when starting the'
                     ' periodic task scheduler to reduce stampeding.'
                     ' (Disable by settings to 0)'),

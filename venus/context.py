@@ -139,21 +139,21 @@ class RequestContext(context.RequestContext):
     # project_id/user internally, so it is compatible with context-aware code
     # from openstack/common. We still need this shim for the rest of Venus's
     # code.
-    @property
-    def project_id(self):
-        return self.tenant
-
-    @project_id.setter
-    def project_id(self, value):
-        self.tenant = value
-
-    @property
-    def user_id(self):
-        return self.user
-
-    @user_id.setter
-    def user_id(self, value):
-        self.user = value
+    # @property
+    # def project_id(self):
+    #     return self.project_id
+    #
+    # @project_id.setter
+    # def project_id(self, value):
+    #     self.project_id = value
+    #
+    # @property
+    # def user_id(self):
+    #     return self.user
+    #
+    # @user_id.setter
+    # def user_id(self, value):
+    #     self.user = value
 
 
 def get_admin_context(read_deleted="no"):

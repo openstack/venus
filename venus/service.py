@@ -17,21 +17,25 @@
 
 import inspect
 import os
+import oslo_messaging as messaging
+import osprofiler.notifier
+import osprofiler.web
 import random
+
 
 from oslo_concurrency import processutils
 from oslo_service import loopingcall
 from oslo_service import service
 from oslo_utils import importutils
-import osprofiler.notifier
-from osprofiler import profiler
-import osprofiler.web
+
 
 from venus.common.utils import LOG
 from venus.conf import CONF
 from venus import context
 from venus import exception
 from venus.i18n import _, _LI, _LW
+from venus.objects import base as objects_base
+from venus import rpc
 from venus import version
 from venus.wsgi import common as wsgi_common
 from venus.wsgi import eventlet_server as wsgi
@@ -71,11 +75,8 @@ class Service(service.Service):
         self.topic = topic
         self.manager_class_name = manager
         manager_class = importutils.import_class(self.manager_class_name)
-        manager_class = profiler.trace_cls("rpc")(manager_class)
 
-        self.manager = manager_class(host=self.host,
-                                     service_name=service_name,
-                                     *args, **kwargs)
+        self.manager = manager_class(*args, **kwargs)
         self.periodic_interval = periodic_interval
         self.periodic_fuzzy_delay = periodic_fuzzy_delay
         self.saved_args, self.saved_kwargs = args, kwargs
@@ -185,7 +186,7 @@ class Service(service.Service):
         self.manager.periodic_tasks(ctxt, raise_on_error=raise_on_error)
 
 
-class WSGIService(service.ServiceBase):
+class WSGIService(service.Service):
     """Provides ability to launch API from a 'paste' configuration."""
 
     def __init__(self, name, loader=None):
@@ -212,6 +213,7 @@ class WSGIService(service.ServiceBase):
                     'workers': self.workers})
             raise exception.InvalidInput(msg)
         setup_profiler(name, self.host)
+        self.rpcserver = None
 
         self.server = wsgi.Server(name,
                                   self.app,
@@ -250,8 +252,15 @@ class WSGIService(service.ServiceBase):
         """
         if self.manager:
             self.manager.init_host()
+            self.topic = "xxxxxxx"
+            target = messaging.Target(topic=self.topic, server="10.49.38.57")
+            endpoints = [self.manager]
+            # endpoints.extend(self.manager.additional_endpoints)
+            serializer = objects_base.VenusObjectSerializer()
+            self.rpcserver = rpc.get_server(target, endpoints, serializer)
+            self.rpcserver.start()
+
         self.server.start()
-        self.port = self.server.port
 
     def stop(self):
         """Stop serving this API.

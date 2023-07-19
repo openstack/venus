@@ -23,6 +23,7 @@ from oslo_reports import guru_meditation_report as gmr
 
 from venus.conf import CONF
 from venus import i18n
+from venus import rpc
 from venus import service
 from venus import utils
 from venus import version
@@ -42,6 +43,8 @@ def main():
     utils.monkey_patch()
 
     gmr.TextGuruMeditation.setup_autorun(version)
+
+    rpc.init(CONF)
 
     server = service.WSGIService('osapi_venus')
     launcher = service.get_launcher()

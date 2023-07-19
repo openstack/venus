@@ -174,6 +174,9 @@ global_opts = [
                help='Base URL that will be presented to users in links '
                     'to the OpenStack Venus API',
                deprecated_name='osapi_compute_link_prefix'),
+    cfg.StrOpt('task_manager',
+               default="venus.manager.Manager",
+               help='Btask_manager')
 ]
 
 

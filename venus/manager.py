@@ -97,21 +97,3 @@ class Manager(base.Base, PeriodicTasks):
         """Ensure that instances are not stuck in build."""
         LOG.info("test_periodictask0")
         LOG.info(context)
-
-    @periodic_task.periodic_task
-    def test_periodictask1(self, context):
-        """Ensure that instances are not stuck in build."""
-        LOG.info("test_periodictask1")
-        LOG.info(context)
-
-    @periodic_task.periodic_task
-    def test_periodictask2(self, context):
-        """Ensure that instances are not stuck in build."""
-        LOG.info("test_periodictask2")
-        LOG.info(context)
-
-    @periodic_task.periodic_task
-    def test_periodictask3(self, context):
-        """Ensure that instances are not stuck in build."""
-        LOG.info("test_periodictask3")
-        LOG.info(context)

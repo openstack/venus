@@ -40,7 +40,13 @@ class AnomalyDetectSql(object):
             )
             session.add(rule)
 
+    def get_rule(self, id):
+        session = get_session()
+        with session.begin():
+            rule = session.query(models.AnomalyRules).filter_by(id=id).first()
+            return rule
+
     def delete_rule(self, id):
         session = get_session()
         with session.begin():
-            session.query(models.Anomaly).filter_by(id=id).delete()
+            session.query(models.AnomalyRules).filter_by(id=id).delete()

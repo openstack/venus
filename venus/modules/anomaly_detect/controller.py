@@ -53,6 +53,22 @@ class AnomalyDetectController(wsgi.Controller):
         return {"code": 0, "msg": "OK"}
 
     @wsgi.wrap_check_policy
+    def get_rule(self, req, id):
+        r = self.api.get_rule(id)
+        if r is None:
+            return {"code": -1, "msg": "not found"}
+
+        rule = dict()
+        rule["title"] = r.title
+        rule["desc"] = r.desc
+        rule["keyword"] = r.keyword
+        rule["match_num"] = r.match_num
+        rule["module"] = r.module
+        rule["create_time"] = r.create_time
+        rule["update_time"] = r.update_time
+        return {"code": 0, "msg": "OK", "rule": rule}
+
+    @wsgi.wrap_check_policy
     def delete_rule(self, req, id):
         self.api.delete_rule(id)
         return {"code": 0, "msg": "OK"}

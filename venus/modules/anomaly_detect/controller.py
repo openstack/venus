@@ -52,6 +52,11 @@ class AnomalyDetectController(wsgi.Controller):
         self.api.add_rule(title, desc, keyword, match_num, module)
         return {"code": 0, "msg": "OK"}
 
+    @wsgi.wrap_check_policy
+    def delete_rule(self, req, id):
+        self.api.delete_rule(id)
+        return {"code": 0, "msg": "OK"}
+
 
 def create_resource(ext_mgr):
     return wsgi.Resource(AnomalyDetectController(ext_mgr))

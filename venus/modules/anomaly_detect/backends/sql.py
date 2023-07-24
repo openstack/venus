@@ -39,3 +39,8 @@ class AnomalyDetectSql(object):
                 update_time = t
             )
             session.add(rule)
+
+    def delete_rule(self, id):
+        session = get_session()
+        with session.begin():
+            session.query(models.Anomaly).filter_by(id=id).delete()

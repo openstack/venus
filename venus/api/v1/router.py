@@ -20,6 +20,7 @@ from oslo_log import log as logging
 
 from venus.api import extensions
 import venus.api.openstack
+from venus.modules.anomaly_detect import controller as anomaly_detect
 from venus.modules.custom_config import controller as custom_config
 from venus.modules.search import controller as search
 from venus.modules.version import versions
@@ -37,6 +38,7 @@ class APIRouter(venus.api.openstack.APIRouter):
         versions_resource = versions.create_resource()
         config_resource = custom_config.create_resource(ext_mgr)
         search_resource = search.create_resource(ext_mgr)
+        anomaly_detect_resource = anomaly_detect.create_resource(ext_mgr)
 
         # Register routers
         mapper.redirect("", "/")
@@ -94,3 +96,8 @@ class APIRouter(venus.api.openstack.APIRouter):
                        controller=search_resource,
                        action='search_global_id',
                        conditions={'method': ['GET']})
+
+        mapper.connect("add_rule", "/anomaly/rule",
+                       controller=anomaly_detect_resource,
+                       action='add_rule',
+                       conditions={'method': ['POST']})

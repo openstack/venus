@@ -46,6 +46,28 @@ class AnomalyDetectSql(object):
             rule = session.query(models.AnomalyRules).filter_by(id=id).first()
             return rule
 
+    def get_rule_list(self,
+                      title,
+                      module,
+                      flag,
+                      page_num,
+                      page_size):
+        page_num = int(page_num)
+        page_size = int(page_size)
+        session = get_session()
+        with session.begin():
+            query = session.query(models.AnomalyRules)
+            if title:
+                query = query.filter(models.AnomalyRules.title.like(
+                    "%{}%".format(title), escape='|'))
+            if module:
+                query = query.filter(models.AnomalyRules.module == module)
+            if flag:
+                query = query.filter(models.AnomalyRules.flag == flag)
+            query = query.limit(page_size).offset((page_num - 1) * page_num)
+            res = query.all()
+            return res
+
     def update_rule(self, id, title, desc, keyword, match_num, module, flag):
         t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         session = get_session()

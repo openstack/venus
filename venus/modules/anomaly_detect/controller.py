@@ -69,6 +69,21 @@ class AnomalyDetectController(wsgi.Controller):
         return {"code": 0, "msg": "OK", "rule": rule}
 
     @wsgi.wrap_check_policy
+    def get_rule_list(self, req):
+        title = req.params.get("title", None)
+        module = req.params.get("module", None)
+        flag = req.params.get("module", None)
+        page_num = req.params.get("page_num", 1)
+        page_size = req.params.get("page_size", 10)
+
+        rules = self.api.get_rule_list(title,
+                                       module,
+                                       flag,
+                                       page_num,
+                                       page_size)
+        return {"code": 0, "msg": "OK", "rules": rules}
+
+    @wsgi.wrap_check_policy
     def update_rule(self, req, body, id):
         if len(req.body) == 0:
             return {"code": -1, "msg": "invalid param"}

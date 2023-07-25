@@ -126,3 +126,8 @@ class APIRouter(venus.api.openstack.APIRouter):
                        controller=anomaly_detect_resource,
                        action='get_record_list',
                        conditions={'method': ['GET']})
+
+        mapper.connect("delete_record", "/anomaly/record/{id}",
+                       controller=anomaly_detect_resource,
+                       action='delete_record',
+                       conditions={'method': ['DELETE']})

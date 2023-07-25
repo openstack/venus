@@ -130,3 +130,8 @@ class AnomalyDetectSql(object):
             query = query.limit(page_size).offset((page_num - 1) * page_num)
             res = query.all()
             return res
+
+    def delete_record(self, id):
+        session = get_session()
+        with session.begin():
+            session.query(models.AnomalyRecords).filter_by(id=id).delete()

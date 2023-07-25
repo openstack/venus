@@ -123,6 +123,11 @@ class AnomalyDetectController(wsgi.Controller):
 
         return {"code": 0, "msg": "OK", "rules": records}
 
+    @wsgi.wrap_check_policy
+    def delete_record(self, req, id):
+        self.api.delete_record(id)
+        return {"code": 0, "msg": "OK"}
+
 
 def create_resource(ext_mgr):
     return wsgi.Resource(AnomalyDetectController(ext_mgr))

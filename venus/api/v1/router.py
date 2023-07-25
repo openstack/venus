@@ -107,6 +107,11 @@ class APIRouter(venus.api.openstack.APIRouter):
                        action='get_rule',
                        conditions={'method': ['GET']})
 
+        mapper.connect("update_rule", "/anomaly/rule/{id}",
+                       controller=anomaly_detect_resource,
+                       action='update_rule',
+                       conditions={'method': ['POST']})
+
         mapper.connect("delete_rule", "/anomaly/rule/{id}",
                        controller=anomaly_detect_resource,
                        action='delete_rule',

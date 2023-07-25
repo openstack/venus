@@ -28,6 +28,15 @@ class AnomalyDetectCore(object):
         res = self.sql.get_rule(id)
         return res
 
+    def update_rule(self, id, title, desc, keyword, match_num, module, flag):
+        res = self.sql.update_rule(title,
+                                   desc,
+                                   keyword,
+                                   match_num,
+                                   module,
+                                   flag)
+        return res
+
     def delete_rule(self, id):
         res = self.sql.delete_rule(id)
         return res

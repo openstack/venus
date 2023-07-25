@@ -46,6 +46,25 @@ class AnomalyDetectSql(object):
             rule = session.query(models.AnomalyRules).filter_by(id=id).first()
             return rule
 
+    def update_rule(self, id, title, desc, keyword, match_num, module, flag):
+        t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+        session = get_session()
+        with session.begin():
+            rule = session.query(models.AnomalyRules).filter_by(id=id).first()
+            if title:
+                rule.title = title
+            if desc:
+                rule.desc = desc
+            if keyword:
+                rule.keyword = keyword
+            if match_num:
+                rule.match_num = match_num
+            if module:
+                rule.module = module
+            if flag:
+                rule.flag = int(flag)
+            rule.update_time = t
+
     def delete_rule(self, id):
         session = get_session()
         with session.begin():

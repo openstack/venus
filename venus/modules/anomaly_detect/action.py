@@ -20,8 +20,8 @@ class AnomalyDetectCore(object):
         self.sql = AnomalyDetectSql()
         super(AnomalyDetectCore, self).__init__()
 
-    def add_rule(self, title, desc, keyword, match_num, module):
-        res = self.sql.add_rule(title, desc, keyword, match_num, module)
+    def add_rule(self, title, desc, keyword, log_type, module):
+        res = self.sql.add_rule(title, desc, keyword, log_type, module)
         return res
 
     def get_rule(self, id):
@@ -42,11 +42,11 @@ class AnomalyDetectCore(object):
                                      page_size)
         return res
 
-    def update_rule(self, id, title, desc, keyword, match_num, module, flag):
+    def update_rule(self, id, title, desc, keyword, log_type, module, flag):
         res = self.sql.update_rule(title,
                                    desc,
                                    keyword,
-                                   match_num,
+                                   log_type,
                                    module,
                                    flag)
         return res

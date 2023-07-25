@@ -41,15 +41,15 @@ class AnomalyDetectController(wsgi.Controller):
         if keyword is None:
             return {"code": -1, "msg": "invalid param: keyword is missed"}
 
-        match_num = body.get("match_num", None)
-        if match_num is None:
-            return {"code": -1, "msg": "invalid param: match_num is missed"}
+        log_type = body.get("log_type", None)
+        if log_type is None:
+            return {"code": -1, "msg": "invalid param: log_type is missed"}
 
         module = body.get("module", None)
         if module is None:
             return {"code": -1, "msg": "invalid param: module is missed"}
 
-        self.api.add_rule(title, desc, keyword, match_num, module)
+        self.api.add_rule(title, desc, keyword, log_type, module)
         return {"code": 0, "msg": "OK"}
 
     @wsgi.wrap_check_policy
@@ -62,7 +62,7 @@ class AnomalyDetectController(wsgi.Controller):
         rule["title"] = r.title
         rule["desc"] = r.desc
         rule["keyword"] = r.keyword
-        rule["match_num"] = r.match_num
+        rule["log_type"] = r.log_type
         rule["module"] = r.module
         rule["create_time"] = r.create_time
         rule["update_time"] = r.update_time
@@ -91,7 +91,7 @@ class AnomalyDetectController(wsgi.Controller):
         title = body.get("title", None)
         desc = body.get("desc", None)
         keyword = body.get("keyword", None)
-        match_num = body.get("match_num", None)
+        log_type = body.get("log_type", None)
         module = body.get("module", None)
         flag = body.get("module", None)
 
@@ -99,7 +99,7 @@ class AnomalyDetectController(wsgi.Controller):
                              title,
                              desc,
                              keyword,
-                             match_num,
+                             log_type,
                              module,
                              flag)
         return {"code": 0, "msg": "OK"}

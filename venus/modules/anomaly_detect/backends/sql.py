@@ -23,7 +23,7 @@ from venus.modules.anomaly_detect.backends import models
 
 class AnomalyDetectSql(object):
 
-    def add_rule(self, title, desc, keyword, match_num, module):
+    def add_rule(self, title, desc, keyword, log_type, module):
         t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         session = get_session()
         with session.begin():
@@ -32,7 +32,7 @@ class AnomalyDetectSql(object):
                 title = title,
                 desc = desc,
                 keyword = keyword,
-                match_num = match_num,
+                log_type = log_type,
                 module = module,
                 flag = 1,
                 create_time = t,
@@ -68,7 +68,7 @@ class AnomalyDetectSql(object):
             res = query.all()
             return res
 
-    def update_rule(self, id, title, desc, keyword, match_num, module, flag):
+    def update_rule(self, id, title, desc, keyword, log_type, module, flag):
         t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         session = get_session()
         with session.begin():
@@ -79,8 +79,8 @@ class AnomalyDetectSql(object):
                 rule.desc = desc
             if keyword:
                 rule.keyword = keyword
-            if match_num:
-                rule.match_num = match_num
+            if log_type:
+                rule.log_type = log_type
             if module:
                 rule.module = module
             if flag:

@@ -20,35 +20,20 @@ class AnomalyDetectCore(object):
         self.sql = AnomalyDetectSql()
         super(AnomalyDetectCore, self).__init__()
 
-    def add_rule(self, title, desc, keyword, log_type, module):
-        res = self.sql.add_rule(title, desc, keyword, log_type, module)
+    def add_rule(self, params):
+        res = self.sql.add_rule(params)
         return res
 
     def get_rule(self, id):
         res = self.sql.get_rule(id)
         return res
 
-    def get_rule_list(self,
-                      title,
-                      module,
-                      flag,
-                      page_num,
-                      page_size):
-        res = self.sql.get_rule_list(self,
-                                     title,
-                                     module,
-                                     flag,
-                                     page_num,
-                                     page_size)
+    def get_rule_list(self, params):
+        res = self.sql.get_rule_list(self, params)
         return res
 
-    def update_rule(self, id, title, desc, keyword, log_type, module, flag):
-        res = self.sql.update_rule(title,
-                                   desc,
-                                   keyword,
-                                   log_type,
-                                   module,
-                                   flag)
+    def update_rule(self, params):
+        res = self.sql.update_rule(params)
         return res
 
     def delete_rule(self, id):

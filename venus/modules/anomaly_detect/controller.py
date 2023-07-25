@@ -49,7 +49,14 @@ class AnomalyDetectController(wsgi.Controller):
         if module is None:
             return {"code": -1, "msg": "invalid param: module is missed"}
 
-        self.api.add_rule(title, desc, keyword, log_type, module)
+        params = {}
+        params["title"] = title
+        params["desc"] = desc
+        params["keyword"] = keyword
+        params["log_type"] = log_type
+        params["module"] = module
+        self.api.add_rule(params)
+
         return {"code": 0, "msg": "OK"}
 
     @wsgi.wrap_check_policy
@@ -70,17 +77,14 @@ class AnomalyDetectController(wsgi.Controller):
 
     @wsgi.wrap_check_policy
     def get_rule_list(self, req):
-        title = req.params.get("title", None)
-        module = req.params.get("module", None)
-        flag = req.params.get("module", None)
-        page_num = req.params.get("page_num", 1)
-        page_size = req.params.get("page_size", 10)
+        params = {}
+        params["title"] = req.params.get("title", None)
+        params["module"] = req.params.get("module", None)
+        params["flag"] = req.params.get("flag", None)
+        params["page_num"] = req.params.get("page_num", "1")
+        params["page_size"] = req.params.get("page_size", "10")
+        rules = self.api.get_rule_list(params)
 
-        rules = self.api.get_rule_list(title,
-                                       module,
-                                       flag,
-                                       page_num,
-                                       page_size)
         return {"code": 0, "msg": "OK", "rules": rules}
 
     @wsgi.wrap_check_policy
@@ -88,20 +92,16 @@ class AnomalyDetectController(wsgi.Controller):
         if len(req.body) == 0:
             return {"code": -1, "msg": "invalid param"}
 
-        title = body.get("title", None)
-        desc = body.get("desc", None)
-        keyword = body.get("keyword", None)
-        log_type = body.get("log_type", None)
-        module = body.get("module", None)
-        flag = body.get("module", None)
+        params = {}
+        params["id"] = id
+        params["title"] = body.get("title", None)
+        params["desc"] = body.get("desc", None)
+        params["keyword"] = body.get("keyword", None)
+        params["log_type"] = body.get("log_type", None)
+        params["module"] = body.get("module", None)
+        params["flag"] = body.get("flag", None)
+        self.api.update_rule(params)
 
-        self.api.update_rule(id,
-                             title,
-                             desc,
-                             keyword,
-                             log_type,
-                             module,
-                             flag)
         return {"code": 0, "msg": "OK"}
 
     @wsgi.wrap_check_policy

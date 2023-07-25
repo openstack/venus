@@ -23,17 +23,17 @@ from venus.modules.anomaly_detect.backends import models
 
 class AnomalyDetectSql(object):
 
-    def add_rule(self, title, desc, keyword, log_type, module):
+    def add_rule(self, params):
         t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         session = get_session()
         with session.begin():
             rule = models.AnomalyRules(
                 id = uuid.uuid4().hex,
-                title = title,
-                desc = desc,
-                keyword = keyword,
-                log_type = log_type,
-                module = module,
+                title = params["title"],
+                desc = params["desc"],
+                keyword = params["keyword"],
+                log_type = params["log_type"],
+                module = params["module"],
                 flag = 1,
                 create_time = t,
                 update_time = t
@@ -46,14 +46,13 @@ class AnomalyDetectSql(object):
             rule = session.query(models.AnomalyRules).filter_by(id=id).first()
             return rule
 
-    def get_rule_list(self,
-                      title,
-                      module,
-                      flag,
-                      page_num,
-                      page_size):
-        page_num = int(page_num)
-        page_size = int(page_size)
+    def get_rule_list(self, params):
+        title = params["title"]
+        module = params["module"]
+        flag = int(params["flag"])
+        page_num = int(params["page_num"])
+        page_size = int(params["page_size"])
+
         session = get_session()
         with session.begin():
             query = session.query(models.AnomalyRules)
@@ -68,8 +67,16 @@ class AnomalyDetectSql(object):
             res = query.all()
             return res
 
-    def update_rule(self, id, title, desc, keyword, log_type, module, flag):
+    def update_rule(self, params):
+        id = params["id"]
+        title = params["title"]
+        desc = params["desc"]
+        keyword = params["keyword"]
+        log_type = params["log_type"]
+        module = params["module"]
+        flag = params["flag"]
         t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+
         session = get_session()
         with session.begin():
             rule = session.query(models.AnomalyRules).filter_by(id=id).first()

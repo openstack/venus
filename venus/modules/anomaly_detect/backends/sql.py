@@ -98,3 +98,35 @@ class AnomalyDetectSql(object):
         session = get_session()
         with session.begin():
             session.query(models.AnomalyRules).filter_by(id=id).delete()
+
+    def get_record_list(self, params):
+        title = params["title"]
+        module = params["module"]
+        ltype = params["log_type"]
+        start_time = params["start_time"]
+        end_time = params["end_time"]
+        page_num = int(params["page_num"])
+        page_size = int(params["page_size"])
+
+        session = get_session()
+        with session.begin():
+            query = session.query(models.AnomalyRecords)
+            if title:
+                query = query.filter(models.AnomalyRecords.title.like(
+                    "%{}%".format(title), escape='|'))
+            if module:
+                query = query.filter(models.AnomalyRecords.module == module)
+            if ltype:
+                query = query.filter(models.AnomalyRecords.log_type == ltype)
+            if start_time:
+                lt = time.localtime(int(start_time))
+                t = time.strftime('%Y-%m-%d %H:%M:%S', lt)
+                query = query.filter(models.AnomalyRecords.create_time >= t)
+            if end_time:
+                lt = time.localtime(int(end_time))
+                t = time.strftime('%Y-%m-%d %H:%M:%S', lt)
+                query = query.filter(models.AnomalyRecords.create_time <= t)
+
+            query = query.limit(page_size).offset((page_num - 1) * page_num)
+            res = query.all()
+            return res

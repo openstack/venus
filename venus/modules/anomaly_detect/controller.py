@@ -109,6 +109,20 @@ class AnomalyDetectController(wsgi.Controller):
         self.api.delete_rule(id)
         return {"code": 0, "msg": "OK"}
 
+    @wsgi.wrap_check_policy
+    def get_record_list(self, req):
+        params = {}
+        params["title"] = req.params.get("title", None)
+        params["module"] = req.params.get("module", None)
+        params["log_type"] = req.params.get("log_type", None)
+        params["start_time"] = req.params.get("start_time", None)
+        params["end_time"] = req.params.get("end_time", None)
+        params["page_num"] = req.params.get("page_num", "1")
+        params["page_size"] = req.params.get("page_size", "10")
+        records = self.api.get_record_list(params)
+
+        return {"code": 0, "msg": "OK", "rules": records}
+
 
 def create_resource(ext_mgr):
     return wsgi.Resource(AnomalyDetectController(ext_mgr))

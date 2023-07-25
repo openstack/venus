@@ -39,3 +39,7 @@ class AnomalyDetectCore(object):
     def delete_rule(self, id):
         res = self.sql.delete_rule(id)
         return res
+
+    def get_record_list(self, params):
+        res = self.sql.get_record_list(self, params)
+        return res

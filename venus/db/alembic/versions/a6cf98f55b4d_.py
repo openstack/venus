@@ -30,6 +30,7 @@ depends_on = None
 
 
 def upgrade() -> None:
+    # create task table and init data
     t_mo_regitster_task = op.create_table(
         't_mo_regitster_task',
         sa.Column('Id', sa.Integer, nullable=False, primary_key=True),
@@ -62,6 +63,7 @@ def upgrade() -> None:
         ],
     )
 
+    # create config table and init data
     t_mo_custom_config = op.create_table(
         't_mo_custom_config',
         sa.Column('id', sa.String(64), primary_key=True),
@@ -81,4 +83,52 @@ def upgrade() -> None:
         [
             new_data,
         ],
+    )
+
+    # create anomaly rule table
+    op.create_table(
+        't_mo_anomaly_rules',
+        sa.Column('id', sa.String(64), nullable=False, primary_key=True),
+        sa.Column('title', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('desc', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('keyword', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('log_type', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('module', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('flag', sa.Integer, nullable=True, primary_key=False),
+        sa.Column('create_time', sa.DateTime, nullable=True,
+                  primary_key=False, default='0000-00-00 00:00:00'),
+        sa.Column('update_time', sa.DateTime, nullable=True,
+                  primary_key=False, default='0000-00-00 00:00:00'),
+        mysql_engine='InnoDB',
+        mysql_charset='utf8'
+    )
+
+    # create anomaly record table
+    op.create_table(
+        't_mo_anomaly_rules',
+        sa.Column('id', sa.String(64), nullable=False, primary_key=True),
+        sa.Column('title', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('desc', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('keyword', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('log_type', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('module', sa.String(1024), nullable=True,
+                  primary_key=False),
+        sa.Column('flag', sa.Integer, nullable=True, primary_key=False),
+        sa.Column('start_time', sa.DateTime, nullable=True,
+                  primary_key=False, default='0000-00-00 00:00:00'),
+        sa.Column('end_time', sa.DateTime, nullable=True,
+                  primary_key=False, default='0000-00-00 00:00:00'),
+        sa.Column('create_time', sa.DateTime, nullable=True,
+                  primary_key=False, default='0000-00-00 00:00:00'),
+        mysql_engine='InnoDB',
+        mysql_charset='utf8'
     )

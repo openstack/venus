@@ -13,9 +13,15 @@
 # under the License.
 
 """A Timer Task With APScheduler."""
+from venus.task.core import delete_anomaly_record_task
 from venus.task.core import delete_es_index_task
 
 
 def delete_es_index_job():
     job = delete_es_index_task.DeleteESIndexTask()
+    job.start_task()
+
+
+def delete_anomaly_record_job():
+    job = delete_anomaly_record_task.DeleteAnomalyRecordTask()
     job.start_task()

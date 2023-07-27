@@ -49,9 +49,16 @@ def upgrade() -> None:
     )
 
     now = timeutils.utcnow()
-    new_data = {
+    new_data1 = {
         'Id': '1',
         'task_name': 'delete_es_index',
+        'host_name': '',
+        'update_time': now
+    }
+
+    new_data2 = {
+        'Id': '3',
+        'task_name': 'delete_anomaly_record',
         'host_name': '',
         'update_time': now
     }
@@ -59,7 +66,8 @@ def upgrade() -> None:
     op.bulk_insert(
         t_mo_regitster_task,
         [
-            new_data,
+            new_data1,
+            new_data2
         ],
     )
 
@@ -72,8 +80,14 @@ def upgrade() -> None:
         mysql_engine='InnoDB',
         mysql_charset='utf8')
 
-    new_data = {
+    new_data1 = {
         'id': 'log_save_days',
+        'value': '30',
+        'update_time': now
+    }
+
+    new_data2 = {
+        'id': 'anomaly_record_save_days',
         'value': '30',
         'update_time': now
     }
@@ -81,7 +95,8 @@ def upgrade() -> None:
     op.bulk_insert(
         t_mo_custom_config,
         [
-            new_data,
+            new_data1,
+            new_data2
         ],
     )
 

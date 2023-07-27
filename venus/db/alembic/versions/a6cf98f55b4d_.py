@@ -57,6 +57,13 @@ def upgrade() -> None:
     }
 
     new_data2 = {
+        'Id': '2',
+        'task_name': 'anomaly_detect',
+        'host_name': '',
+        'update_time': now
+    }
+
+    new_data3 = {
         'Id': '3',
         'task_name': 'delete_anomaly_record',
         'host_name': '',
@@ -67,7 +74,8 @@ def upgrade() -> None:
         t_mo_regitster_task,
         [
             new_data1,
-            new_data2
+            new_data2,
+            new_data3
         ],
     )
 

@@ -21,7 +21,7 @@ from venus.modules.search.search_lib import ESSearchObj
 from venus.i18n import _LE, _LI
 
 
-TASK_NAME = "delete_anomaly_record"
+TASK_NAME = "anomaly_detect"
 
 
 class AnomalyDetectTask(object):
@@ -34,6 +34,7 @@ class AnomalyDetectTask(object):
 
     def anomaly_detect(self):
         last_timestamp = self.config_api.get_config("last_detect_timestamp")
+        last_timestamp = int(last_timestamp)
         now_timestamp = time.time()
 
         if last_timestamp is None:
@@ -77,6 +78,8 @@ class AnomalyDetectTask(object):
 
             for log in openstack_logs:
                 for r in rules:
+                    if r.module != log["module_name"]:
+                        continue
                     if r.keyword not in log["desc"]:
                         continue
                     p = {}
@@ -96,6 +99,8 @@ class AnomalyDetectTask(object):
 
             for log in system_logs:
                 for r in rules:
+                    if r.module != log["module_name"]:
+                        continue
                     if r.keyword not in log["desc"]:
                         continue
                     p = {}
@@ -112,6 +117,9 @@ class AnomalyDetectTask(object):
                                            time.localtime(now_timestamp))
                     p["end_time"] = es_str
                     self.anomaly_api.add_record(p)
+
+            self.config_api.get_config("last_detect_timestamp",
+                                       str(now_timestamp))
         except Exception as e:
             LOG.error(_LE("anomaly detects, catch exception:%s"),
                       str(e))

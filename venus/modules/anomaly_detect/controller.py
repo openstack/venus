@@ -83,7 +83,18 @@ class AnomalyDetectController(wsgi.Controller):
         params["flag"] = req.params.get("flag", None)
         params["page_num"] = req.params.get("page_num", "1")
         params["page_size"] = req.params.get("page_size", "10")
-        rules = self.api.get_rule_list(params)
+        res = self.api.get_rule_list(params)
+        rules = []
+        for r in res:
+            rule = dict()
+            rule["title"] = r.title
+            rule["desc"] = r.desc
+            rule["keyword"] = r.keyword
+            rule["log_type"] = r.log_type
+            rule["module"] = r.module
+            rule["create_time"] = r.create_time
+            rule["update_time"] = r.update_time
+            rules.append(rule)
 
         return {"code": 0, "msg": "OK", "rules": rules}
 
@@ -100,9 +111,11 @@ class AnomalyDetectController(wsgi.Controller):
         params["log_type"] = body.get("log_type", None)
         params["module"] = body.get("module", None)
         params["flag"] = body.get("flag", None)
-        self.api.update_rule(params)
-
-        return {"code": 0, "msg": "OK"}
+        rule = self.api.update_rule(params)
+        if rule:
+            return {"code": 0, "msg": "OK", "rule": rule}
+        else:
+            return {"code": -1, "msg": "no found"}
 
     @wsgi.wrap_check_policy
     def delete_rule(self, req, id):
@@ -119,7 +132,21 @@ class AnomalyDetectController(wsgi.Controller):
         params["end_time"] = req.params.get("end_time", None)
         params["page_num"] = req.params.get("page_num", "1")
         params["page_size"] = req.params.get("page_size", "10")
-        records = self.api.get_record_list(params)
+        res = self.api.get_record_list(params)
+
+        records = []
+        for r in res:
+            record = dict()
+            record["title"] = r.title
+            record["desc"] = r.desc
+            record["keyword"] = r.keyword
+            record["log_type"] = r.log_type
+            record["module"] = r.module
+            record["logs"] = r.logs
+            record["start_time"] = r.create_time
+            record["end_time"] = r.create_time
+            record["create_time"] = r.create_time
+            records.append(record)
 
         return {"code": 0, "msg": "OK", "rules": records}
 

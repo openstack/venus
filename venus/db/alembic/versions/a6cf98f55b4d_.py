@@ -133,7 +133,7 @@ def upgrade() -> None:
 
     # create anomaly record table
     op.create_table(
-        't_mo_anomaly_record',
+        't_mo_anomaly_records',
         sa.Column('id', sa.String(64), nullable=False, primary_key=True),
         sa.Column('title', sa.String(1024), nullable=True,
                   primary_key=False),
@@ -145,7 +145,8 @@ def upgrade() -> None:
                   primary_key=False),
         sa.Column('module', sa.String(1024), nullable=True,
                   primary_key=False),
-        sa.Column('flag', sa.Integer, nullable=True, primary_key=False),
+        sa.Column('logs', sa.String(10240), nullable=True,
+                  primary_key=False),
         sa.Column('start_time', sa.DateTime, nullable=True,
                   primary_key=False, default='0000-00-00 00:00:00'),
         sa.Column('end_time', sa.DateTime, nullable=True,

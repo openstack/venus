@@ -28,7 +28,7 @@ class CustomConfigController(wsgi.Controller):
     @wsgi.wrap_check_policy
     def get_config(self, req):
         result = dict()
-        result["log_save_days"] = self.config_api.get_config("es_index_length")
+        result["log_save_days"] = self.config_api.get_config("log_save_days")
         return result
 
     @wsgi.wrap_check_policy

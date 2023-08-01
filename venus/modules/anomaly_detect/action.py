@@ -29,7 +29,7 @@ class AnomalyDetectCore(object):
         return res
 
     def get_rule_list(self, params):
-        res = self.sql.get_rule_list(self, params)
+        res = self.sql.get_rule_list(params)
         return res
 
     def update_rule(self, params):
@@ -45,7 +45,7 @@ class AnomalyDetectCore(object):
         return res
 
     def get_record_list(self, params):
-        res = self.sql.get_record_list(self, params)
+        res = self.sql.get_record_list(params)
         return res
 
     def delete_record(self, id):

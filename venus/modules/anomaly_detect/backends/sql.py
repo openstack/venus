@@ -49,7 +49,7 @@ class AnomalyDetectSql(object):
     def get_rule_list(self, params):
         title = params["title"]
         module = params["module"]
-        flag = int(params["flag"])
+        flag = params["flag"]
         page_num = int(params["page_num"])
         page_size = int(params["page_size"])
 
@@ -62,8 +62,8 @@ class AnomalyDetectSql(object):
             if module:
                 query = query.filter(models.AnomalyRules.module == module)
             if flag:
-                query = query.filter(models.AnomalyRules.flag == flag)
-            query = query.limit(page_size).offset((page_num - 1) * page_num)
+                query = query.filter(models.AnomalyRules.flag == int(flag))
+            query = query.limit(page_size).offset((page_num - 1) * page_size)
             res = query.all()
             return res
 
@@ -80,6 +80,8 @@ class AnomalyDetectSql(object):
         session = get_session()
         with session.begin():
             rule = session.query(models.AnomalyRules).filter_by(id=id).first()
+            if rule is None:
+                return None
             if title:
                 rule.title = title
             if desc:
@@ -93,6 +95,7 @@ class AnomalyDetectSql(object):
             if flag:
                 rule.flag = int(flag)
             rule.update_time = t
+            return rule
 
     def delete_rule(self, id):
         session = get_session()

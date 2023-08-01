@@ -17,7 +17,7 @@ import time
 from venus.common.utils import LOG
 from venus.modules.anomaly_detect.action import AnomalyDetectCore
 from venus.modules.custom_config.action import CustomConfigCore
-from venus.modules.search.search_lib import ESSearchObj
+from venus.modules.search.action import SearchCore
 from venus.i18n import _LE, _LI
 
 
@@ -30,104 +30,88 @@ class AnomalyDetectTask(object):
     def __init__(self):
         self.config_api = CustomConfigCore()
         self.anomaly_api = AnomalyDetectCore()
-        self.search_lib = ESSearchObj()
+        self.search_api = SearchCore()
 
     def anomaly_detect(self):
+        now_timestamp = int(time.time())
         last_timestamp = self.config_api.get_config("last_detect_timestamp")
-        last_timestamp = int(last_timestamp)
-        now_timestamp = time.time()
+        if last_timestamp:
+            last_timestamp = int(last_timestamp)
+            if now_timestamp - last_timestamp > 3000000:
+                last_timestamp = last_timestamp - 3000000
+        else:
+            last_timestamp = now_timestamp - 6000000
 
-        if last_timestamp is None:
-            last_timestamp = now_timestamp - 60
-        if now_timestamp - last_timestamp > 300:
-            last_timestamp = now_timestamp - 300
+        self.anomaly_detect_logs("flog", last_timestamp, now_timestamp)
+        self.anomaly_detect_logs("slog", last_timestamp, now_timestamp)
 
+        self.config_api.set_config("last_detect_timestamp", str(now_timestamp))
+
+    def anomaly_detect_logs(self, log_type, start_timestamp, end_timestamp):
         try:
-            openstack_logs_res = self.search_lib.logs(None,
-                                                      None,
-                                                      None,
-                                                      None,
-                                                      None,
-                                                      None,
-                                                      None,
-                                                      "flog",
-                                                      last_timestamp,
-                                                      now_timestamp,
-                                                      1,
-                                                      10000)
-            openstack_logs = openstack_logs_res["data"]["values"]
+            logs_res = self.search_api.logs(None,
+                                            None,
+                                            None,
+                                            None,
+                                            None,
+                                            None,
+                                            None,
+                                            log_type,
+                                            start_timestamp,
+                                            end_timestamp,
+                                            1,
+                                            10000)
 
-            system_logs_res = self.search_lib.logs(None,
-                                                   None,
-                                                   None,
-                                                   None,
-                                                   None,
-                                                   None,
-                                                   None,
-                                                   "slog",
-                                                   last_timestamp,
-                                                   now_timestamp,
-                                                   1,
-                                                   10000)
-            system_logs = system_logs_res["data"]["values"]
+            data = logs_res.get("data", None)
+            if data is None:
+                return
+            logs = data.get("values", None)
+            if logs is None:
+                return
 
             params = {}
             params["page_num"] = 1
             params["page_size"] = 999999
+            params["log_type"] = log_type
             rules = self.anomaly_api.get_rule_list(params)
+            LOG.debug(_LE("get %s rule num:%s"), log_type, str(len(rules)))
 
-            for log in openstack_logs:
+            for log in logs:
                 for r in rules:
+                    context = ""
+                    if log_type == "flog":
+                        context = log["desc"]
+                    elif log_type == "flog":
+                        context = log["programname"]
+                    else:
+                        pass
+
                     if r.module != log["module_name"]:
                         continue
-                    if r.keyword not in log["desc"]:
+                    if r.keyword not in context:
                         continue
                     p = {}
                     p["title"] = r.title
                     p["desc"] = r.desc
                     p["keyword"] = r.keyword
-                    p["log_type"] = "flog"
+                    p["log_type"] = log_type
                     p["module"] = r.module
-                    p["logs"] = log["desc"]
+                    p["logs"] = context
                     ss_str = time.strftime('%Y-%m-%d %H:%M:%S',
-                                           time.localtime(last_timestamp))
+                                           time.localtime(start_timestamp))
                     p["start_time"] = ss_str
                     es_str = time.strftime('%Y-%m-%d %H:%M:%S',
-                                           time.localtime(now_timestamp))
+                                           time.localtime(end_timestamp))
                     p["end_time"] = es_str
                     self.anomaly_api.add_record(p)
-
-            for log in system_logs:
-                for r in rules:
-                    if r.module != log["module_name"]:
-                        continue
-                    if r.keyword not in log["desc"]:
-                        continue
-                    p = {}
-                    p["title"] = r.title
-                    p["desc"] = r.desc
-                    p["keyword"] = r.keyword
-                    p["log_type"] = "slog"
-                    p["module"] = r.module
-                    p["logs"] = log["desc"]
-                    ss_str = time.strftime('%Y-%m-%d %H:%M:%S',
-                                           time.localtime(last_timestamp))
-                    p["start_time"] = ss_str
-                    es_str = time.strftime('%Y-%m-%d %H:%M:%S',
-                                           time.localtime(now_timestamp))
-                    p["end_time"] = es_str
-                    self.anomaly_api.add_record(p)
-
-            self.config_api.get_config("last_detect_timestamp",
-                                       str(now_timestamp))
         except Exception as e:
-            LOG.error(_LE("anomaly detects, catch exception:%s"),
-                      str(e))
+            LOG.error(_LE("detect %s logs, catch exception:%s"),
+                      log_type, str(e))
 
     def start_task(self):
         try:
             self.anomaly_detect()
-            LOG.info(_LI("anomaly detects task done"))
+            LOG.info(_LI("anomaly detect task done"))
         except Exception as e:
-            LOG.error(_LE("anomaly detects task, catch exception:%s"),
+            LOG.error(_LE("anomaly detect task, catch exception:%s"),
                       str(e))

@@ -47,9 +47,10 @@ class AnomalyDetectSql(object):
             return rule
 
     def get_rule_list(self, params):
-        title = params["title"]
-        module = params["module"]
-        flag = params["flag"]
+        title = params.get("title", None)
+        module = params.get("module", None)
+        flag = params.get("flag", None)
+        log_type = params.get("log_type", None)
         page_num = int(params["page_num"])
         page_size = int(params["page_size"])
 
@@ -63,6 +64,9 @@ class AnomalyDetectSql(object):
                 query = query.filter(models.AnomalyRules.module == module)
             if flag:
                 query = query.filter(models.AnomalyRules.flag == int(flag))
+            if log_type:
+                query = query.filter(models.AnomalyRules.log_type == log_type)
+
             query = query.limit(page_size).offset((page_num - 1) * page_size)
             res = query.all()
             return res
@@ -106,7 +110,7 @@ class AnomalyDetectSql(object):
         t = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
         session = get_session()
         with session.begin():
-            rule = models.AnomalyRules(
+            rule = models.AnomalyRecords(
                 id = uuid.uuid4().hex,
                 title = params["title"],
                 desc = params["desc"],

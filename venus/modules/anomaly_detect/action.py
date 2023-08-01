@@ -41,7 +41,7 @@ class AnomalyDetectCore(object):
         return res
 
     def add_record(self, params):
-        res = self.sql.add_record(self, params)
+        res = self.sql.add_record(params)
         return res
 
     def get_record_list(self, params):

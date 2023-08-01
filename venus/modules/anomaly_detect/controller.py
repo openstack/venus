@@ -66,11 +66,13 @@ class AnomalyDetectController(wsgi.Controller):
             return {"code": -1, "msg": "not found"}
 
         rule = dict()
+        rule["id"] = r.id
         rule["title"] = r.title
         rule["desc"] = r.desc
         rule["keyword"] = r.keyword
         rule["log_type"] = r.log_type
         rule["module"] = r.module
+        rule["flag"] = r.flag
         rule["create_time"] = r.create_time
         rule["update_time"] = r.update_time
         return {"code": 0, "msg": "OK", "rule": rule}
@@ -87,11 +89,13 @@ class AnomalyDetectController(wsgi.Controller):
         rules = []
         for r in res:
             rule = dict()
+            rule["id"] = r.id
             rule["title"] = r.title
             rule["desc"] = r.desc
             rule["keyword"] = r.keyword
             rule["log_type"] = r.log_type
             rule["module"] = r.module
+            rule["flag"] = r.flag
             rule["create_time"] = r.create_time
             rule["update_time"] = r.update_time
             rules.append(rule)
@@ -112,8 +116,8 @@ class AnomalyDetectController(wsgi.Controller):
         params["module"] = body.get("module", None)
         params["flag"] = body.get("flag", None)
         rule = self.api.update_rule(params)
-        if rule:
-            return {"code": 0, "msg": "OK", "rule": rule}
+        if rule is None:
+            return {"code": 0, "msg": "OK"}
         else:
             return {"code": -1, "msg": "no found"}
 
@@ -137,6 +141,7 @@ class AnomalyDetectController(wsgi.Controller):
         records = []
         for r in res:
             record = dict()
+            record["id"] = r.id
             record["title"] = r.title
             record["desc"] = r.desc
             record["keyword"] = r.keyword

@@ -85,7 +85,7 @@ class AnomalyDetectSql(object):
         with session.begin():
             rule = session.query(models.AnomalyRules).filter_by(id=id).first()
             if rule is None:
-                return None
+                return "error"
             if title:
                 rule.title = title
             if desc:
@@ -99,7 +99,7 @@ class AnomalyDetectSql(object):
             if flag:
                 rule.flag = int(flag)
             rule.update_time = t
-            return rule
+            return None
 
     def delete_rule(self, id):
         session = get_session()

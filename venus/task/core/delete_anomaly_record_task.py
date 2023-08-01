@@ -39,7 +39,9 @@ class DeleteAnomalyRecordTask(object):
         LOG.info(_LI("anomaly record save days: %s"), len_d)
         try:
             params = {}
-            params["start_time"] = str(time.time() - 86400 * int(len_d))
+            params["page_num"] = "1"
+            params["page_size"] = "999999"
+            params["end_time"] = str(int(time.time()) - 86400 * int(len_d))
             records = self.anomaly_api.get_record_list(params)
             for r in records:
                 self.anomaly_api.delete_record(r.id)

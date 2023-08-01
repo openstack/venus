@@ -125,13 +125,13 @@ class AnomalyDetectSql(object):
             session.add(rule)
 
     def get_record_list(self, params):
-        title = params["title"]
-        module = params["module"]
-        ltype = params["log_type"]
-        start_time = params["start_time"]
-        end_time = params["end_time"]
-        page_num = int(params["page_num"])
-        page_size = int(params["page_size"])
+        title = params.get("title", None)
+        module = params.get("module", None)
+        ltype = params.get("log_type", None)
+        start_time = params.get("start_time", None)
+        end_time = params.get("end_time", None)
+        page_num = int(params.get("page_num", "1"))
+        page_size = int(params.get("page_size", "10"))
 
         session = get_session()
         with session.begin():
@@ -152,7 +152,7 @@ class AnomalyDetectSql(object):
                 t = time.strftime('%Y-%m-%d %H:%M:%S', lt)
                 query = query.filter(models.AnomalyRecords.create_time <= t)
 
-            query = query.limit(page_size).offset((page_num - 1) * page_num)
+            query = query.limit(page_size).offset((page_num - 1) * page_size)
             res = query.all()
             return res
 

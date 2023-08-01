@@ -37,10 +37,10 @@ class AnomalyDetectTask(object):
         last_timestamp = self.config_api.get_config("last_detect_timestamp")
         if last_timestamp:
             last_timestamp = int(last_timestamp)
-            if now_timestamp - last_timestamp > 3000000:
-                last_timestamp = last_timestamp - 3000000
+            if now_timestamp - last_timestamp > 300:
+                last_timestamp = last_timestamp - 300
         else:
-            last_timestamp = now_timestamp - 6000000
+            last_timestamp = now_timestamp - 60
 
         self.anomaly_detect_logs("flog", last_timestamp, now_timestamp)
         self.anomaly_detect_logs("slog", last_timestamp, now_timestamp)

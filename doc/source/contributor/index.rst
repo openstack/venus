@@ -2,7 +2,7 @@
 Contributor Documentation
 =========================
 
-Contributing to Cybrog gives you the power to help add features, fix bugs,
+Contributing to Venus gives you the power to help add features, fix bugs,
 enhance documentation, and increase testing. Contributions of any type are
 valuable, and part of what keeps the project going. Here are a list of
 resources to get your started.

@@ -81,6 +81,12 @@ request_id:
   in: query
   required: true
   type: string
+rule_id:
+  description: |
+    The id of an anomaly rule.
+  in: query
+  required: true
+  type: string
 start_time:
   description: |
     the start timestamp of time frame.

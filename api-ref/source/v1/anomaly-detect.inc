@@ -50,6 +50,19 @@ Response codes
 
    - -1
 
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - title: title
+   - log_type: anomaly_log_type
+   - module: module_name
+   - start_time: start_time
+   - end_time: end_time
+   - page_num: page_num
+   - page_size: page_size
+
 Response
 --------
 

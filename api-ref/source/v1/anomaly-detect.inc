@@ -67,6 +67,41 @@ Response codes
    - -1
 
 
+Delete anomaly rule
+~~~~~~~~~~~~~~~~~~~~~
+
+.. rest_method:: DELETE /v1/anomaly/rule/{id}
+
+Delete anomaly rule.
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 1
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
+
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - id: rule_id
+
+Response
+--------
+
+**Example: JSON response**
+
+
+.. literalinclude:: ./samples/anomaly-detect/delete-anomaly-rule-show-response.json
+   :language: javascript
+
+
 Get anomaly record
 ~~~~~~~~~~~~~~~~~~
 

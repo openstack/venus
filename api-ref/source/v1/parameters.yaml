@@ -105,11 +105,23 @@ user_id:
   in: query
   required: false
   type: string
+anomaly_log_type:
+  description: |
+    the log type of anomaly log, such as flog, slog
+  in: body
+  required: false
+  type: string
 id:
   description: |
     custom config id
   in: body
   required: true
+  type: string
+title:
+  description: |
+    the title of anomaly record.
+  in: body
+  required: false
   type: string
 value:
   description: |

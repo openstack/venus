@@ -56,5 +56,5 @@ Response
 **Example: JSON response**
 
 
-.. literalinclude:: ./samples/anomaly-detect/get-anomaly-detect-show-response.json
+.. literalinclude:: ./samples/anomaly-detect/get-anomaly-record-show-response.json
    :language: javascript

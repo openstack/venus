@@ -14,3 +14,6 @@ OpenStack Log API V1 (CURRENT)
 
 .. search log document.
 .. include:: search.inc
+
+.. anomaly detect document.
+.. include:: anomaly-detect.inc

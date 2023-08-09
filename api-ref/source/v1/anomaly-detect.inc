@@ -31,6 +31,15 @@ Response codes
 
    - -1
 
+Response
+--------
+
+**Example Get An Anomaly Rule response:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/get-anomaly-rule-show-response.json
+   :language: javascript
+
 
 Get anomaly record
 ~~~~~~~~~~~~~~~~~~

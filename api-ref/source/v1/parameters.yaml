@@ -123,6 +123,42 @@ id:
   in: body
   required: true
   type: string
+rule_desc:
+  description: |
+    the description of anomaly rule.
+  in: body
+  required: false
+  type: string
+rule_flag:
+  description: |
+    whether enable flag, ``0``: disable, ``1``: enable.
+  in: body
+  required: false
+  type: string
+rule_keyword:
+  description: |
+    keyword, only support exact-match at present.
+  in: body
+  required: false
+  type: string
+rule_log_type:
+  description: |
+    the type of log, ``flog`` is platform log, and ``slog`` is operate system log.
+  in: body
+  required: false
+  type: string
+rule_module:
+  description: |
+    application module or service.
+  in: body
+  required: false
+  type: string
+rule_title:
+  description: |
+    the title of anomaly rule.
+  in: body
+  required: false
+  type: string
 title:
   description: |
     the title of anomaly record.

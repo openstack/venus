@@ -54,6 +54,12 @@ Request
 .. rest_parameters:: parameters.yaml
 
    - id: rule_id
+   - title: rule_title
+   - desc: rule_desc
+   - keyword: rule_keyword
+   - log_type: rule_log_type
+   - module: rule_module
+   - flag: rule_flag
 
 Response codes
 --------------

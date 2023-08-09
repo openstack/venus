@@ -80,3 +80,38 @@ Response
 
 .. literalinclude:: ./samples/anomaly-detect/get-anomaly-record-show-response.json
    :language: javascript
+
+
+Delete anomaly record
+~~~~~~~~~~~~~~~~~~~~~
+
+.. rest_method:: DELETE /v1/anomaly/record/{id}
+
+Delete anomaly record.
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 0
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
+
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - id: record_id
+
+Response
+--------
+
+**Example: JSON response**
+
+
+.. literalinclude:: ./samples/anomaly-detect/delete-anomaly-record-show-response.json
+   :language: javascript

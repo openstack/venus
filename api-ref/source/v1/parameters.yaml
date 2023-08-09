@@ -75,6 +75,12 @@ query:
   in: query
   required: false
   type: string
+record_id:
+  description: |
+    anomaly record id
+  in: query
+  required: true
+  type: string
 request_id:
   description: |
     request id.

@@ -41,6 +41,32 @@ Response
    :language: javascript
 
 
+Update Anomaly Rule
+~~~~~~~~~~~~~~~~~~~
+
+.. rest_method:: POST /v1/anomaly/rule/{id}
+
+Update an anomaly rule.
+
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - id: rule_id
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 1
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
+
+
 Get anomaly record
 ~~~~~~~~~~~~~~~~~~
 

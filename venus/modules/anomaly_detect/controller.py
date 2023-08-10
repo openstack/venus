@@ -153,7 +153,7 @@ class AnomalyDetectController(wsgi.Controller):
             record["create_time"] = r.create_time
             records.append(record)
 
-        return {"code": 0, "msg": "OK", "rules": records}
+        return {"code": 0, "msg": "OK", "records": records}
 
     @wsgi.wrap_check_policy
     def delete_record(self, req, id):

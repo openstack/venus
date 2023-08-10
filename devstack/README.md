@@ -34,6 +34,6 @@ If you want to download td-agent and es yourself when the official download link
 you cloud get them via the following links:
 
 - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.16.deb
-- http://packages.treasuredata.com.s3.amazonaws.com/4/ubuntu/bionic/pool/contrib/t/td-agent/td-agent_4.1.0-1_amd64.deb
+- https://packages.treasuredata.com.s3.amazonaws.com/4/ubuntu/bionic/pool/contrib/t/td-agent/td-agent_4.1.0-1_amd64.deb
 
 And save the files to `/opt/stack/venus/devstack/files`

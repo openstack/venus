@@ -95,6 +95,48 @@ Response
    :language: javascript
 
 
+Get anomaly rule list
+~~~~~~~~~~~~~~~~~~~~~
+
+.. rest_method:: GET /v1/anomaly/rule/list
+
+Get all anomaly rules.
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 0
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
+
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - title: rule_title
+   - desc: rule_desc
+   - keyword: rule_keyword
+   - log_type: rule_log_type
+   - module: rule_module
+   - flag: rule_flag
+   - page_num: page_num
+   - page_size: page_size
+
+Response
+--------
+
+**Example: JSON response**
+
+
+.. literalinclude:: ./samples/anomaly-detect/get-anomaly-rule-show-response.json
+   :language: javascript
+
+
 Delete anomaly rule
 ~~~~~~~~~~~~~~~~~~~~~
 

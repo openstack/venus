@@ -61,6 +61,12 @@ Request
    - module: rule_module
    - flag: rule_flag
 
+**Example Update An Anomaly Rule request:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/update-anomaly-rule-request.json
+   :language: javascript
+
 Response codes
 --------------
 
@@ -71,6 +77,22 @@ Response codes
 .. rest_status_code:: error ../status.yaml
 
    - -1
+
+Response
+--------
+
+**Example Update An Anomaly Rule Success response:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/update-anomaly-rule-success-response.json
+   :language: javascript
+
+
+**Example Update An Anomaly Rule Failed response:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/update-anomaly-rule-failed-response.json
+   :language: javascript
 
 
 Delete anomaly rule

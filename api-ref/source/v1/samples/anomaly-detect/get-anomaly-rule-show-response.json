@@ -2,7 +2,7 @@
     "code": 0,
     "msg": "OK",
     "rule": {
-        "id": "152f637bbd5646ab8e69313512514c4c"
+        "id": "152f637bbd5646ab8e69313512514c4c",
         "title": "\u6d4b\u8bd5\u89c4\u5219",
         "desc": "\u8fd9\u662f\u4e00\u4e2a\u6d4b\u8bd5\u89c4\u5219",
         "keyword": "Running periodic task",

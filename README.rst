@@ -1,7 +1,13 @@
-Hello Venus
-===========
+===============
+OpenStack Venus
+===============
 
-An OpenStack Log Management Service.
+.. image:: https://governance.openstack.org/tc/badges/venus.svg
+    :target: https://governance.openstack.org/tc/reference/tags/index.html
+
+.. Change things from this point on
+
+OpenStack Venus is an OpenStack Log Management Service.
 
 About Venus
 -----------

@@ -5,7 +5,7 @@ Search API
 
 Users can search, download and analyze logs, instance callchain.
 
-Get Search Params
+Get search params
 ~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/params
@@ -91,7 +91,7 @@ Response
 .. -*- rst -*-
 
 
-Download Logs
+Download logs
 ~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/search/logs/download

@@ -1,9 +1,9 @@
 .. -*- rst -*-
 
-API versions
+API Versions
 ============
 
-List Api Versions
+List api versions
 ~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /

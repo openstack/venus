@@ -6,7 +6,7 @@ Anomaly Detect
 Users can add, delete, modify and query anomaly rules, query and delete anomaly records.
 
 
-Get Anomaly Rule
+Get anomaly rule
 ~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/anomaly/rule/{id}
@@ -41,7 +41,7 @@ Response
    :language: javascript
 
 
-Update Anomaly Rule
+Update anomaly rule
 ~~~~~~~~~~~~~~~~~~~
 
 .. rest_method:: POST /v1/anomaly/rule/{id}

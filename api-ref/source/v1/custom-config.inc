@@ -5,7 +5,7 @@ Custom Config
 
 Users can customize some important configurations, such as the retention days of ElasticSearch index.
 
-Get Custom Config
+Get custom config
 ~~~~~~~~~~~~~~~~~
 
 .. rest_method:: GET /v1/custom_config
@@ -33,7 +33,7 @@ Response
    :language: javascript
 
 
-Set Custom Config
+Set custom config
 ~~~~~~~~~~~~~~~~~
 
 .. rest_method:: POST /v1/custom_config

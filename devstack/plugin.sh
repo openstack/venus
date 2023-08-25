@@ -76,7 +76,7 @@ function install_fluentd() {
   echo_summary "install fluentd"
   if [[ is_ubuntu ]]; then
     FLUENTD_VERSION=${FLUENTD_VERSION:-4.1.0-1_amd64}
-    FLUENTD_DOWNLOAD_URL=${FLUENTD_DOWNLOAD_URL:-http://packages.treasuredata.com.s3.amazonaws.com/4/ubuntu/bionic/pool/contrib/t/td-agent}
+    FLUENTD_DOWNLOAD_URL=${FLUENTD_DOWNLOAD_URL:-https://packages.treasuredata.com.s3.amazonaws.com/4/ubuntu/bionic/pool/contrib/t/td-agent}
     FLUENTD_DOWNLOAD_FILE="td-agent_$FLUENTD_VERSION.deb"
 
     if [[ ! -f $VENUS_FILES/$FLUENTD_DOWNLOAD_FILE ]]; then

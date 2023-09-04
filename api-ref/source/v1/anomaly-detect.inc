@@ -179,17 +179,6 @@ Get anomaly record
 
 Get all anomaly records.
 
-Response codes
---------------
-
-.. rest_status_code:: success ../status.yaml
-
-   - 0
-
-.. rest_status_code:: error ../status.yaml
-
-   - -1
-
 Request
 -------
 
@@ -202,6 +191,23 @@ Request
    - end_time: end_time
    - page_num: page_num
    - page_size: page_size
+
+**Example Get Anomaly record request:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/get-anomaly-record-request-curl.json
+   :language: javascript
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 0
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
 
 Response
 --------

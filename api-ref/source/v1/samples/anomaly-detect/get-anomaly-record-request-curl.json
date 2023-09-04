@@ -1,0 +1,3 @@
+curl -X GET http://10.49.38.57:10010/v1/anomaly/record/list \
+  -H 'X-Auth-Token: 124' 
+  -H 'Content-type: application/json'

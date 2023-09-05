@@ -6,6 +6,45 @@ Anomaly Detect
 Users can add, delete, modify and query anomaly rules, query and delete anomaly records.
 
 
+Add anomaly rule
+~~~~~~~~~~~~~~~~~~~
+
+.. rest_method:: POST /v1/anomaly/rule
+
+Add an anomaly rule.
+
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - title: rule_title
+   - desc: rule_desc
+   - keyword: rule_keyword
+   - log_type: rule_log_type
+   - module: rule_module
+
+Response codes
+--------------
+
+.. rest_status_code:: success ../status.yaml
+
+   - 0
+
+.. rest_status_code:: error ../status.yaml
+
+   - -1
+
+Response
+--------
+
+**Example Add An Anomaly Rule response:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/add-anomaly-rule-show-response.json
+   :language: javascript
+
+
 Get anomaly rule
 ~~~~~~~~~~~~~~~~~~~
 

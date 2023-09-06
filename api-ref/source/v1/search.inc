@@ -282,6 +282,7 @@ Request
 .. rest_parameters:: parameters.yaml
 
    - request_id: request_id
+   - uuid: uuid
 
 Response
 --------

@@ -111,6 +111,12 @@ user_id:
   in: query
   required: false
   type: string
+uuid:
+  description: |
+    uuid.
+  in: query
+  required: true
+  type: string
 anomaly_log_type:
   description: |
     the log type of anomaly log, such as flog, slog

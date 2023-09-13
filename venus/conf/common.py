@@ -160,7 +160,7 @@ global_opts = [
                default=114688,
                help='Max size for body of a request'),
     cfg.StrOpt('public_endpoint', default=None,
-               help="Public url to use for versions endpoint. The default "
+               help="Public URL to use for versions endpoint. The default "
                     "is None, which will use the request's host_url "
                     "attribute to populate the URL base. If Venus is "
                     "operating behind a proxy, you will want to change "

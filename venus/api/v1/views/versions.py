@@ -74,7 +74,7 @@ class ViewBuilder(object):
         return links
 
     def generate_href(self, version, path=None):
-        """Create an url that refers to a specific version_number."""
+        """Create an URL that refers to a specific version_number."""
         if version.find('v1.') == 0:
             version_number = 'v1'
         else:

@@ -2,7 +2,7 @@ oslo-incubator
 --------------
 
 A number of modules from oslo-incubator are imported into this project.
-You can clone the oslo-incubator repository using the following url:
+You can clone the oslo-incubator repository using the following URL:
 
   git://git.openstack.org/openstack/oslo-incubator
 

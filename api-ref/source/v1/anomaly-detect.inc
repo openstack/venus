@@ -271,6 +271,19 @@ Delete anomaly record
 
 Delete anomaly record.
 
+Request
+-------
+
+.. rest_parameters:: parameters.yaml
+
+   - id: record_id
+
+**Example Get Anomaly record request:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/delete-anomaly-record-request-curl.json
+   :language: javascript
+
 Response codes
 --------------
 
@@ -281,13 +294,6 @@ Response codes
 .. rest_status_code:: error ../status.yaml
 
    - -1
-
-Request
--------
-
-.. rest_parameters:: parameters.yaml
-
-   - id: record_id
 
 Response
 --------

@@ -117,6 +117,38 @@ uuid:
   in: query
   required: true
   type: string
+
+# variables in body
+add_rule_desc:
+  description: |
+    the description of anomaly rule.
+  in: body
+  required: true
+  type: string
+add_rule_keyword:
+  description: |
+    keyword, only support exact-match at present.
+  in: body
+  required: true
+  type: string
+add_rule_log_type:
+  description: |
+    the type of log, ``flog`` is platform log, and ``slog`` is operate system log.
+  in: body
+  required: true
+  type: string
+add_rule_module:
+  description: |
+    application module or service.
+  in: body
+  required: true
+  type: string
+add_rule_title:
+  description: |
+    the title of anomaly rule.
+  in: body
+  required: true
+  type: string
 anomaly_log_type:
   description: |
     the log type of anomaly log, such as flog, slog

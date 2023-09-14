@@ -18,11 +18,11 @@ Request
 
 .. rest_parameters:: parameters.yaml
 
-   - title: rule_title
-   - desc: rule_desc
-   - keyword: rule_keyword
-   - log_type: rule_log_type
-   - module: rule_module
+   - title: add_rule_title
+   - desc: add_rule_desc
+   - keyword: add_rule_keyword
+   - log_type: add_rule_log_type
+   - module: add_rule_module
 
 **Example Add Anomaly rule request:**
 

@@ -1,4 +1,4 @@
-curl -X POST "http://10.49.38.57:10010/v1/anomaly/rule" \
+curl -X POST "http://127.0.0.1:10010/v1/anomaly/rule" \
   -d '{"title": "test", "desc":"test", "keyword": "out of memory", "log_type":"flog", "module":"nova"}' 
   -H 'X-Auth-Token: 124' 
   -H 'Content-type: application/json'

@@ -7,7 +7,7 @@ Users can add, delete, modify and query anomaly rules, query and delete anomaly 
 
 
 Add anomaly rule
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 
 .. rest_method:: POST /v1/anomaly/rule
 
@@ -23,6 +23,12 @@ Request
    - keyword: rule_keyword
    - log_type: rule_log_type
    - module: rule_module
+
+**Example Add Anomaly rule request:**
+
+
+.. literalinclude:: ./samples/anomaly-detect/add-anomaly-rule-request-curl.json
+   :language: javascript
 
 Response codes
 --------------

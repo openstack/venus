@@ -20,3 +20,15 @@ class TestUrlMap(unittest.TestCase):
     def setUp(self):
         self.urlmap = urlmap
         super(TestUrlMap, self).setUp()
+
+    def test_unquote_header_value(self):
+        result = self.urlmap.unquote_header_value('')
+        self.assertEqual(result, '')
+        result = self.urlmap.unquote_header_value('test')
+        self.assertEqual(result, 'test')
+        result = self.urlmap.unquote_header_value('"test"')
+        self.assertEqual(result, 'test')
+        result = self.urlmap.unquote_header_value('"test')
+        self.assertEqual(result, '"test')
+        result = self.urlmap.unquote_header_value('test"')
+        self.assertEqual(result, 'test"')

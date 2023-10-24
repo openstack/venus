@@ -20,3 +20,13 @@ class TestCommon(unittest.TestCase):
     def setUp(self):
         self.common = api_common
         super(TestCommon, self).setUp()
+
+    def test_validate_key_names(self):
+        result = self.common.validate_key_names([])
+        self.assertEqual(result, True)
+        result = self.common.validate_key_names(['Test-1.1', 'Test:1_2'])
+        self.assertEqual(result, True)
+        result = self.common.validate_key_names(['Test 1'])
+        self.assertEqual(result, False)
+        result = self.common.validate_key_names(['Test1', 'Test2?'])
+        self.assertEqual(result, False)

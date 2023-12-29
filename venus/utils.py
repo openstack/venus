@@ -76,7 +76,7 @@ def find_config(config_path):
         os.path.join(CONF.state_path, config_path),
         "/etc/venus/%s" % config_path,
     ]
-
+    LOG.info("possible_locations=%s", possible_locations)
     for path in possible_locations:
         if os.path.exists(path):
             return os.path.abspath(path)

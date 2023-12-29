@@ -158,6 +158,7 @@ class Service(service.Service):
 
     def kill(self):
         """Destroy the service object in the datastore."""
+        LOG.info("Destroy the service object")
         self.stop()
 
     def stop(self):

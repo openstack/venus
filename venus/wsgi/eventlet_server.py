@@ -139,6 +139,7 @@ class Server(service.ServiceBase):
         # give bad file descriptor error. So duplicating the socket object,
         # to keep file descriptor usable.
 
+        LOG.info(_LI("Starting WSGI server."))
         dup_socket = self._socket.dup()
         dup_socket.setsockopt(socket.SOL_SOCKET,
                               socket.SO_REUSEADDR, 1)

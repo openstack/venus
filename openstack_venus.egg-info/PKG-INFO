@@ -1,15 +1,21 @@
 Metadata-Version: 2.1
 Name: openstack-venus
-Version: 1.1.0.dev26
+Version: 3.1.0.dev6
 Summary: OpenStack Log Management as a Service
 Home-page: UNKNOWN
 Author: Brin Zhang
 Author-email: zhangbailin@inspur.com
 License: UNKNOWN
-Description: Hello Venus
-========================
+Description: ===============
+        OpenStack Venus
+        ===============
         
-        An OpenStack Log Management Service.
+        .. image:: https://governance.openstack.org/tc/badges/venus.svg
+            :target: https://governance.openstack.org/tc/reference/tags/index.html
+        
+        .. Change things from this point on
+        
+        OpenStack Venus is an OpenStack Log Management Service.
         
         About Venus
         -----------

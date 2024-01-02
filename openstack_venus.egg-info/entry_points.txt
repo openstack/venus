@@ -1,6 +1,7 @@
 [console_scripts]
-venus-api = venus.cmd.api:main
-venus-manager = venus.cmd.manage:main
+venus_api = venus.cmd.api:main
+venus_manager = venus.cmd.manage:main
+venus_task = venus.cmd.task:main
 
 [venus.database.migration_backend]
 sqlalchemy = oslo_db.sqlalchemy.migration

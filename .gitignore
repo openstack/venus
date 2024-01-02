@@ -29,3 +29,5 @@ releasenotes/build*
 AUTHORS
 Authors
 ChangeLog
+
+openstack_venus.egg-info/*

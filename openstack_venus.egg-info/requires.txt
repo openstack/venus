@@ -14,7 +14,7 @@ oslo.upgradecheck>=0.1.0
 oslo.utils>=4.5.0
 oslo.versionedobjects>=1.31.2
 osprofiler>=3.4.0
-SQLAlchemy!=1.1.5,!=1.1.6,!=1.1.7,!=1.1.8,>=0.9.0
+SQLAlchemy>=1.4.0
 alembic>=0.8.10
 stevedore>=1.5.0
 keystonemiddleware>=4.17.0

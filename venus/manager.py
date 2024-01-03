@@ -90,6 +90,7 @@ class Manager(base.Base, PeriodicTasks):
         This method is supposed to be overriden by subclasses and return if
         manager is working correctly.
         """
+        LOG.info("service is working correctly")
         return True
 
     @periodic_task.periodic_task

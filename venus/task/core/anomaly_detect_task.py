@@ -22,6 +22,9 @@ from venus.i18n import _LE, _LI
 
 
 TASK_NAME = "anomaly_detect"
+PLATFROM_LOG = "flog"
+HOST_LOG = "slog"
+DETECT_TIMESTAMP_KEY = "last_detect_timestamp"
 
 
 class AnomalyDetectTask(object):
@@ -34,7 +37,7 @@ class AnomalyDetectTask(object):
 
     def anomaly_detect(self):
         now_timestamp = int(time.time())
-        last_timestamp = self.config_api.get_config("last_detect_timestamp")
+        last_timestamp = self.config_api.get_config(DETECT_TIMESTAMP_KEY)
         if last_timestamp:
             last_timestamp = int(last_timestamp)
             if now_timestamp - last_timestamp > 300:
@@ -42,10 +45,10 @@ class AnomalyDetectTask(object):
         else:
             last_timestamp = now_timestamp - 60
 
-        self.anomaly_detect_logs("flog", last_timestamp, now_timestamp)
-        self.anomaly_detect_logs("slog", last_timestamp, now_timestamp)
+        self.anomaly_detect_logs(PLATFROM_LOG, last_timestamp, now_timestamp)
+        self.anomaly_detect_logs(HOST_LOG, last_timestamp, now_timestamp)
 
-        self.config_api.set_config("last_detect_timestamp", str(now_timestamp))
+        self.config_api.set_config(DETECT_TIMESTAMP_KEY, str(now_timestamp))
 
     def anomaly_detect_logs(self, log_type, start_timestamp, end_timestamp):
         try:
@@ -79,9 +82,9 @@ class AnomalyDetectTask(object):
             for log in logs:
                 for r in rules:
                     context = ""
-                    if log_type == "flog":
+                    if log_type == PLATFROM_LOG:
                         context = log["desc"]
-                    elif log_type == "slog":
+                    elif log_type == HOST_LOG:
                         context = log["programname"]
                     else:
                         pass

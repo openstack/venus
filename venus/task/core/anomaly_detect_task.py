@@ -81,7 +81,7 @@ class AnomalyDetectTask(object):
                     context = ""
                     if log_type == "flog":
                         context = log["desc"]
-                    elif log_type == "flog":
+                    elif log_type == "slog":
                         context = log["programname"]
                     else:
                         pass

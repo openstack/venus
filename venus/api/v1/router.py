@@ -57,16 +57,6 @@ class APIRouter(venus.api.openstack.APIRouter):
                        action='set_config',
                        conditions={'method': ['POST']})
 
-        mapper.connect("get_log_storage_days", "/log_storage_days",
-                       controller=config_resource,
-                       action='get_config',
-                       conditions={'method': ['GET']})
-
-        mapper.connect("set_log_storage_days", "/log_storage_days",
-                       controller=config_resource,
-                       action='set_config',
-                       conditions={'method': ['POST']})
-
         mapper.connect("search_params", "/search/params",
                        controller=search_resource,
                        action='search_params',

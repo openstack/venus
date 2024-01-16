@@ -46,29 +46,29 @@ class DeleteESIndexTask(object):
                       name, str(e))
 
     def delete_es_outdated_index(self):
-        len_d = self.config_api.get_config("log_save_days")
-        if len_d is None:
+        days = self.config_api.get_config("log_save_days")
+        if days is None:
             LOG.error(_LE("the config of log_save_days do not exist"))
             return
 
-        LOG.info(_LI("es indexes(log) save days: %s"), len_d)
+        LOG.info(_LI("es indexes(log) save days: %s"), days)
         today = time.strftime('%Y-%m-%d')
         try:
             indexes_array = self.search_lib.get_all_index()
             for index in indexes_array:
                 index_name = index["index"]
                 index_day = index_name.split('-')[1]
-                today_start = datetime.datetime.strptime(today, "%Y-%m-%d")
-                index_start = datetime.datetime.strptime(index_day, '%Y.%m.%d')
-                diff_day = today_start - index_start
+                dt_today = datetime.datetime.strptime(today, "%Y-%m-%d")
+                dt_index = datetime.datetime.strptime(index_day, '%Y.%m.%d')
+                dt_diff = dt_today - dt_index
 
-                if diff_day.days >= int(len_d):
+                if dt_diff.days >= int(days):
                     LOG.info(_LI("deleted index %s, diff day %d"),
-                             index_name, diff_day.days)
+                             index_name, dt_diff.days)
                     self.delete_index(index_name)
                 else:
                     LOG.debug(_LI("reserved index %s, diff day %d"),
-                              index_name, diff_day.days)
+                              index_name, dt_diff.days)
 
         except Exception as e:
             LOG.error(_LE("delete es index, catch exception:%s"), str(e))

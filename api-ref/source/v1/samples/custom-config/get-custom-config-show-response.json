@@ -1,4 +1,5 @@
 {
-    "log_save_days": "30"
-
+    "log_save_days": "30",
+    "anomaly_record_save_days": "30",
+    "log_max_gb": "100"
 }

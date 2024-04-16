@@ -14,22 +14,14 @@
 
 """Starter script for Venus API."""
 
-import eventlet
 import os
 import sys
 
 from oslo_log import log as logging
-from oslo_reports import guru_meditation_report as gmr
 
 from venus.conf import CONF
-from venus import i18n
-from venus import rpc
 from venus import service
-from venus import utils
 from venus import version
-
-eventlet.monkey_patch()
-i18n.enable_lazy()
 
 
 def main():
@@ -40,11 +32,6 @@ def main():
     if not is_exists:
         os.makedirs(logdir)
     logging.setup(CONF, "venus")
-    utils.monkey_patch()
-
-    gmr.TextGuruMeditation.setup_autorun(version)
-
-    rpc.init(CONF)
 
     server = service.WSGIService('osapi_venus')
     launcher = service.get_launcher()

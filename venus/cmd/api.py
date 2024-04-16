@@ -28,9 +28,10 @@ def main():
     CONF(sys.argv[1:], project='venus',
          version=version.version_string())
     logdir = CONF.log_dir
-    is_exists = os.path.exists(logdir)
-    if not is_exists:
-        os.makedirs(logdir)
+    if logdir:
+        is_exists = os.path.exists(logdir)
+        if not is_exists:
+            os.makedirs(logdir)
     logging.setup(CONF, "venus")
 
     server = service.WSGIService('osapi_venus')

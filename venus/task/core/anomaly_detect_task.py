@@ -80,7 +80,7 @@ class AnomalyDetectTask(object):
             LOG.debug(_LE("get %s rule num:%s"), log_type, str(len(rules)))
 
             for log in logs:
-                for r in rules:
+                for rule in rules:
                     context = ""
                     if log_type == PLATFROM_LOG:
                         context = log["desc"]
@@ -89,16 +89,16 @@ class AnomalyDetectTask(object):
                     else:
                         pass
 
-                    if r.module != log["module_name"]:
+                    if rule.module != log["module_name"]:
                         continue
-                    if r.keyword not in context:
+                    if rule.keyword not in context:
                         continue
                     p = {}
-                    p["title"] = r.title
-                    p["desc"] = r.desc
-                    p["keyword"] = r.keyword
+                    p["title"] = rule.title
+                    p["desc"] = rule.desc
+                    p["keyword"] = rule.keyword
                     p["log_type"] = log_type
-                    p["module"] = r.module
+                    p["module"] = rule.module
                     p["logs"] = context
                     ss_str = time.strftime('%Y-%m-%d %H:%M:%S',
                                            time.localtime(start_timestamp))
